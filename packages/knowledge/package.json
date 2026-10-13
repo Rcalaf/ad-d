@@ -1,0 +1,12 @@
+{
+  "name": "@dnd/knowledge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@lancedb/lancedb": "^0.40.0",
+    "apache-arrow": "18.1.0",
+    "ollama": "^0.6.4"
+  }
+}
