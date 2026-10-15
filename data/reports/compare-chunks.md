@@ -1,0 +1,195 @@
+# Chunk comparison: index vs. current chunker
+
+Indexed chunks: 2153. Chunks now: 2152. Unchanged: 2025.
+
+## Moved: same text, new location (46)
+
+- **dmg**: Chapter 11: Encounters > Encounter Reactions > Encounter Reactions > Table 59: Encounter Reactions → **Chapter 11: Encounters > Encounter Reactions > Table 59: Encounter Reactions**
+  - `Player Characters are: | Modified Die Roll | Friendly | Indifferent | Threatening | Hostile | |---|---|---|---|---| | 2`
+- **dmg**: Chapter 11: Encounters > Encounter Reactions > Encounter Reactions → **Chapter 11: Encounters > Encounter Reactions**
+  - `Using the column that most closely matches the behavior of the player characters, find the entry listed for modified die`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 88: Magical Items → **Appendix 2 > Magical Item Tables > Table 88: Magical Items**
+  - `| D100 Roll | Category | |---|---| | 01–20 | Potions and Oils | | 21–35 | Scrolls | | 36–40 | Rings | | 41 | Rods | | 42`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 89: Potions and Oils (D6) → **Appendix 2 > Magical Item Tables > Table 89: Potions and Oils (D6)**
+  - `| Subtable | D20 Roll | Item | XP Value | |---|---|---|---| | Subtable A (1–2) | 1 | Animal Control* | 250 | | Subtable `
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 89: Potions and Oils (D6) → **Appendix 2 > Magical Item Tables > Table 89: Potions and Oils (D6)**
+  - `* The type of creature affected can be determined by die roll (see the specific item description for more information). `
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 90: Scrolls (D6) → **Appendix 2 > Magical Item Tables > Table 90: Scrolls (D6)**
+  - `| Subtable | D20 Roll | Item* | Level Range | Item | XP Value | |---|---|---|---|---|---| | Subtable A (1–4) | 1–3 | 1 s`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 90: Scrolls (D6) → **Appendix 2 > Magical Item Tables > Table 90: Scrolls (D6)**
+  - `* See “Scrolls” in Appendix 3 to determine whether a priest scroll or a wizard scroll is found. ** Level Range lists th`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value → **Appendix 2 > Magical Item Tables**
+  - `The XP Value (experience point value) for spell scrolls is equal to the total spell levels contained on the scroll × 100`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 91: Rings (D6) → **Appendix 2 > Magical Item Tables > Table 91: Rings (D6)**
+  - `| Subtable | D20 Roll | Item | XP Value | |---|---|---|---| | Subtable A (1–4) | 1 | Animal Friendship | 1,000 | | Subta`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 92: Rods → **Appendix 2 > Magical Item Tables > Table 92: Rods**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1–2 | Absorption (Priest, Wizard) | 7,500 | | 3–4 | Alertness | 7,000 | |`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 93: Staves → **Appendix 2 > Magical Item Tables > Table 93: Staves**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1–2 | Mace | 1,500 | | 3 | Command (Priest, Wizard) | 5,000 | | 4–5 | Cur`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 94: Wands → **Appendix 2 > Magical Item Tables > Table 94: Wands**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Conjuration (Wizard) | 7,000 | | 2 | Earth and Stone | 1,000 | | 3 | `
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 95: Miscellaneous Magic: Books, Librams, Manuals, Tomes → **Appendix 2 > Magical Item Tables > Table 95: Miscellaneous Magic: Books, Librams, Manuals, Tomes**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1–3 | Boccob’s Blessed Book (Wizard) | 4,500 | | 4 | Book of Exalted Deed`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 96: Miscellaneous Magic: Jewels, Jewelry, Phylacteries (D6) → **Appendix 2 > Magical Item Tables > Table 96: Miscellaneous Magic: Jewels, Jewelry, Phylacteries (D6)**
+  - `| Subtable | D20 Roll | Item | XP Value | |---|---|---|---| | Subtable A (1–3) | 1 | Amulet of Inescapable Location | — `
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 96: Miscellaneous Magic: Jewels, Jewelry, Phylacteries (D6) → **Appendix 2 > Magical Item Tables > Table 96: Miscellaneous Magic: Jewels, Jewelry, Phylacteries (D6)**
+  - `* Per level ** Per die of damage *** Per special bead **** See item description`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 97: Miscellaneous Magic: Cloaks and Robes → **Appendix 2 > Magical Item Tables > Table 97: Miscellaneous Magic: Cloaks and Robes**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Cloak of Arachnida | 3,000 | | 2 | Cloak of Displacement | 3,000 | | `
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 98: Miscellaneous Magic: Boots, Bracers, Gloves → **Appendix 2 > Magical Item Tables > Table 98: Miscellaneous Magic: Boots, Bracers, Gloves**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Boots of Dancing | — | | 2 | Boots of Elvenkind | 1,000 | | 3 | Boots`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 99: Miscellaneous Magic: Girdles, Hats, Helms → **Appendix 2 > Magical Item Tables > Table 99: Miscellaneous Magic: Girdles, Hats, Helms**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1–3 | Girdle of Dwarvenkind | 3,500 | | 4 | Girdle of Femininity/Masculin`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 100: Miscellaneous Magic: Bags, Bottles, Pouches, Containers → **Appendix 2 > Magical Item Tables > Table 100: Miscellaneous Magic: Bags, Bottles, Pouches, Containers**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Alchemy Jug | 3,000 | | 2 | Bag of Beans | 1,000 | | 3 | Bag of Devou`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 101: Miscellaneous Magic: Candles, Dusts, Ointments, Incense, and Stones → **Appendix 2 > Magical Item Tables > Table 101: Miscellaneous Magic: Candles, Dusts, Ointments, Incense, and Stones**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Candle of Invocation (Priest) | 1,000 | | 2 | Dust of Appearance | 1,`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 102: Miscellaneous Magic: Household Items and Tools → **Appendix 2 > Magical Item Tables > Table 102: Miscellaneous Magic: Household Items and Tools**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Brazier Commanding Fire Elementals (Wizard) | 4,000 | | 2 | Brazier o`
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 103: Miscellaneous Magic: Musical Instruments → **Appendix 2 > Magical Item Tables > Table 103: Miscellaneous Magic: Musical Instruments**
+  - `| D20 Roll | Item | XP Value | |---|---|---| | 1 | Chime of Interruption | 2,000 | | 2 | Chime of Opening | 3,500 | | 3 `
+- **dmg**: Appendix 2 > Magical Item Tables > Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value > Table 104: Miscellaneous Magic: The Weird Stuff (D6) → **Appendix 2 > Magical Item Tables > Table 104: Miscellaneous Magic: The Weird Stuff (D6)**
+  - `| Subtable | D20 Roll | Item | XP Value | |---|---|---|---| | Subtable A (1–3) | 1 | Apparatus of Kwalish | 8,000 | | Su`
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `Boots of Dancing: These magical boots expand or contract to fit any foot size, from halfling to giant (just as other mag`
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `Boots of the North: This footgear bestows many powers upon the wearer. First, he is able to travel across snow at normal`
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `If circumstances permit the use of such movement in combat, the wearer can effectively strike and spring away when he ha`
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `For every twelve hours of uninterrupted non-use, the boots regain one hour of flying power. No amount of non-use allows `
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `The victim will drown in 1d6 + 2 rounds, unless magic is used to save him, for he cannot be physically removed from the `
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `The wearer can also jump as if wearing _boots of striding and_ _springing_, but the jump must culminate in the grasping `
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable → **Appendix 3 > Miscellaneous Magic > List of Magical Items**
+  - `Brazier of Sleep Smoke: This device is exactly like the _brazier_ _commanding fire elementals_. However, when a fire is `
+- ... and 16 more.
+
+## Added or changed: text not in the index (81)
+
+- **dmg**: Chapter 5: Proficiencies (Optional) > NPC Proficiencies
+  - `**NPC Proficiencies** As a convenience for the DM, non-player characters are assumed to be proficient with the weapons `
+- **dmg**: Chapter 6: Money and Equipment > Equipment by Time Period
+  - `**Equipment by Time Period** The equipment lists given in the _Player’s Handbook_ assume your campaign is set in a gene`
+- **dmg**: Chapter 11: Encounters > Encounter Reactions
+  - `**Encounter Reactions** Once the encounter is set and the DM is ready to role-play the situation, he needs to know how `
+- **dmg**: Chapter 12: NPCs > Officials and Social Rank
+  - `**Officials and Social Rank** Some NPCs are available for hire; others, because of social rank or profession, can be hi`
+- **dmg**: Chapter 14: Time and Movement > Aerial Movement
+  - `**Aerial Movement** Aerial movement rates are handled according to the normal movement rules, with clear sky being trea`
+- **dmg**: Appendix 2 > Magical Item Tables
+  - `When possible, the DM should select the magical items he gives out in his campaign. Sometimes, however, the DM has more `
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items
+  - `**Spellcaster employing spells usable** by own class and/or level .....................................................`
+- **phb**: Foreword
+  - `Before we even start, I want to make sure everyone understands one very important fact: **This is not AD&D 3rd Edition!`
+- **phb**: Foreword
+  - `Chapter 4: Alignment . . . . . . . . . . . . . . . . . . . . . . . . . . . 64 Chapter 6: Money and Equipment . . . . . `
+- **phb**: Appendix 3: Wizard Spells > First-Level Spells > Comprehend Languages
+  - `**(Alteration)Reversible** Range: Touch Components: V, S, M Duration: 5 rds./level Casting Time: 1 rd. Area of Effe`
+- **phb**: Appendix 3: Wizard Spells > First-Level Spells > Enlarge
+  - `**(Alteration)Reversible** Range: 5 yds./level Components: V, S, M Duration: 5 rds./level Casting Time: 1 Area of E`
+- **phb**: Appendix 3: Wizard Spells > First-Level Spells > Protection From Evil
+  - `**(Abjuration)Reversible** Range: Touch Components: V, S, M Duration: 2 rds./level Casting Time: 1 Area of Effect: `
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Continual Light
+  - `**(Alteration)Reversible** Range: 60 yds. Components: V, S Duration: Permanent Casting Time: 2 Area of Effect: 60-f`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Detect Evil
+  - `**(Divination)Reversible** Range: 0 Components: V, S Duration: 5 rds./level Casting Time: 2 Area of Effect: 10 × 18`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Knock
+  - `**(Alteration)Reversible** Range: 60 yds. Components: V Duration: Special Casting Time: 1 Area of Effect: 10 sq. ft`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Know Alignment
+  - `**(Divination)Reversible** Range: 10 yds. Components: V, S Duration: 1 rd./level Casting Time: 1 rd. Area of Effect`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Locate Object
+  - `**(Divination)Reversible** Range: 0 Components: V, S, M Duration: 1 rd./level Casting Time: 2 Area of Effect: 20 yd`
+- **phb**: Appendix 3: Wizard Spells > Third-Level Spells > Protection From Evil, 10 ’ Radius
+  - `**(Abjuration)Reversible** Range: Touch Components: V, S, M Duration: 2 rds./level Casting Time: 3 Area of Effect: `
+- **phb**: Appendix 3: Wizard Spells > Third-Level Spells > Tongues
+  - `**(Alteration)Reversible** Range: 0 Components: V, M Duration: 1 rd./level Casting Time: 3 Area of Effect: 30-ft. r`
+- **phb**: Appendix 3: Wizard Spells > Third-Level Spells > Water Breathing
+  - `**(Alteration)Reversible** Range: Touch Components: V, S, M Duration: 1 hr./level + 1d4 hrs. Casting Time: 3 Area o`
+- **phb**: Appendix 3: Wizard Spells > Fourth-Level Spells > Remove Curse
+  - `**(Abjuration)Reversible** Range: Touch Components: V, S Duration: Permanent Casting Time: 4 Area of Effect: Specia`
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Animal Growth
+  - `**(Alteration)Reversible** Range: 60 yds. Components: V, S, M Duration: 1 rd./level Casting Time: 5 Area of Effect:`
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Avoidance
+  - `**(Abjuration, Alteration)Reversible** Range: 10 yds. Components: V, S, M Duration: Permanent until dispelled Castin`
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Dream
+  - `**(Invocation, Illusion/Phantasm)Reversible** Range: Touch Components: V, S Duration: Special Casting Time: 1 turn `
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Transmute Rock to Mud
+  - `**(Alteration)Reversible** Range: 10 yds./level Components: V, S, M Duration: Special Casting Time: 5 Area of Effec`
+- **phb**: Appendix 3: Wizard Spells > Sixth-Level Spells > Lower Water
+  - `**(Alteration)Reversible** Range: 80 yds. Components: V, S, M Duration: 5 rds./level Casting Time: 1 turn Area of E`
+- **phb**: Appendix 3: Wizard Spells > Sixth-Level Spells > Stone to Flesh
+  - `**(Alteration)Reversible** Range: 10 yds./level Components: V, S, M Duration: Permanent Casting Time: 6 Area of Eff`
+- **phb**: Appendix 3: Wizard Spells > Sixth-Level Spells > Transmute Water to Dust
+  - `**(Alteration)Reversible** Range: 60 yds. Components: V, S, M Duration: Permanent Casting Time: 5 Area of Effect: 1`
+- **phb**: Appendix 3: Wizard Spells > Ninth-Level Spells > Imprisonment
+  - `**(Abjuration)Reversible** Range: Touch Components: V, S Duration: Permanent Casting Time: 9 Area of Effect: 1 crea`
+- **phb**: Appendix 3: Wizard Spells > Ninth-Level Spells > Succor
+  - `**(Alteration, Enchantment)Reversible** Range: Touch Components: V, S, M Duration: Special Casting Time: 1 to 4 days`
+- ... and 51 more.
+
+## Removed or changed: indexed text not produced any more (82)
+
+- **dmg**: Chapter 5: Proficiencies (Optional) > NPC Proficiencies > NPC Proficiencies
+  - `As a convenience for the DM, non-player characters are assumed to be proficient with the weapons they carry. However, th`
+- **dmg**: Chapter 6: Money and Equipment > Equipment by Time Period > Equipment by Time Period
+  - `The equipment lists given in the _Player’s Handbook_ assume your campaign is set in a generic medieval fantasy world. In`
+- **dmg**: Chapter 11: Encounters > Encounter Reactions > Encounter Reactions
+  - `Once the encounter is set and the DM is ready to role-play the situation, he needs to know how the NPCs or monsters will`
+- **dmg**: Chapter 12: NPCs > Officials and Social Rank > Officials and Social Rank
+  - `Some NPCs are available for hire; others, because of social rank or profession, can be hired only under special circumst`
+- **dmg**: Chapter 14: Time and Movement > Aerial Movement > Aerial Movement
+  - `Aerial movement rates are handled according to the normal movement rules, with clear sky being treated as clear terrain.`
+- **dmg**: Appendix 2 > Magical Item Tables
+  - `When possible, the DM should select the magical items he gives out in his campaign. Sometimes, however, the DM has more `
+- **dmg**: Appendix 3 > Miscellaneous Magic > List of Magical Items > Spellcaster employing spells usable
+  - `by own class and/or level ........................................................... 10% Spellcaster using spells fore`
+- **phb**: Foreword
+  - `Before we even start, I want to make sure everyone understands one very important fact:`
+- **phb**: Foreword > This is not AD&D 3rd Edition!
+  - `There, everyone can breathe again. Rest assured that this is still the same version of the AD&D game that your friends,`
+- **phb**: Foreword > This is not AD&D 3rd Edition!
+  - `Chapter 6: Money and Equipment . . . . . . . . . . . . . . . . 88`
+- **phb**: Appendix 3: Wizard Spells > First-Level Spells > Comprehend Languages > (Alteration)Reversible
+  - `Range: Touch Components: V, S, M Duration: 5 rds./level Casting Time: 1 rd. Area of Effect: 1 speaking Saving Throw`
+- **phb**: Appendix 3: Wizard Spells > First-Level Spells > Enlarge > (Alteration)Reversible
+  - `Range: 5 yds./level Components: V, S, M Duration: 5 rds./level Casting Time: 1 Area of Effect: 1 creature or object `
+- **phb**: Appendix 3: Wizard Spells > First-Level Spells > Protection From Evil > (Abjuration)Reversible
+  - `Range: Touch Components: V, S, M Duration: 2 rds./level Casting Time: 1 Area of Effect: Creature touched Saving Thr`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Continual Light > (Alteration)Reversible
+  - `Range: 60 yds. Components: V, S Duration: Permanent Casting Time: 2 Area of Effect: 60-ft. radius Saving Throw: Spe`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Detect Evil > (Divination)Reversible
+  - `Range: 0 Components: V, S Duration: 5 rds./level Casting Time: 2 Area of Effect: 10 × 180 ft. Saving Throw: None T`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Knock > (Alteration)Reversible
+  - `Range: 60 yds. Components: V Duration: Special Casting Time: 1 Area of Effect: 10 sq. ft./level Saving Throw: None `
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Know Alignment > (Divination)Reversible
+  - `Range: 10 yds. Components: V, S Duration: 1 rd./level Casting Time: 1 rd. Area of Effect: 1 creature or Saving Thro`
+- **phb**: Appendix 3: Wizard Spells > Second-Level Spells > Locate Object > (Divination)Reversible
+  - `Range: 0 Components: V, S, M Duration: 1 rd./level Casting Time: 2 Area of Effect: 20 yds./level Saving Throw: None`
+- **phb**: Appendix 3: Wizard Spells > Third-Level Spells > Protection From Evil, 10 ’ Radius > (Abjuration)Reversible
+  - `Range: Touch Components: V, S, M Duration: 2 rds./level Casting Time: 3 Area of Effect: 10-ft. radius Saving Throw:`
+- **phb**: Appendix 3: Wizard Spells > Third-Level Spells > Tongues > (Alteration)Reversible
+  - `Range: 0 Components: V, M Duration: 1 rd./level Casting Time: 3 Area of Effect: 30-ft. radius Saving Throw: None T`
+- **phb**: Appendix 3: Wizard Spells > Third-Level Spells > Water Breathing > (Alteration)Reversible
+  - `Range: Touch Components: V, S, M Duration: 1 hr./level + 1d4 hrs. Casting Time: 3 Area of Effect: Creature touched `
+- **phb**: Appendix 3: Wizard Spells > Fourth-Level Spells > Remove Curse > (Abjuration)Reversible
+  - `Range: Touch Components: V, S Duration: Permanent Casting Time: 4 Area of Effect: Special Saving Throw: Special Up`
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Animal Growth > (Alteration)Reversible
+  - `Range: 60 yds. Components: V, S, M Duration: 1 rd./level Casting Time: 5 Area of Effect: Up to 8 animals Saving Thr`
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Avoidance > (Abjuration, Alteration)Reversible
+  - `Range: 10 yds. Components: V, S, M Duration: Permanent until dispelled Casting Time: 5 Area of Effect: Up to 3-ft. c`
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Dream > (Invocation, Illusion/Phantasm)Reversible
+  - `Range: Touch Components: V, S Duration: Special Casting Time: 1 turn Area of Effect: 1 creature Saving Throw: None `
+- **phb**: Appendix 3: Wizard Spells > Fifth-Level Spells > Transmute Rock to Mud > (Alteration)Reversible
+  - `Range: 10 yds./level Components: V, S, M Duration: Special Casting Time: 5 Area of Effect: 20-ft. cube/level Saving`
+- **phb**: Appendix 3: Wizard Spells > Sixth-Level Spells > Lower Water > (Alteration)Reversible
+  - `Range: 80 yds. Components: V, S, M Duration: 5 rds./level Casting Time: 1 turn Area of Effect: 10-ft./level square `
+- **phb**: Appendix 3: Wizard Spells > Sixth-Level Spells > Stone to Flesh > (Alteration)Reversible
+  - `Range: 10 yds./level Components: V, S, M Duration: Permanent Casting Time: 6 Area of Effect: 1 creature Saving Thro`
+- **phb**: Appendix 3: Wizard Spells > Sixth-Level Spells > Transmute Water to Dust > (Alteration)Reversible
+  - `Range: 60 yds. Components: V, S, M Duration: Permanent Casting Time: 5 Area of Effect: 10-ft. cube/level Saving Thr`
+- **phb**: Appendix 3: Wizard Spells > Ninth-Level Spells > Imprisonment > (Abjuration)Reversible
+  - `Range: Touch Components: V, S Duration: Permanent Casting Time: 9 Area of Effect: 1 creature Saving Throw: None Wh`
+- ... and 52 more.

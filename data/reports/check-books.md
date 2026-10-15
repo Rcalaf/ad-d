@@ -1,21 +1,23 @@
 # Book check report
 
-Generated 2026-10-15 10:34.
+Generated 2026-10-15 14:56.
 
 | Book | Fix | Review | Info | Tables | Pages | Chunks |
 | --- | --- | --- | --- | --- | --- | --- |
-| dmg.md | 83 | 39 | 59 | 142 | 1-249 | 987 |
-| phb.md | 105 | 62 | 88 | 81 | 1-313 | 1147 |
+| dmg.md | 98 | 129 | 152 | 142 | 1-249 | 992 |
+| phb.md | 127 | 81 | 163 | 81 | 1-313 | 1160 |
 
 Work through **Fix** first, then **Review**. Rerun the check after each round of corrections.
 
 ## dmg.md
 
 - Headings by level: # 1, ## 21, ### 138, #### 400
-- Numbered tables: 118, Table 1 to Table 119
-- Chunks: 987, median 1215 characters, 42 under 150 characters
+- Numbered tables: 119, Table 1 to Table 119
+- Chunks: 992, median 1150 characters
 
-### Fix: certainly wrong (83)
+### Fix: certainly wrong (98)
+
+#### unclear (83)
 
 - **[line 141](../books/dmg.md#L141)**: Marked unclear by the converter: table on page 11 has header cells that were not detected; check column headings against the printed page.
   - Text: `<!-- UNCLEAR: table on page 11 has header cells that were not detected; check column headings agains...`
@@ -77,221 +79,212 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
 - **[line 3815](../books/dmg.md#L3815)**: Marked unclear by the converter: table on page 98 may contain text from the surrounding column; check against the printed page.
   - Text: `<!-- UNCLEAR: table on page 98 may contain text from the surrounding column; check against the print...`
   - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4316](../books/dmg.md#L4316)**: Marked unclear by the converter: heading "Aerial Combat (Optional Rule)" starts somewhere on page 109; exact position not detected.
-  - Text: `<!-- UNCLEAR: heading "Aerial Combat (Optional Rule)" starts somewhere on page 109; exact position n...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4410](../books/dmg.md#L4410)**: Marked unclear by the converter: heading "Who Needs Money?" starts somewhere on page 112; exact position not detected.
-  - Text: `<!-- UNCLEAR: heading "Who Needs Money?" starts somewhere on page 112; exact position not detected -...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4480](../books/dmg.md#L4480)**: Marked unclear by the converter: heading "Planned and Random Encounter Treasures" starts somewhere on page 114; exact position not detected.
-  - Text: `<!-- UNCLEAR: heading "Planned and Random Encounter Treasures" starts somewhere on page 114; exact p...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5567](../books/dmg.md#L5567)**: Marked unclear by the converter: table on page 138 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 138 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5831](../books/dmg.md#L5831)**: Marked unclear by the converter: Table 60 on page 144 is scrambled (cells cut mid-word) and the end of the list (from "Quarrier" onwards) is missing; transcribe from the printed page.
-  - Text: `<!-- UNCLEAR: Table 60 on page 144 is scrambled (cells cut mid-word) and the end of the list (from "...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5872](../books/dmg.md#L5872)**: Marked unclear by the converter: table on page 145 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 145 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5936](../books/dmg.md#L5936)**: Marked unclear by the converter: table on page 146: the first column seems to contain values from the next column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 146: the first column seems to contain values from the next column; chec...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6232](../books/dmg.md#L6232)**: Marked unclear by the converter: Table 66 on page 152: the Russian and Turkish columns appear as loose text further down this page, and two lines of the example dialogue printed below the table are missing; check the printed page.
-  - Text: `<!-- UNCLEAR: Table 66 on page 152: the Russian and Turkish columns appear as loose text further dow...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6494](../books/dmg.md#L6494)**: Marked unclear by the converter: Table 70 is printed on page 156 but was not separated from the neighbouring table; transcribe it from the printed page.
-  - Text: `<!-- UNCLEAR: Table 70 is printed on page 156 but was not separated from the neighbouring table; tra...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6496](../books/dmg.md#L6496)**: Marked unclear by the converter: no table number/title detected next to this table on page 156.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 156 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6497](../books/dmg.md#L6497)**: Marked unclear by the converter: table on page 156 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 156 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6585](../books/dmg.md#L6585)**: Marked unclear by the converter: table "Table 71" on page 157 is printed on a shaded panel and its structure was not recovered; its text follows line by line, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 71" on page 157 is printed on a shaded panel and its structure was not re...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6639](../books/dmg.md#L6639)**: Marked unclear by the converter: heading "Effects of Light Sources" starts somewhere on page 158; exact position not detected.
-  - Text: `<!-- UNCLEAR: heading "Effects of Light Sources" starts somewhere on page 158; exact position not de...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6725](../books/dmg.md#L6725)**: Marked unclear by the converter: table on page 161 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 161 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 7077](../books/dmg.md#L7077)**: Marked unclear by the converter: table on page 170 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 170 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 7210](../books/dmg.md#L7210)**: Marked unclear by the converter: table "Table 81: Chance of Getting Hopelessly Lost" on page 172 is printed on a shaded panel and its structure was not recovered; its text follows line by line, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 81: Chance of Getting Hopelessly Lost" on page 172 is printed on a shaded...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 7253](../books/dmg.md#L7253)**: Marked unclear by the converter: table "Table 82: Lost Modifiers" on page 172 is printed on a shaded panel and its structure was not recovered; its text follows line by line, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 82: Lost Modifiers" on page 172 is printed on a shaded panel and its stru...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 7349](../books/dmg.md#L7349)**: Marked unclear by the converter: Table 83 on page 175: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 83 on page 175: title and table structure were not recovered; its content follow...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8417](../books/dmg.md#L8417)**: Marked unclear by the converter: table on page 191 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 191 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8541](../books/dmg.md#L8541)**: Marked unclear by the converter: no table number/title detected next to this table on page 193.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 193 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8542](../books/dmg.md#L8542)**: Marked unclear by the converter: table on page 193 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 193 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8589](../books/dmg.md#L8589)**: Marked unclear by the converter: no table number/title detected next to this table on page 193.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 193 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8590](../books/dmg.md#L8590)**: Marked unclear by the converter: table on page 193 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 193 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8664](../books/dmg.md#L8664)**: Marked unclear by the converter: no table number/title detected next to this table on page 195.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 195 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8750](../books/dmg.md#L8750)**: Marked unclear by the converter: Table 112 on page 196: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 112 on page 196: title and table structure were not recovered; its content follo...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9246](../books/dmg.md#L9246)**: Marked unclear by the converter: no table number/title detected next to this table on page 204.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 204 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9247](../books/dmg.md#L9247)**: Marked unclear by the converter: table on page 204 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 204 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9389](../books/dmg.md#L9389)**: Marked unclear by the converter: no table number/title detected next to this table on page 206.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 206 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9461](../books/dmg.md#L9461)**: Marked unclear by the converter: no table number/title detected next to this table on page 207.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 207 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9890](../books/dmg.md#L9890)**: Marked unclear by the converter: no table number/title detected next to this table on page 214.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 214 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9911](../books/dmg.md#L9911)**: Marked unclear by the converter: no table number/title detected next to this table on page 215.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 215 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9912](../books/dmg.md#L9912)**: Marked unclear by the converter: table on page 215 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 215 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9913](../books/dmg.md#L9913)**: Marked unclear by the converter: table on page 215 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 215 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 9990](../books/dmg.md#L9990)**: Marked unclear by the converter: table on page 216 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 216 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10076](../books/dmg.md#L10076)**: Marked unclear by the converter: no table number/title detected next to this table on page 217.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 217 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10158](../books/dmg.md#L10158)**: Marked unclear by the converter: no table number/title detected next to this table on page 219.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 219 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10267](../books/dmg.md#L10267)**: Marked unclear by the converter: no table number/title detected next to this table on page 220.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 220 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10268](../books/dmg.md#L10268)**: Marked unclear by the converter: table on page 220: the first column seems to contain values from the next column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 220: the first column seems to contain values from the next column; chec...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10269](../books/dmg.md#L10269)**: Marked unclear by the converter: table on page 220 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 220 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10319](../books/dmg.md#L10319)**: Marked unclear by the converter: no table number/title detected next to this table on page 221.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 221 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10320](../books/dmg.md#L10320)**: Marked unclear by the converter: table on page 221 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 221 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10391](../books/dmg.md#L10391)**: Marked unclear by the converter: no table number/title detected next to this table on page 222.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 222 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10392](../books/dmg.md#L10392)**: Marked unclear by the converter: table on page 222 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 222 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10393](../books/dmg.md#L10393)**: Marked unclear by the converter: table on page 222 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 222 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10668](../books/dmg.md#L10668)**: Marked unclear by the converter: no table number/title detected next to this table on page 226.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 226 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10669](../books/dmg.md#L10669)**: Marked unclear by the converter: table on page 226 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 226 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10685](../books/dmg.md#L10685)**: Marked unclear by the converter: no table number/title detected next to this table on page 226.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 226 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10686](../books/dmg.md#L10686)**: Marked unclear by the converter: table on page 226 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 226 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10818](../books/dmg.md#L10818)**: Marked unclear by the converter: no table number/title detected next to this table on page 229.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 229 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10921](../books/dmg.md#L10921)**: Marked unclear by the converter: no table number/title detected next to this table on page 231.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 231 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10991](../books/dmg.md#L10991)**: Marked unclear by the converter: no table number/title detected next to this table on page 233.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 233 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10992](../books/dmg.md#L10992)**: Marked unclear by the converter: table on page 233 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 233 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11073](../books/dmg.md#L11073)**: Marked unclear by the converter: no table number/title detected next to this table on page 234.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 234 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11277](../books/dmg.md#L11277)**: Marked unclear by the converter: no table number/title detected next to this table on page 238.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 238 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11319](../books/dmg.md#L11319)**: Marked unclear by the converter: no table number/title detected next to this table on page 239.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 239 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11505](../books/dmg.md#L11505)**: Marked unclear by the converter: no table number/title detected next to this table on page 242.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 242 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11529](../books/dmg.md#L11529)**: Marked unclear by the converter: no table number/title detected next to this table on page 242.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 242 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11553](../books/dmg.md#L11553)**: Marked unclear by the converter: no table number/title detected next to this table on page 243.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 243 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11604](../books/dmg.md#L11604)**: Marked unclear by the converter: no table number/title detected next to this table on page 243.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 243 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11645](../books/dmg.md#L11645)**: Marked unclear by the converter: no table number/title detected next to this table on page 244.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 244 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 11661](../books/dmg.md#L11661)**: Marked unclear by the converter: no table number/title detected next to this table on page 244.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 244 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12009](../books/dmg.md#L12009)**: Marked unclear by the converter: table on page 249 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 249 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12010](../books/dmg.md#L12010)**: Marked unclear by the converter: table on page 249: the first column seems to contain values from the next column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 249: the first column seems to contain values from the next column; chec...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
+- ... and 63 more of this kind.
 
-### Review: probably wrong, check against the book (40)
+#### table-title-in-table (13)
 
-- **whole book**: Table 71 is missing from the sequence 1 to 119.
-  - Hint: Look for Table 71 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+- **[line 1769](../books/dmg.md#L1769)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Table 26: Horse Trai | ts |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 1898](../books/dmg.md#L1898)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  |  | Item | Table Savi | 29: ng Thro | ws |  |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 2037](../books/dmg.md#L2037)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Spell | Table 30: Book Capacities |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 3087](../books/dmg.md#L3087)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Table 42: Armor Modifiers for Wrestling |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 3146](../books/dmg.md#L3146)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | Table 43: |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 3294](../books/dmg.md#L3294)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Cover | Table 44: and Concealment Modifiers |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 5571](../books/dmg.md#L5571)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Frequen | cy & | Table Chance of | 56: Wilder | ness Enc | ounters |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 5938](../books/dmg.md#L5938)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Table 62: |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 6499](../books/dmg.md#L6499)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  |  | Table | 70: |  |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 6727](../books/dmg.md#L6727)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Table Optional Degre | 72: es of Da | rkness |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 7079](../books/dmg.md#L7079)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Table 77: |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 9915](../books/dmg.md#L9915)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Bag | of Tr | icks Ani A (1–5) | mals (D | 10) | create 1d4 + 1 doses of 1d4 + 1 potions. (The ...`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 12012](../books/dmg.md#L12012)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Table 119: |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+
+#### table-flattened (2)
+
+- **[line 7351](../books/dmg.md#L7351)**: Table 83 was written as a single line of text instead of a table.
+  - Text: `Table 83: Dwarf Elf Gnome 15% (3) 20% (4) 25% (5) Half-elf Halfling Human 15% (3) 20% (4) 15% (3)`
+  - Hint: Rebuild it from the printed page as a Markdown table under its heading "#### Table 83: Title", and move any text that follows the values on the same line back into the paragraph it belongs to.
+- **[line 8752](../books/dmg.md#L8752)**: Table 112 was written as a single line of text instead of a table.
+  - Text: `Table 112: Caster Level Total Reverse or Difference Failure Harmful Effect 1–3 95% 5% 4–6 85% 15% 7–...`
+  - Hint: Rebuild it from the printed page as a Markdown table under its heading "#### Table 112: Title", and move any text that follows the values on the same line back into the paragraph it belongs to.
+
+### Review: probably wrong, check against the book (129)
+
+#### text-garbled (27)
+
+- **[line 21](../books/dmg.md#L21)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `The Player’s Handbook and the D!"#$%" l&'($) fuide give you what you’re expected to know, but that d`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 27](../books/dmg.md#L27)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `At the beginning of the first D!"#$%" l&'($) fuide, Gary Gygax stressed that each of us, working fro`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 39](../books/dmg.md#L39)**: Text looks garbled: a run of mixed symbols ("!"#$%&!").
+  - Text: `This is a derivative work based on the original A!"#$%&! c'$(&)$* E c,#()$*™ Players Handbook and th`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 55](../books/dmg.md#L55)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `After six years, it was time for the Player’s Handbook and D!"#$%" l&'($) _Guide_, the two most impo`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 57](../books/dmg.md#L57)**: Text looks garbled: a run of mixed symbols ("!"#$%&!").
+  - Text: `Bringing this project together rekindled a lot of memories. In particular, one day from 1987 stands `
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 69](../books/dmg.md#L69)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `The D!"#$%" l&'($) fuide is reserved for Dungeon Masters. Discourage players from reading this book,`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 71](../books/dmg.md#L71)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `Also, this book contains essential rules that are not discussed in the _Player’s_ _Handbook_. Some o`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 91](../books/dmg.md#L91)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `based on the assumption Everything in this book is that you are familiar with the_Player’s Handbook_`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 101](../books/dmg.md#L101)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `But you won’t find them in the D!"#$%" l&'($) fuide. This is a reference book for running the AD&D g`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 103](../books/dmg.md#L103)**: Text looks garbled: a run of mixed symbols ("*+&",$*").
+  - Text: `If you have never played a role-playing game before but are eager to learn, our advice from the _Pla`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 385](../books/dmg.md#L385)**: Text looks garbled: a run of mixed symbols ("!"#$%"").
+  - Text: `There are no rules to answer these questions. _The Player’s_ Handbook and D!"#$%" l&'($) fuide are d`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 1578](../books/dmg.md#L1578)**: Text looks garbled: many word fragments (m, u, c, h, m, o).
+  - Text: `given the player characters too Sometimes you discover you have m u c h m o n e y. Wh i l e l i v i `
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 4522](../books/dmg.md#L4522)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `Monster descriptions in the M%"'()%!' l&"!&. differentiate between treasures found in a creature’s l`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 4532](../books/dmg.md#L4532)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `To simplify the assignment of treasures to lairs and monsters, the AD&D game uses a set of alphabeti`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 5620](../books/dmg.md#L5620)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `If the DM decides that yes, this encounter should happen, he determines how many creatures or NPCs a`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 7439](../books/dmg.md#L7439)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `Lycanthropy is not the only type of weird and magical affliction that can strike a character. Filthy`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 8948](../books/dmg.md#L8948)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `Ring of Djinni Summoning: One of the many fabled rings of fantasy legend, the “genie’’ ring is most `
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 10088](../books/dmg.md#L10088)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `Note that if salt water is used, the elemental will be stronger (+2 per Hit Die, maximum 8 hp per di`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 10124](../books/dmg.md#L10124)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `Brazier Commanding Fire Elementals: This device appears to be a normal container for holding burning`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- **[line 10167](../books/dmg.md#L10167)**: Text looks garbled: a run of mixed symbols ("%"'()%!'").
+  - Text: `Censer Controlling Air Elementals: This 6-inch wide, 1-inch high perforated golden vessel resembles `
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+- ... and 7 more of this kind.
+
+#### chunk-oversized-text (1)
+
+- **[line 35](../books/dmg.md#L35)**: Text of 2061 characters in Foreword to the 2nd Edition > Credits, with no paragraph break the chunker could use.
+  - Text: `Hundreds of players assisted us in playtesting the AD&D 2nd Edition game. Their efforts were invalua`
+  - Hint: Add blank lines between paragraphs or entries in this section, so search can return them separately.
+
+#### page-jump (1)
+
 - **[line 63](../books/dmg.md#L63)**: Pages jump from 3 to 8.
   - Text: `<!-- page 8 -->`
   - Hint: Check whether pages 4 to 7 are missing from the conversion. Full-page illustrations or blank pages legitimately have no text.
+
+#### chunk-starts-midsentence (60)
+
+- **[line 91](../books/dmg.md#L91)**: Chunk in Introduction > A Word About Organization starts in the middle of a sentence.
+  - Text: `based on the assumption Everything in this book is that you are familiar with the_Player’s Handbook_`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 123](../books/dmg.md#L123)**: Chunk in Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method starts in the middle of a sentence.
+  - Text: `from one another. Some produce The following methods are different more powerful characters than oth`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 277](../books/dmg.md#L277)**: Chunk in Chapter 1: Player Character Ability Scores > Super Characters starts in the middle of a sentence.
+  - Text: `players is to create super characters. One of the great temptations for While this is not true of ev`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 716](../books/dmg.md#L716)**: Chunk in Chapter 3: Player Character Classes > 0-Level Characters starts in the middle of a sentence.
+  - Text: `chance a clerk is going to be skilled with any type of weapon. In nonweapon proficiencies, 0-level `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 822](../books/dmg.md#L822)**: Chunk in Chapter 3: Player Character Classes > High-Level Characters starts in the middle of a sentence.
+  - Text: `els comes the natural tendency to Along with character classes and levclassify campaigns according t`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1039](../books/dmg.md#L1039)**: Chunk in Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule) starts in the middle of a sentence.
+  - Text: `through role-playing and careful choice of proficiencies. A mountaineer could easily be a fighter or`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1077](../books/dmg.md#L1077)**: Chunk in Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule) starts in the middle of a sentence.
+  - Text: `the abilities for your class and add the multiples together. After you have chosen all the abilities`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1149](../books/dmg.md#L1149)**: Chunk in Chapter 4: Alignment > Society Alignment starts in the middle of a sentence.
+  - Text: `are not alone in having alignment. Since Player characters, NPCs, and monsters a kingdom is nothing `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1255](../books/dmg.md#L1255)**: Chunk in Chapter 4: Alignment > Alignment as a Tool starts in the middle of a sentence.
+  - Text: `times already, this point is important Even though it has been said several enough to repeat—alignme`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1295](../books/dmg.md#L1295)**: Chunk in Chapter 4: Alignment > Changing Alignment starts in the middle of a sentence.
+  - Text: `change alignment. A character might Sooner or later, a player character will change alignment for ma`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1373](../books/dmg.md#L1373)**: Chunk in Chapter 5: Proficiencies (Optional) > Weapon Proficiencies starts in the middle of a sentence.
+  - Text: `complain that the weapon profi-Sooner or later a player will ciencies are too restrictive. But the r`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1409](../books/dmg.md#L1409)**: Chunk in Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies starts in the middle of a sentence.
+  - Text: `optional, but, if chosen, can be Nonweapon proficiencies are very useful. If you are uncertain wheth`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1471](../books/dmg.md#L1471)**: Chunk in Chapter 6: Money and Equipment > Monetary Systems starts in the middle of a sentence.
+  - Text: `your campaign, you can use money as Even before you play the first session in a tool in creating you`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1475](../books/dmg.md#L1475)**: Chunk in Chapter 6: Money and Equipment > A Short History of Commerce starts in the middle of a sentence.
+  - Text: `always based on coins. Many Monetary systems aren’t different forms of exchange can be in use simult`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1533](../books/dmg.md#L1533)**: Chunk in Chapter 6: Money and Equipment > Expense starts in the middle of a sentence.
+  - Text: `for player characters, tracing day-to-day As exciting and important as money is expenses just isn’t `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1572](../books/dmg.md#L1572)**: Chunk in Chapter 6: Money and Equipment > Expense > Wealthy Conditions starts in the middle of a sentence.
+  - Text: `political maneuverings, mainly to protect their own privileges. Upon building or claiming his own s`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1578](../books/dmg.md#L1578)**: Chunk in Chapter 6: Money and Equipment > Draining the Coffers starts in the middle of a sentence.
+  - Text: `given the player characters too Sometimes you discover you have m u c h m o n e y. Wh i l e l i v i `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1678](../books/dmg.md#L1678)**: Chunk in Chapter 6: Money and Equipment > Equipment by Time Period > The Ancient World starts in the middle of a sentence.
+  - Text: `bronze, others of iron, and a few were made of steel. Most household items were pottery, wood, stone`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1709](../books/dmg.md#L1709)**: Chunk in Chapter 6: Money and Equipment > Equipment by Time Period > Adjusting Equipment Lists starts in the middle of a sentence.
+  - Text: `were commonly used in the time period. For example, flails (as an agricultural instrument) have exis`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1713](../books/dmg.md#L1713)**: Chunk in Chapter 6: Money and Equipment > Quality of Equipment starts in the middle of a sentence.
+  - Text: `buys is assumed to be of average Most of the equipment a character quality—neither too cheaply made `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- ... and 40 more of this kind.
+
+#### chunk-duplicate (1)
+
+- **[line 212](../books/dmg.md#L212)**: The same text appears in two chunks, at line 212 and also at line 243.
+  - Text: `| | #1 | #2 | #3 | #4 | #5 | |---|---|---|---|---|---| | Strength | 15 | 14 | 15 | 16 | 15 | | Dext`
+  - Hint: Usually content duplicated by the conversion. Keep the copy in the right place and delete the other.
+
+#### table-no-title (30)
+
 - **[line 2323](../books/dmg.md#L2323)**: No 'Table N:' title in the lines above this table.
   - Text: `| Ability Hit Die Modifier |`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 3087](../books/dmg.md#L3087)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Table 42: Armor Modifiers for Wrestling |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 5571](../books/dmg.md#L5571)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  | Frequen | cy & | Table Chance of | 56: Wilder | ness Enc | ounters |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 6499](../books/dmg.md#L6499)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  |  | Table | 70: |  |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 6647](../books/dmg.md#L6647)**: Heading jumps from level 2 to level 4.
-  - Text: `#### Being Seen`
-  - Hint: If this section belongs directly under the previous heading, change "####" to "###". Leave it if the book really nests it this way.
-- **[line 7347](../books/dmg.md#L7347)**: Heading jumps from level 2 to level 4.
-  - Text: `#### Table 83`
-  - Hint: If this section belongs directly under the previous heading, change "####" to "###". Leave it if the book really nests it this way.
 - **[line 7527](../books/dmg.md#L7527)**: No 'Table N:' title in the lines above this table.
   - Text: `| Treasure Type A | Copper 1,000–3,000 25% | Silver 200–2,000 30% | Gold 1,000–6,000 40% | Electrum*...`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
@@ -315,9 +308,6 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 - **[line 9892](../books/dmg.md#L9892)**: No 'Table N:' title in the lines above this table.
   - Text: `| D100 | Weight | Weight Limit | Volume Limit |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 9915](../books/dmg.md#L9915)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  | Bag | of Tr | icks Ani A (1–5) | mals (D | 10) | create 1d4 + 1 doses of 1d4 + 1 potions. (The ...`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 - **[line 10078](../books/dmg.md#L10078)**: No 'Table N:' title in the lines above this table.
   - Text: `| D4 | Flying | Maneuverability |`
@@ -352,43 +342,172 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
 - **[line 11075](../books/dmg.md#L11075)**: No 'Table N:' title in the lines above this table.
   - Text: `| D20 | Special | Plus of |`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11279](../books/dmg.md#L11279)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D100 | Type(s) of Golem | XP |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11321](../books/dmg.md#L11321)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Level of Wizard | Movement/ Round | Probability of Control/Round |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11507](../books/dmg.md#L11507)**: No 'Table N:' title in the lines above this table.
-  - Text: `| 1. | Arachnids | 11. | Illusionists |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11531](../books/dmg.md#L11531)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D20 Roll | Magical Bonus | XP Value |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11555](../books/dmg.md#L11555)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D100 Roll | Magical Bonus | XP Value |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11606](../books/dmg.md#L11606)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D10 Roll | Type | XP Value |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11647](../books/dmg.md#L11647)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D20 Roll | Type | XP Value |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11663](../books/dmg.md#L11663)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D100 Roll | Type | XP Value |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11951](../books/dmg.md#L11951)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D100 Roll | Purpose |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 11970](../books/dmg.md#L11970)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D100 Roll | Power |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 12012](../books/dmg.md#L12012)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Table 119: |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **Foreword to the 2nd Edition**: section text is 2061 characters without a paragraph break.
-  - Hint: add blank lines between paragraphs or entries in this section, so search can return them separately.
+- ... and 10 more of this kind.
 
-### Info: fine, worth knowing (59)
+#### heading-jump (1)
+
+- **[line 6647](../books/dmg.md#L6647)**: Heading jumps from level 2 to level 4.
+  - Text: `#### Being Seen`
+  - Hint: If this section belongs directly under the previous heading, change "####" to "###". Leave it if the book really nests it this way.
+
+#### chunk-table-title-without-table (8)
+
+- **[line 7212](../books/dmg.md#L7212)**: "Table 81: Chance of Getting Hopelessly Lost" has no Markdown table under it.
+  - Text: `Surroundings % Chance Level, open ground 10% Rolling ground 20% Lightly wooded 30% Rough (wo`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 7255](../books/dmg.md#L7255)**: "Table 82: Lost Modifiers" has no Markdown table under it.
+  - Text: `Condition Modifier Featureless (no distinguishable landmarks)* +50 Darkness +70 Overcast +30`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 7523](../books/dmg.md#L7523)**: "Table 84: Treasure Types" has no Markdown table under it.
+  - Text: `LAIR TREASURES INDIVIDUAL AND SMALL LAIR TREASURES`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 7560](../books/dmg.md#L7560)**: "Table 84: Treasure Types" has no Markdown table under it.
+  - Text: `* DM’s choice`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 7757](../books/dmg.md#L7757)**: "Table 89: Potions and Oils (D6)" has no Markdown table under it.
+  - Text: `* The type of creature affected can be determined by die roll (see the specific item description for`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 7803](../books/dmg.md#L7803)**: "Table 90: Scrolls (D6)" has no Markdown table under it.
+  - Text: `* See “Scrolls” in Appendix 3 to determine whether a priest scroll or a wizard scroll is found. ** `
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 7993](../books/dmg.md#L7993)**: "Table 96: Miscellaneous Magic: Jewels, Jewelry, Phylacteries (D6)" has no Markdown table under it.
+  - Text: `* Per level ** Per die of damage *** Per special bead **** See item description`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 8375](../books/dmg.md#L8375)**: "Table 110: Special Weapons (D10)" has no Markdown table under it.
+  - Text: `* See item description * See item description`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+
+### Info: fine, worth knowing (152)
+
+#### chunk-short (22)
+
+- **[line 5](../books/dmg.md#L5)**: Short chunk (46 characters) in Dungeon Master Guide (AD&D 2nd Edition, Revised).
+  - Text: `**DUNGEON MASTER Guide for the AD&D Game.** ™`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 379](../books/dmg.md#L379)**: Short chunk (140 characters) in Chapter 1: Player Character Ability Scores > Players with Multiple Characters > Multiple Character Problems.
+  - Text: `And remember, when problems arise (which they will), don’t give up or give in. Instead, look for way`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 535](../books/dmg.md#L535)**: Short chunk (103 characters) in Chapter 2: Player Character Races > Racial Level Restrictions > Slow Advancement (Optional Rule) > Table 8: Prime Requisite Bonuses.
+  - Text: `| Ability Score | Additional Levels | |---|---| | 14, 15 | +1 | | 16, 17 | +2 | | 18 | +3 | | 19 | +`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 906](../books/dmg.md#L906)**: Short chunk (57 characters) in Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule) > Table 11: Race.
+  - Text: `| Race | Multiple | |---|---| | Human | 0 | | Other | 1 |`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 935](../books/dmg.md#L935)**: Short chunk (116 characters) in Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule) > Table 14: it Dice Per Level.
+  - Text: `| Level | Multiple | |---|---| | 1d3 | 0 | | 1d4 | +0.5 | | 1d6 | +0.75 | | 1d8 | +1 | | 1d10 | +2.5`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 968](../books/dmg.md#L968)**: Short chunk (81 characters) in Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule) > Table 17: Hit Points Per Level Beyond 9th.
+  - Text: `Beyond 9th | Degree | Multiple | |---|---| | +1 | +0.5 | | +2 | +2 | | +3 | +2 |`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 1622](../books/dmg.md#L1622)**: Short chunk (107 characters) in Chapter 6: Money and Equipment > Equipment by Time Period > The Ancient World.
+  - Text: `This covers a period of great empires spreading from the Mediterranean. Some weapons and armor were `
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 1700](../books/dmg.md#L1700)**: Short chunk (148 characters) in Chapter 6: Money and Equipment > Equipment by Time Period > Adjusting Equipment Lists > Table 24: Lock Quality.
+  - Text: `| Quality | Modification | |---|---| | Wretched | +30% | | Poor | +15% | | Good | 0% | | Excellent |`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 2052](../books/dmg.md#L2052)**: Short chunk (107 characters) in Chapter 7: Magic > Spell Books > Spell Book Preparation.
+  - Text: `while other preparations should be used to protect against mold, mildew, and dry rot. All this costs`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 2170](../books/dmg.md#L2170)**: Short chunk (67 characters) in Chapter 7: Magic > Too Much or Too Little?.
+  - Text: `This c also not p situat Aw is diff to re point deter reacti Th f`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 2635](../books/dmg.md#L2635)**: Short chunk (119 characters) in Chapter 9: Combat > Calculating THAC0 > Table 37: THAC0 Advancement.
+  - Text: `| Group | Improvement Rate Points/Level | |---|---| | Priest | 2/3 | | Rogue | 1/2 | | Warrior | 1/1`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 2793](../books/dmg.md#L2793)**: Short chunk (134 characters) in Chapter 9: Combat > Initiative > Initiative Modifiers.
+  - Text: `Situational factors can affect who has initiative. To reflect this, modifiers are added to or subtra`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 3667](../books/dmg.md#L3667)**: Short chunk (109 characters) in Chapter 9: Combat > Turning Undead > Evil Priests and Undead.
+  - Text: `din (7 HD) and would not be able to turn one of 8th level (using the paladin’s level as the HD to be`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 5952](../books/dmg.md#L5952)**: Short chunk (125 characters) in Chapter 12: NPCs > The Assassin, the Spy, and the Sage > Sages > Table 63: Research Times.
+  - Text: `| Type of | Time | |---|---| | Question | Required | | General | 1d6 hours | | Specific | 1d6 days |`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 7144](../books/dmg.md#L7144)**: Short chunk (138 characters) in Chapter 14: Time and Movement > Movement on Water > Ocean Voyaging > Table 80: Aerial Movement Modifiers.
+  - Text: `| Condition Hurricane | Modifier Not possible | |---|---| | Gale | ×1⁄4 | | Storm | ×1⁄4 | | Rain or`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 7523](../books/dmg.md#L7523)**: Short chunk (51 characters) in Appendix 1 > Table 84: Treasure Types.
+  - Text: `LAIR TREASURES INDIVIDUAL AND SMALL LAIR TREASURES`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 7560](../books/dmg.md#L7560)**: Short chunk (13 characters) in Appendix 1 > Table 84: Treasure Types.
+  - Text: `* DM’s choice`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 7807](../books/dmg.md#L7807)**: Short chunk (121 characters) in Appendix 2 > Magical Item Tables.
+  - Text: `The XP Value (experience point value) for spell scrolls is equal to the total spell levels contained`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 7993](../books/dmg.md#L7993)**: Short chunk (80 characters) in Appendix 2 > Magical Item Tables > Table 96: Miscellaneous Magic: Jewels, Jewelry, Phylacteries (D6).
+  - Text: `* Per level ** Per die of damage *** Per special bead **** See item description`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 8375](../books/dmg.md#L8375)**: Short chunk (46 characters) in Appendix 2 > Magical Item Tables > Magical Weapons > Table 110: Special Weapons (D10).
+  - Text: `* See item description * See item description`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- ... and 2 more of this kind.
+
+#### heading-bold-line (70)
+
+- **[line 31](../books/dmg.md#L31)**: Bold line treated by the chunker as a subheading: "Credits".
+  - Text: `**Credits**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 677](../books/dmg.md#L677)**: Bold line treated by the chunker as a subheading: "Class, Level, and the Common Man".
+  - Text: `**Class, Level, and the Common Man**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1109](../books/dmg.md#L1109)**: Bold line treated by the chunker as a subheading: "Player Character Alignment".
+  - Text: `**Player Character Alignment**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1401](../books/dmg.md#L1401)**: Bold line treated by the chunker as a subheading: "NPC Proficiencies".
+  - Text: `**NPC Proficiencies**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1610](../books/dmg.md#L1610)**: Bold line treated by the chunker as a subheading: "Equipment by Time Period".
+  - Text: `**Equipment by Time Period**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 2190](../books/dmg.md#L2190)**: Bold line treated by the chunker as a subheading: "Too Little or Too Much?".
+  - Text: `**Too Little or Too Much?**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 2571](../books/dmg.md#L2571)**: Bold line treated by the chunker as a subheading: "The Various Types of Weapons".
+  - Text: `**The Various Types of Weapons**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 2958](../books/dmg.md#L2958)**: Bold line treated by the chunker as a subheading: "Magical Weapon Speeds".
+  - Text: `**Magical Weapon Speeds**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 3218](../books/dmg.md#L3218)**: Bold line treated by the chunker as a subheading: "Critical Fumbles".
+  - Text: `**Critical Fumbles**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 3336](../books/dmg.md#L3336)**: Bold line treated by the chunker as a subheading: "Scatter Diagram".
+  - Text: `**Scatter Diagram**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 3392](../books/dmg.md#L3392)**: Bold line treated by the chunker as a subheading: "Limits on Charmed Creatures".
+  - Text: `**Limits on Charmed Creatures**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 3396](../books/dmg.md#L3396)**: Bold line treated by the chunker as a subheading: "Degrees of Charm".
+  - Text: `**Degrees of Charm**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4012](../books/dmg.md#L4012)**: Bold line treated by the chunker as a subheading: "Treating Poison Victims".
+  - Text: `**Treating Poison Victims**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4018](../books/dmg.md#L4018)**: Bold line treated by the chunker as a subheading: "Creating New Poisons".
+  - Text: `**Creating New Poisons**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4030](../books/dmg.md#L4030)**: Bold line treated by the chunker as a subheading: "Is This Injury Necessary?".
+  - Text: `**Is This Injury Necessary?**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4161](../books/dmg.md#L4161)**: Bold line treated by the chunker as a subheading: "Mounts—Trained and Untrained".
+  - Text: `**Mounts—Trained and Untrained**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4173](../books/dmg.md#L4173)**: Bold line treated by the chunker as a subheading: "Fighting from Horseback".
+  - Text: `**Fighting from Horseback**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4204](../books/dmg.md#L4204)**: Bold line treated by the chunker as a subheading: "Being Dismounted".
+  - Text: `**Being Dismounted**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4246](../books/dmg.md#L4246)**: Bold line treated by the chunker as a subheading: "Maneuverability Classes".
+  - Text: `**Maneuverability Classes**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 4266](../books/dmg.md#L4266)**: Bold line treated by the chunker as a subheading: "Levitation".
+  - Text: `**Levitation**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- ... and 50 more of this kind.
+
+#### page-inline (58)
 
 - **[line 327](../books/dmg.md#L327)**: Page marker inside a line of text.
   - Text: `- Don't adjust an ability score above 15. Only two classes have ability minimums <!-- page 16 --> hi...`
@@ -450,131 +569,26 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
 - **[line 4080](../books/dmg.md#L4080)**: Page marker inside a line of text.
   - Text: `Poisons remain effective for 2d6 hours after the death of the victim. If the character is raised dur...`
   - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4132](../books/dmg.md#L4132)**: Page marker inside a line of text.
-  - Text: `Sooner or later, player characters are going to lay siege to <!-- page 105 --> a castle, or leap on ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4185](../books/dmg.md#L4185)**: Page marker inside a line of text.
-  - Text: `Another consideration to bear in mind when using a lance is that lances are breakable. Heavy and med...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4242](../books/dmg.md#L4242)**: Page marker inside a line of text.
-  - Text: `In the air, attacks can come from ahead, alongside, above, behind, below, or any combination of thes...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4350](../books/dmg.md#L4350)**: Page marker inside a line of text.
-  - Text: `The biggest problem facing characters underwater is, naturally, breathing. Before any kind of underw...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4428](../books/dmg.md#L4428)**: Page marker inside a line of text.
-  - Text: `The simplest treasures are items of set value—gold, silver, platinum, and copper coins. Virtually an...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4630](../books/dmg.md#L4630)**: Page marker inside a line of text.
-  - Text: `Even after learning what he must do, the spellcaster may have to do further research to learn the te...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4670](../books/dmg.md#L4670)**: Page marker inside a line of text.
-  - Text: `A spell on a page in a wizard’s spellbook is different from a spell contained on a scroll. The first...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4720](../books/dmg.md#L4720)**: Page marker inside a line of text.
-  - Text: `In addition, a potion requires a number of mundane ingredients. The basic cost of these ingredients ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4756](../books/dmg.md#L4756)**: Page marker inside a line of text.
-  - Text: `Preparing the Materials: Once the vessel for the magic is obtained, the character will have to prepa...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4790](../books/dmg.md#L4790)**: Page marker inside a line of text.
-  - Text: `Once this is done, the item is ready for the final plea. As it rests upon an altar, the priest must ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4904](../books/dmg.md#L4904)**: Page marker inside a line of text.
-  - Text: `Major Powers: After choosing minor powers, you can select the major powers. There should normally be...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5172](../books/dmg.md#L5172)**: Page marker inside a line of text.
-  - Text: `As complete as you make them, triggers are not without <!-- page 131 --> their weaknesses. While ver...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5190](../books/dmg.md#L5190)**: Page marker inside a line of text.
-  - Text: `During the course of an adventure, the DM makes encounter checks, rolling a die to determine if a ra...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5236](../books/dmg.md#L5236)**: Page marker inside a line of text.
-  - Text: `Logic: The other significant factor restricting encounter tables is rationality. Everything on the e...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5457](../books/dmg.md#L5457)**: Page marker inside a line of text.
-  - Text: `Unlike the dungeon tables, those used for the wilderness are not so neatly organized according to de...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5682](../books/dmg.md#L5682)**: Page marker inside a line of text.
-  - Text: `When making a surprise roll, there are many factors that can increase or decrease the chance of surp...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5912](../books/dmg.md#L5912)**: Page marker inside a line of text.
-  - Text: `Frequency is the chance of finding a sage with that particular skill in a large city—a university to...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 6047](../books/dmg.md#L6047)**: Page marker inside a line of text.
-  - Text: `Some Italian militias were well-equipped with banded or <!-- page 149 --> plate mail armor and glaiv...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 6345](../books/dmg.md#L6345)**: Page marker inside a line of text.
-  - Text: `**Money:** For some clerical spellcasters and most nonclerical types, spellcasting is more a matter ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 6705](../books/dmg.md#L6705)**: Page marker inside a line of text.
-  - Text: `Since one can’t see anything in the dark, the safe movement rate of blinded characters is immediatel...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7177](../books/dmg.md#L7177)**: Page marker inside a line of text.
-  - Text: `Next, the DM rolls 1d6 to determine precipitation (although storms and hurricanes have automatic pre...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7427](../books/dmg.md#L7427)**: Page marker inside a line of text.
-  - Text: `During the change, the character’s Strength increases <!-- page 177 --> temporarily to 19, allowing ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7439](../books/dmg.md#L7439)**: Page marker inside a line of text.
-  - Text: `Lycanthropy is not the only type of weird and magical affliction that can strike a character. Filthy...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
+- ... and 38 more of this kind.
+
+#### heading-jump (2)
+
+- **[line 7347](../books/dmg.md#L7347)**: Heading jumps from level 2 to level 4.
+  - Text: `#### Table 83`
+  - Hint: Harmless for search: this is a table title, and the chunker skips the missing levels. Leave it unless you want consistent levels.
 - **[line 7521](../books/dmg.md#L7521)**: Heading jumps from level 2 to level 4.
   - Text: `#### Table 84: Treasure Types`
   - Hint: Harmless for search: this is a table title, and the chunker skips the missing levels. Leave it unless you want consistent levels.
-- **[line 9104](../books/dmg.md#L9104)**: Page marker inside a line of text.
-  - Text: `Structural damage from the ramlike force is identical to an actual <!-- page 202 --> battering ram, ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9188](../books/dmg.md#L9188)**: Page marker inside a line of text.
-  - Text: `Once the spell is turned, the effects must be determined. If the <!-- page 203 --> spell normally al...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9236](../books/dmg.md#L9236)**: Page marker inside a line of text.
-  - Text: `Ring of Wishes, Multiple: This ring contains from 2d4 _wish_ spells. As with any wish, the DM should...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9532](../books/dmg.md#L9532)**: Page marker inside a line of text.
-  - Text: `Retributive strike is a breaking of the staff. It must be purposeful and declared by the wizard wiel...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9588](../books/dmg.md#L9588)**: Page marker inside a line of text.
-  - Text: `_Lightning:_ A short spark of electricity leaps forth when the opponent is struck, causing normal st...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9608](../books/dmg.md#L9608)**: Page marker inside a line of text.
-  - Text: `* This function duplicates the ability of a treant to cause a large tree to move at a movement rate ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9844](../books/dmg.md#L9844)**: Page marker inside a line of text.
-  - Text: `Amulet Versus Undead: This prized charm is a specially blessed symbol that enables the wearer to tur...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9966](../books/dmg.md#L9966)**: Page marker inside a line of text.
-  - Text: `Boccob’s Blessed Book: This well-made tome is always of small size. One will typically be no more th...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10096](../books/dmg.md#L10096)**: Page marker inside a line of text.
-  - Text: `The bracers empower such a wearer to use any bow (not including <!-- page 218 --> crossbows) as if h...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10154](../books/dmg.md#L10154)**: Page marker inside a line of text.
-  - Text: `Carpet of Flying: The size, carrying capacity, and speed of a carpet are determined by rolling perce...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10604](../books/dmg.md#L10604)**: Page marker inside a line of text.
-  - Text: `_Marble Elephant:_ This is the largest of the figurines, the statuette being about the size of a hum...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11105](../books/dmg.md#L11105)**: Page marker inside a line of text.
-  - Text: `Pipes of the Sewers: These wooden pipes appear ordinary, but if the possessor learns the proper tune...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11221](../books/dmg.md#L11221)**: Page marker inside a line of text.
-  - Text: `Robe of Vermin: This magical-seeming garment will radiate a dim aura of enchantment if magic is dete...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11269](../books/dmg.md#L11269)**: Page marker inside a line of text.
-  - Text: `The possessor gains a +1 bonus to all saving throws vs. spell. If no save is normally possible, he g...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11479](../books/dmg.md#L11479)**: Page marker inside a line of text.
-  - Text: `Swords have a 25% chance of some form of intelligence. Other <!-- page 242 --> melee weapons (axes, ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
 
 ## phb.md
 
 - Headings by level: # 1, ## 25, ### 133, #### 660
-- Numbered tables: 52, Table 1 to Table 66
-- Chunks: 1147, median 1268 characters, 19 under 150 characters
+- Numbered tables: 53, Table 1 to Table 66
+- Chunks: 1160, median 1231 characters
 
-### Fix: certainly wrong (105)
+### Fix: certainly wrong (127)
+
+#### unclear (105)
 
 - **[line 299](../books/phb.md#L299)**: Marked unclear by the converter: heading "Glossary" starts somewhere on page 13; exact position not detected.
   - Text: `<!-- UNCLEAR: heading "Glossary" starts somewhere on page 13; exact position not detected -->`
@@ -636,327 +650,250 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
 - **[line 1377](../books/phb.md#L1377)**: Marked unclear by the converter: table "Table 16: Fighter’s Followers" on page 38 could not be rebuilt as a table; the content follows as extracted, check the printed page.
   - Text: `<!-- UNCLEAR: table "Table 16: Fighter’s Followers" on page 38 could not be rebuilt as a table; the ...`
   - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1451](../books/phb.md#L1451)**: Marked unclear by the converter: table on page 40 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 40 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1546](../books/phb.md#L1546)**: Marked unclear by the converter: no table number/title detected next to this table on page 41.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 41 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1547](../books/phb.md#L1547)**: Marked unclear by the converter: table on page 41 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 41 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1642](../books/phb.md#L1642)**: Marked unclear by the converter: no table number/title detected next to this table on page 43.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 43 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1643](../books/phb.md#L1643)**: Marked unclear by the converter: table on page 43 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 43 may contain text from the surrounding column; check against the print...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1644](../books/phb.md#L1644)**: Marked unclear by the converter: table on page 43 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 43 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1701](../books/phb.md#L1701)**: Marked unclear by the converter: no table number/title detected next to this table on page 45.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 45 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1702](../books/phb.md#L1702)**: Marked unclear by the converter: table on page 45 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 45 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 1810](../books/phb.md#L1810)**: Marked unclear by the converter: table on page 47 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 47 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2145](../books/phb.md#L2145)**: Marked unclear by the converter: table "Table 27: Thieving Skill Racial Adjustments" on page 54 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 27: Thieving Skill Racial Adjustments" on page 54 could not be rebuilt as...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2150](../books/phb.md#L2150)**: Marked unclear by the converter: table "Table 28: Thieving Skill Dexterity Adjustments" on page 54 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 28: Thieving Skill Dexterity Adjustments" on page 54 could not be rebuilt...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2265](../books/phb.md#L2265)**: Marked unclear by the converter: Table 30 on page 56: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 30 on page 56: title and table structure were not recovered; its content follows...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2277](../books/phb.md#L2277)**: Marked unclear by the converter: table on page 58 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 58 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2333](../books/phb.md#L2333)**: Marked unclear by the converter: no table number/title detected next to this table on page 59.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 59 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2334](../books/phb.md#L2334)**: Marked unclear by the converter: table on page 59 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 59 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 2814](../books/phb.md#L2814)**: Marked unclear by the converter: table "Table 36: Secondary Skills" on page 75 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 36: Secondary Skills" on page 75 could not be rebuilt as a table; the con...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3145](../books/phb.md#L3145)**: Marked unclear by the converter: table on page 86 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 86 may contain text from the surrounding column; check against the print...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3296](../books/phb.md#L3296)**: Marked unclear by the converter: table on page 89 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 89 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3325](../books/phb.md#L3325)**: Marked unclear by the converter: Table 43 on page 89: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 43 on page 89: title and table structure were not recovered; its content follows...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3335](../books/phb.md#L3335)**: Marked unclear by the converter: Table 44 on page 90: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 44 on page 90: title and table structure were not recovered; its content follows...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3341](../books/phb.md#L3341)**: Marked unclear by the converter: no table number/title detected next to this table on page 90.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 90 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3342](../books/phb.md#L3342)**: Marked unclear by the converter: table on page 90 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 90 may contain text from the surrounding column; check against the print...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3343](../books/phb.md#L3343)**: Marked unclear by the converter: table on page 90 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 90 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3406](../books/phb.md#L3406)**: Marked unclear by the converter: no table number/title detected next to this table on page 91.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 91 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3407](../books/phb.md#L3407)**: Marked unclear by the converter: table on page 91 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 91 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3572](../books/phb.md#L3572)**: Marked unclear by the converter: no table number/title detected next to this table on page 94.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 94 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3573](../books/phb.md#L3573)**: Marked unclear by the converter: table on page 94 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 94 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3638](../books/phb.md#L3638)**: Marked unclear by the converter: no table number/title detected next to this table on page 95.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 95 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3679](../books/phb.md#L3679)**: Marked unclear by the converter: table on page 95 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 95 may contain text from the surrounding column; check against the print...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3680](../books/phb.md#L3680)**: Marked unclear by the converter: table on page 95 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 95 has header cells that were not detected; check column headings agains...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3802](../books/phb.md#L3802)**: Marked unclear by the converter: Table 46 on page 96: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 46 on page 96: title and table structure were not recovered; its content follows...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 3935](../books/phb.md#L3935)**: Marked unclear by the converter: table on page 103 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 103 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4433](../books/phb.md#L4433)**: Marked unclear by the converter: table "Table 54: THAC0 Advancement" on page 121 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 54: THAC0 Advancement" on page 121 could not be rebuilt as a table; the c...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4800](../books/phb.md#L4800)**: Marked unclear by the converter: table on page 128 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 128 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4804](../books/phb.md#L4804)**: Marked unclear by the converter: Table 57 on page 127: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 57 on page 127: title and table structure were not recovered; its content follow...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 4983](../books/phb.md#L4983)**: Marked unclear by the converter: table "Table 59: Cover and" on page 132 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 59: Cover and" on page 132 could not be rebuilt as a table; the content f...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5060](../books/phb.md#L5060)**: Marked unclear by the converter: table "Table 60: Character Saving Throws" on page 134 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 60: Character Saving Throws" on page 134 could not be rebuilt as a table;...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5064](../books/phb.md#L5064)**: Marked unclear by the converter: no table number/title detected next to this table on page 134.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 134 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5212](../books/phb.md#L5212)**: Marked unclear by the converter: no table number/title detected next to this table on page 137.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 137 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5213](../books/phb.md#L5213)**: Marked unclear by the converter: table on page 137 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 137 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5675](../books/phb.md#L5675)**: Marked unclear by the converter: no table number/title detected next to this table on page 155.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 155 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5902](../books/phb.md#L5902)**: Marked unclear by the converter: Table 65 on page 161: title and table structure were not recovered; its content follows as extracted text, check the printed page.
-  - Text: `<!-- UNCLEAR: Table 65 on page 161: title and table structure were not recovered; its content follow...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5978](../books/phb.md#L5978)**: Marked unclear by the converter: no table number/title detected next to this table on page 163.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 163 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 5979](../books/phb.md#L5979)**: Marked unclear by the converter: table on page 163 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 163 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6611](../books/phb.md#L6611)**: Marked unclear by the converter: no table number/title detected next to this table on page 174.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 174 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 6612](../books/phb.md#L6612)**: Marked unclear by the converter: table on page 174 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 174 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 8224](../books/phb.md#L8224)**: Marked unclear by the converter: no table number/title detected next to this table on page 191.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 191 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10191](../books/phb.md#L10191)**: Marked unclear by the converter: no table number/title detected next to this table on page 213.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 213 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10814](../books/phb.md#L10814)**: Marked unclear by the converter: no table number/title detected next to this table on page 219.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 219 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 10815](../books/phb.md#L10815)**: Marked unclear by the converter: table on page 219 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 219 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12232](../books/phb.md#L12232)**: Marked unclear by the converter: no table number/title detected next to this table on page 236.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 236 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12233](../books/phb.md#L12233)**: Marked unclear by the converter: table on page 236 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 236 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12234](../books/phb.md#L12234)**: Marked unclear by the converter: table on page 236 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 236 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12877](../books/phb.md#L12877)**: Marked unclear by the converter: no table number/title detected next to this table on page 243.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 243 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12878](../books/phb.md#L12878)**: Marked unclear by the converter: table on page 243 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 243 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12879](../books/phb.md#L12879)**: Marked unclear by the converter: table on page 243 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 243 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 12935](../books/phb.md#L12935)**: Marked unclear by the converter: no table number/title detected next to this table on page 244.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 244 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 13305](../books/phb.md#L13305)**: Marked unclear by the converter: no table number/title detected next to this table on page 249.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 249 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 13306](../books/phb.md#L13306)**: Marked unclear by the converter: table on page 249 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 249 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 13307](../books/phb.md#L13307)**: Marked unclear by the converter: table on page 249 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 249 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 14878](../books/phb.md#L14878)**: Marked unclear by the converter: no table number/title detected next to this table on page 267.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 267 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 15278](../books/phb.md#L15278)**: Marked unclear by the converter: no table number/title detected next to this table on page 271.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 271 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 15532](../books/phb.md#L15532)**: Marked unclear by the converter: no table number/title detected next to this table on page 274.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 274 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 15533](../books/phb.md#L15533)**: Marked unclear by the converter: table on page 274 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 274 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 15715](../books/phb.md#L15715)**: Marked unclear by the converter: no table number/title detected next to this table on page 276.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 276 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 16988](../books/phb.md#L16988)**: Marked unclear by the converter: no table number/title detected next to this table on page 290.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 290 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 17386](../books/phb.md#L17386)**: Marked unclear by the converter: no table number/title detected next to this table on page 295.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 295 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 17563](../books/phb.md#L17563)**: Marked unclear by the converter: no table number/title detected next to this table on page 297.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 297 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 17634](../books/phb.md#L17634)**: Marked unclear by the converter: no table number/title detected next to this table on page 298.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 298 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 17967](../books/phb.md#L17967)**: Marked unclear by the converter: no table number/title detected next to this table on page 308.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 308 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18052](../books/phb.md#L18052)**: Marked unclear by the converter: no table number/title detected next to this table on page 310.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 310 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18053](../books/phb.md#L18053)**: Marked unclear by the converter: table on page 310 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 310 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18087](../books/phb.md#L18087)**: Marked unclear by the converter: no table number/title detected next to this table on page 310.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 310 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18088](../books/phb.md#L18088)**: Marked unclear by the converter: table on page 310 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 310 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18116](../books/phb.md#L18116)**: Marked unclear by the converter: no table number/title detected next to this table on page 311.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 311 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18117](../books/phb.md#L18117)**: Marked unclear by the converter: table on page 311 may contain text from the surrounding column; check against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 311 may contain text from the surrounding column; check against the prin...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18149](../books/phb.md#L18149)**: Marked unclear by the converter: no table number/title detected next to this table on page 311.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 311 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18150](../books/phb.md#L18150)**: Marked unclear by the converter: table on page 311 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 311 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18162](../books/phb.md#L18162)**: Marked unclear by the converter: no table number/title detected next to this table on page 312.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 312 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18163](../books/phb.md#L18163)**: Marked unclear by the converter: table on page 312 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 312 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18191](../books/phb.md#L18191)**: Marked unclear by the converter: no table number/title detected next to this table on page 312.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 312 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18192](../books/phb.md#L18192)**: Marked unclear by the converter: table on page 312 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 312 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18223](../books/phb.md#L18223)**: Marked unclear by the converter: no table number/title detected next to this table on page 312.
-  - Text: `<!-- UNCLEAR: no table number/title detected next to this table on page 312 -->`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18224](../books/phb.md#L18224)**: Marked unclear by the converter: table on page 312 has header cells that were not detected; check column headings against the printed page.
-  - Text: `<!-- UNCLEAR: table on page 312 has header cells that were not detected; check column headings again...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
-- **[line 18254](../books/phb.md#L18254)**: Marked unclear by the converter: table "Table 29" on page 313 could not be rebuilt as a table; the content follows as extracted, check the printed page.
-  - Text: `<!-- UNCLEAR: table "Table 29" on page 313 could not be rebuilt as a table; the content follows as e...`
-  - Hint: Check this passage on the printed page, write the correct text, and remove the marker.
+- ... and 85 more of this kind.
 
-### Review: probably wrong, check against the book (62)
+#### table-title-in-table (19)
+
+- **[line 641](../books/phb.md#L641)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Table 2: Dexterity Missile |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 707](../books/phb.md#L707)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | T Cons | able 3: titution |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 763](../books/phb.md#L763)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | In | Table 4: telligen | ce |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 823](../books/phb.md#L823)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Magical | Tab Wis | le 5: dom Chance |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 893](../books/phb.md#L893)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Table 6: Charisma Maximum |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 1272](../books/phb.md#L1272)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | Tab | le 13: |  |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 1549](../books/phb.md#L1549)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  | Ra | Table nger A | 18: biliti | es |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 1646](../books/phb.md#L1646)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| 4), the character under- stands the spell and how to cast it. He can |  |  |  |  | Table | 21: |  ...`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 2336](../books/phb.md#L2336)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | Table 32: |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 5215](../books/phb.md#L5215)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  |  |  | Tur | Tab ning | le 61: Und | ead |  |  |  |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 5677](../books/phb.md#L5677)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Condition | T Visibili Movement | able 62: ty Ran Spotted | ges Type | ID | Detail |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 5981](../books/phb.md#L5981)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Type of Surface Very smooth * | Rate —————— Dry 1⁄4 | Table 67: s of Climbing ———Surface Condition...`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 17969](../books/phb.md#L17969)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Ability Score 1 | Tab Dext Reaction Adj. –6 | le 2: erity Missile Attack Adj. –6 | Defensive Adj. ...`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 18055](../books/phb.md#L18055)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | In | Table 4: telligen | ce |  |  | Tabl Char | e 6: isma |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 18090](../books/phb.md#L18090)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  |  |  | Tur | Tab ning | le 61: Und | ead |  |  |  |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 18119](../books/phb.md#L18119)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `| Ability Score | Magical Defense Adjust. | Ta Wi Bonus Spells | ble 5: sdom Chance of Spell Failure...`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 18165](../books/phb.md#L18165)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  |  |  | Table 21: |  |  |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 18194](../books/phb.md#L18194)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  |  | Table | 24: |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+- **[line 18226](../books/phb.md#L18226)**: The table's title seems to have been captured inside the table, broken across cells.
+  - Text: `|  |  | T | able 32: |  |  |`
+  - Hint: Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.
+
+#### table-flattened (3)
+
+- **[line 2267](../books/phb.md#L2267)**: Table 30 was written as a single line of text instead of a table.
+  - Text: `Table 30: Thief’s Level Damage Multiplier 1–4 2 5–8 3 9–12 4 13+ 5 <!-- page 58 --> magical writings...`
+  - Hint: Rebuild it from the printed page as a Markdown table under its heading "#### Table 30: Title", and move any text that follows the values on the same line back into the paragraph it belongs to.
+- **[line 3327](../books/phb.md#L3327)**: Table 43 was written as a single line of text instead of a table.
+  - Text: `Table 43: Character Group Die Range Warrior 5d4 × 10 gp Wizard (1d4+1) × 10 gp Rogue 2d6 × 10 gp Pri...`
+  - Hint: Rebuild it from the printed page as a Markdown table under its heading "#### Table 43: Title", and move any text that follows the values on the same line back into the paragraph it belongs to.
+- **[line 3804](../books/phb.md#L3804)**: Table 46 was written as a single line of text instead of a table.
+  - Text: `Table 46: Type of Armor AC Rating None 10 Shield only 9 Leather or padded armor 8 Leather or padded ...`
+  - Hint: Rebuild it from the printed page as a Markdown table under its heading "#### Table 46: Title", and move any text that follows the values on the same line back into the paragraph it belongs to.
+
+### Review: probably wrong, check against the book (81)
+
+#### table-number-missing (13)
 
 - **whole book**: Table 2 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 2 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 2 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 4 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 4 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 4 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 5 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 5 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 5 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 6 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 6 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
-- **whole book**: Table 10 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 10 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 6 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 18 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 18 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 18 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 21 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 21 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 21 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 22 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 22 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 22 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 32 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 32 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 32 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 33 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 33 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 33 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 38 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 38 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 38 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 41 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 41 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 41 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 61 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 61 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 61 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
 - **whole book**: Table 62 is missing from the sequence 1 to 66.
-  - Hint: Look for Table 62 in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.
+  - Hint: Look for Table 62 in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.
+
+#### table-number-duplicate (12)
+
 - **[line 597](../books/phb.md#L597)**: Table 1 appears 2 times (lines 597, 17938).
   - Text: `#### Table 1: Strength`
   - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
-- **[line 641](../books/phb.md#L641)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  | Table 2: Dexterity Missile |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 707](../books/phb.md#L707)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  | T Cons | able 3: titution |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 763](../books/phb.md#L763)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  | In | Table 4: telligen | ce |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 823](../books/phb.md#L823)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  | Magical | Tab Wis | le 5: dom Chance |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 893](../books/phb.md#L893)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  | Table 6: Charisma Maximum |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 - **[line 1020](../books/phb.md#L1020)**: Table 9 appears 2 times (lines 1020, 18040).
   - Text: `#### Table 9: Constitution Saving Throw Bonuses`
   - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
-- **[line 1272](../books/phb.md#L1272)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  | Tab | le 13: |  |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 1549](../books/phb.md#L1549)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  | Ra | Table nger A | 18: biliti | es |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 1646](../books/phb.md#L1646)**: No 'Table N:' title in the lines above this table.
-  - Text: `| 4), the character under- stands the spell and how to cast it. He can |  |  |  |  | Table | 21: |  ...`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
+- **[line 2204](../books/phb.md#L2204)**: Table 29 appears 2 times (lines 2204, 18253).
+  - Text: `#### Table 29: Thieving Skill Armor Adjustments`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 3333](../books/phb.md#L3333)**: Table 44 appears 2 times (lines 3333, 3337).
+  - Text: `#### Table 44`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 3337](../books/phb.md#L3337)**: Table 44 appears 2 times (lines 3333, 3337).
+  - Text: `Table 44:`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 4802](../books/phb.md#L4802)**: Table 57 appears 2 times (lines 4802, 4806).
+  - Text: `#### Table 57`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 4806](../books/phb.md#L4806)**: Table 57 appears 2 times (lines 4802, 4806).
+  - Text: `Table 57: Armor Modifiers for Wrestling`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 5900](../books/phb.md#L5900)**: Table 65 appears 2 times (lines 5900, 5904).
+  - Text: `#### Table 65`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 5904](../books/phb.md#L5904)**: Table 65 appears 2 times (lines 5900, 5904).
+  - Text: `Table 65: Base Climbing Success Rates`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 17938](../books/phb.md#L17938)**: Table 1 appears 2 times (lines 597, 17938).
+  - Text: `#### Table 1: Strength`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 18040](../books/phb.md#L18040)**: Table 9 appears 2 times (lines 1020, 18040).
+  - Text: `#### Table 9: Constitution Saving Throw Bonuses`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+- **[line 18253](../books/phb.md#L18253)**: Table 29 appears 2 times (lines 2204, 18253).
+  - Text: `#### Table 29`
+  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
+
+#### chunk-duplicate (1)
+
+- **[line 599](../books/phb.md#L599)**: The same text appears in two chunks, at line 599 and also at line 17940.
+  - Text: `| Ability Score | Hit Prob. | Damage Adjust. | Weight Allow. | Max. Press | Open Doors | Bend Bars/ `
+  - Hint: Usually content duplicated by the conversion. Keep the copy in the right place and delete the other.
+
+#### chunk-starts-midsentence (20)
+
+- **[line 983](../books/phb.md#L983)**: Chunk in Chapter 2: Player Character Races > Dwarves starts in the middle of a sentence.
+  - Text: `cheeks, dark eyes, and dark hair. Dwarves generally live for 350 years. Dwarves tend to be dour and`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 1006](../books/phb.md#L1006)**: Chunk in Chapter 2: Player Character Races > Dwarves starts in the middle of a sentence.
+  - Text: `proficiency slots he allots to languages (if that optional system is used). By nature, dwarves are `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2219](../books/phb.md#L2219)**: Chunk in Chapter 3: Player Character Classes > Rogue > Thief > Skill Explanations starts in the middle of a sentence.
+  - Text: `find any traps,” it’s up to the player to decide whether that means there are no traps or there are `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2299](../books/phb.md#L2299)**: Chunk in Chapter 3: Player Character Classes > Rogue > Thief > Backstab Damage Multipliers starts in the middle of a sentence.
+  - Text: `comrades. Table 31 can be used to determine the type and level of followers, or the DM can choose fo`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2500](../books/phb.md#L2500)**: Chunk in Chapter 4: Alignment > Good, Neutrality, and Evil starts in the middle of a sentence.
+  - Text: `attitudes is also divided into three parts. Like law and order, the second set of These parts descri`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2651](../books/phb.md#L2651)**: Chunk in Chapter 5: Proficiencies (Optional) > Acquiring Proficiencies starts in the middle of a sentence.
+  - Text: `three slots and his Intelligence of 11 gives him two additional proficiency slots (according to Tabl`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2691](../books/phb.md#L2691)**: Chunk in Chapter 5: Proficiencies (Optional) > Weapon Proficiencies starts in the middle of a sentence.
+  - Text: `more, a character can assign weapon proficiency slots only to those weapons allowed to his character`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2871](../books/phb.md#L2871)**: Chunk in Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies > Using Nonweapon Proficiencies starts in the middle of a sentence.
+  - Text: `sometimes worse than having none. Nonweapon proficiencies can also be improved beyond the ability s`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 2925](../books/phb.md#L2925)**: Chunk in Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies > Nonweapon Proficiency Descriptions starts in the middle of a sentence.
+  - Text: `labor, hunt, track, or fight alongside soldiers (such as a war horse or elephant). A specific trick `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 3196](../books/phb.md#L3196)**: Chunk in Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies > Nonweapon Proficiency Descriptions starts in the middle of a sentence.
+  - Text: `modified chance to track as found from Table 39. In the earlier example, Thule has a modified track`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 3284](../books/phb.md#L3284)**: Chunk in Chapter 6: Money and Equipment > Starting Money starts in the middle of a sentence.
+  - Text: `amount of cash. This nest egg may be your All player characters begin with some character’s life sav`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 3307](../books/phb.md#L3307)**: Chunk in Chapter 6: Money and Equipment > Equipment Lists starts in the middle of a sentence.
+  - Text: `have been discovered or invented yet! While he should tell you which items are and aren’t available,`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 3315](../books/phb.md#L3315)**: Chunk in Chapter 6: Money and Equipment > Equipment Descriptions starts in the middle of a sentence.
+  - Text: `described here. The vast majority Not every piece of equipment is of things found on the equipment l`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 4146](../books/phb.md#L4146)**: Chunk in Chapter 7: Magic > Casting Spells starts in the middle of a sentence.
+  - Text: `rules for casting spells. To cast a spell, the Both wizards and priests use the same character must `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 4166](../books/phb.md#L4166)**: Chunk in Chapter 7: Magic > Magical Research starts in the middle of a sentence.
+  - Text: `and priests is magical research. While One oft-ignored asset of both wizards the spell lists for bot`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 5154](../books/phb.md#L5154)**: Chunk in Chapter 9: Combat > Magic Resistance starts in the middle of a sentence.
+  - Text: `them more difficult to affect with magical energy than ordinary creatures or items. A rare few crea`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 5200](../books/phb.md#L5200)**: Chunk in Chapter 9: Combat > Turning Undead starts in the middle of a sentence.
+  - Text: `combat ability available to priests and pala-One important, and potentially life-saving, dins is the`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 5239](../books/phb.md#L5239)**: Chunk in Chapter 9: Combat > Turning Undead starts in the middle of a sentence.
+  - Text: `character (two levels lower for a paladin). If there is a number listed, roll 1d20. If the number ro`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 5295](../books/phb.md#L5295)**: Chunk in Chapter 9: Combat > Special Damage starts in the middle of a sentence.
+  - Text: `the only way a character can get hurt. Getting hit by weapons or monsters isn’t In deed, the world i`
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+- **[line 5599](../books/phb.md#L5599)**: Chunk in Chapter 12: NPCs > Followers starts in the middle of a sentence.
+  - Text: `ters who, while they expect pay, were originally drawn into service by the reputation of the player `
+  - Hint: Usually a blank line inside a paragraph, often at a page break. Remove the blank line so the paragraph stays whole; keep any page marker on its own line or inline.
+
+#### chunk-table-title-without-table (8)
+
+- **[line 1208](../books/phb.md#L1208)**: "Table 11: Age" has no Markdown table under it.
+  - Text: `* Upon attaining this age, an elf does not die. Rather he feels compelled to migrate to some mysteri`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 1213](../books/phb.md#L1213)**: "Table 12: Aging Effects" has no Markdown table under it.
+  - Text: `Middle Age* Old Age** Venerable*** Race (1⁄2 Base Max.) (2⁄3 Base Max.) (Base Max.) Dwarf 125 years `
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 1379](../books/phb.md#L1379)**: "Table 16: Fighter’s Followers" has no Markdown table under it.
+  - Text: `Roll percentile dice on each of the following subtables of Table 16: once for the leader of the troo`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 1391](../books/phb.md#L1391)**: "Table 16: Fighter’s Followers" has no Markdown table under it.
+  - Text: `**Die RollElite Units** 01–10 10 mounted knights: 1st-level fighters with field plate, large shield,`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 2147](../books/phb.md#L2147)**: "Table 27: Thieving Skill Racial Adjustments" has no Markdown table under it.
+  - Text: `Skill Dwarf Elf Gnome Half-elf Halfling Pick Pockets — +5% — +10% +5% Open Locks +10% –5% +5% — +5% `
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 2152](../books/phb.md#L2152)**: "Table 28: Thieving Skill Dexterity Adjustments" has no Markdown table under it.
+  - Text: `Pick Open Find/ Move Hide in Dexterity Pockets Locks Remove Traps Silently Shadows 9 –15% –10% –10% `
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 2816](../books/phb.md#L2816)**: "Table 36: Secondary Skills" has no Markdown table under it.
+  - Text: `D100 Roll Secondary Skill 01–02 Armorer (make, repair & evaluate armor and weapons) 03–04 Bowyer/Fle`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+- **[line 4435](../books/phb.md#L4435)**: "Table 54: THAC0 Advancement" has no Markdown table under it.
+  - Text: `Improvement Rate Group Points/Level Priest 2/3 Rogue 1/2 Warrior 1/1 Wizard 1/3`
+  - Hint: The table may be missing, or written in a form the chunker doesn't recognize (see table findings). Compare with the book.
+
+#### table-no-title (24)
+
 - **[line 1704](../books/phb.md#L1704)**: No 'Table N:' title in the lines above this table.
   - Text: `|  |  | Ta | ble 22: |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 2336](../books/phb.md#L2336)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  | Table 32: |  |`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 - **[line 3345](../books/phb.md#L3345)**: No 'Table N:' title in the lines above this table.
   - Text: `| Clothing |  | Household Provisioning | Animals |  |`
@@ -975,15 +912,6 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 - **[line 5066](../books/phb.md#L5066)**: No 'Table N:' title in the lines above this table.
   - Text: `| Priests | Character Class and Experience Level 1–3 | Paralyzation, Poison, or Death Magic 10 | Rod...`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 5215](../books/phb.md#L5215)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  |  |  | Tur | Tab ning | le 61: Und | ead |  |  |  |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 5677](../books/phb.md#L5677)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Condition | T Visibili Movement | able 62: ty Ran Spotted | ges Type | ID | Detail |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 5981](../books/phb.md#L5981)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Type of Surface Very smooth * | Rate —————— Dry 1⁄4 | Table 67: s of Climbing ———Surface Condition...`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 - **[line 6614](../books/phb.md#L6614)**: No 'Table N:' title in the lines above this table.
   - Text: `| D20 Roll | Familiar* | Sensory Powers |`
@@ -1024,50 +952,156 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
 - **[line 16990](../books/phb.md#L16990)**: No 'Table N:' title in the lines above this table.
   - Text: `| Tree Size | Height | Hit Dice | Damage per Attack |`
   - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 17388](../books/phb.md#L17388)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Precipitation | Temperature | Wind |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 17565](../books/phb.md#L17565)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Creature’s Hit Dice or Level | General | Attack Move | Dice | Spells |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 17636](../books/phb.md#L17636)**: No 'Table N:' title in the lines above this table.
-  - Text: `| D100 Roll | Incarnation | D100 Roll | Incarnation |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
+- ... and 4 more of this kind.
+
+#### text-repeated-line (1)
+
+- **[line 8609](../books/phb.md#L8609)**: The same line appears 5 times (first at line 8609): probably a leftover page header or footer.
+  - Text: `The material components of this spell are a tiny bag and a small (not necessarily lit) candle.`
+  - Hint: If it is a running header or footer from the printed pages, delete every occurrence; it adds noise to many chunks.
+
+#### page-jump (1)
+
 - **[line 17934](../books/phb.md#L17934)**: Pages jump from 303 to 308.
   - Text: `<!-- page 308 -->`
   - Hint: Check whether pages 304 to 307 are missing from the conversion. Full-page illustrations or blank pages legitimately have no text.
-- **[line 17938](../books/phb.md#L17938)**: Table 1 appears 2 times (lines 597, 17938).
-  - Text: `#### Table 1: Strength`
-  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
-- **[line 17969](../books/phb.md#L17969)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Ability Score 1 | Tab Dext Reaction Adj. –6 | le 2: erity Missile Attack Adj. –6 | Defensive Adj. ...`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18040](../books/phb.md#L18040)**: Table 9 appears 2 times (lines 1020, 18040).
-  - Text: `#### Table 9: Constitution Saving Throw Bonuses`
-  - Hint: Check the number against the book: usually one of them is a different table with a misread number, or the same title was repeated.
-- **[line 18055](../books/phb.md#L18055)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  | In | Table 4: telligen | ce |  |  | Tabl Char | e 6: isma |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18090](../books/phb.md#L18090)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  |  |  | Tur | Tab ning | le 61: Und | ead |  |  |  |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18119](../books/phb.md#L18119)**: No 'Table N:' title in the lines above this table.
-  - Text: `| Ability Score | Magical Defense Adjust. | Ta Wi Bonus Spells | ble 5: sdom Chance of Spell Failure...`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18152](../books/phb.md#L18152)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  |  |  |  |  | C | AL | CU | T LA | able 5 TED Level | 3: T | HA | C0 | S |  |  |  |  |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18165](../books/phb.md#L18165)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  |  |  | Table 21: |  |  |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18194](../books/phb.md#L18194)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  |  | Table | 24: |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
-- **[line 18226](../books/phb.md#L18226)**: No 'Table N:' title in the lines above this table.
-  - Text: `|  |  | T | able 32: |  |  |`
-  - Hint: Add the title as printed in the book on its own line above the table, for example "#### Table 12: Title". If the book prints this table without a number, leave it.
 
-### Info: fine, worth knowing (88)
+#### text-garbled (1)
+
+- **[line 18085](../books/phb.md#L18085)**: Text looks garbled: many word fragments (g, t, o, d, s).
+  - Text: `* While with g unable t runts an o speak a d gesture language, the s. character can communicate 24 2`
+  - Hint: Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.
+
+### Info: fine, worth knowing (163)
+
+#### chunk-short (20)
+
+- **[line 5](../books/phb.md#L5)**: Short chunk (45 characters) in Player's Handbook (AD&D 2nd Edition, Revised).
+  - Text: `**Player’s Handbook for the AD&D Game.** ® ™`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 83](../books/phb.md#L83)**: Short chunk (144 characters) in Foreword.
+  - Text: `Chapter 4: Alignment . . . . . . . . . . . . . . . . . . . . . . . . . . . 64 Chapter 6: Money and `
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 449](../books/phb.md#L449)**: Short chunk (102 characters) in The Real Basics > Step-by-Step Player Character Generation > Step 1: Roll Ability Scores (chapter 1).
+  - Text: `Your character needs scores for Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charism`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 968](../books/phb.md#L968)**: Short chunk (127 characters) in Chapter 2: Player Character Races > Dwarves.
+  - Text: `Dwarves are short, stocky fellows, easily identified by their size and shape. They average 4 to 41⁄2`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 1022](../books/phb.md#L1022)**: Short chunk (125 characters) in Chapter 2: Player Character Races > Dwarves > Table 9: Constitution Saving Throw Bonuses.
+  - Text: `| Constitution Score | Saving Throw Bonus | |---|---| | 4–6 | +1 | | 7–10 | +2 | | 11–13 | +3 | | 14`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 1208](../books/phb.md#L1208)**: Short chunk (144 characters) in Chapter 2: Player Character Races > Other Characteristics > Table 11: Age.
+  - Text: `* Upon attaining this age, an elf does not die. Rather he feels compelled to migrate to some mysteri`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 1324](../books/phb.md#L1324)**: Short chunk (105 characters) in Chapter 3: Player Character Classes > Class Ability Score Requirements > Table 15: Warrior Melee Attacks per Round.
+  - Text: `| Warrior Level | Attacks/Round | |---|---| | 1–6 | 1/round | | 7–12 | 3/2 rounds | | 13 & up | 2/ro`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 2046](../books/phb.md#L2046)**: Short chunk (113 characters) in Chapter 3: Player Character Classes > Priest > Druid > Druid Organization.
+  - Text: `Druids have a worldwide structure. At their upper levels (12th and above), only a few druids can hol`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 3190](../books/phb.md#L3190)**: Short chunk (119 characters) in Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies > Nonweapon Proficiency Descriptions > Table 40: Movement While Tracking.
+  - Text: `| Chance to Track | Movement Rate | |---|---| | 1–6 | 1⁄4 normal | | 7–14 | 1⁄2 normal | | 14 or gre`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 3337](../books/phb.md#L3337)**: Short chunk (20 characters) in Chapter 6: Money and Equipment > Equipment Descriptions > Tack and Harness > Initial Character Funds > Table 44.
+  - Text: `Table 44: Equipment`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 4435](../books/phb.md#L4435)**: Short chunk (79 characters) in Chapter 9: Combat > Calculating THAC0 > Table 54: THAC0 Advancement.
+  - Text: `Improvement Rate Group Points/Level Priest 2/3 Rogue 1/2 Warrior 1/1 Wizard 1/3`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 5377](../books/phb.md#L5377)**: Short chunk (149 characters) in Chapter 9: Combat > Healing > Herbalism & Healing Proficiencies.
+  - Text: `Characters can also gain minor healing benefits from those proficient in the arts of herbalism and h`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 5779](../books/phb.md#L5779)**: Short chunk (116 characters) in Chapter 14: Time and Movement > Movement > Table 64: Base Movement Rates.
+  - Text: `| Race | Rate | |---|---| | Human | 12 | | Dwarf | 6 | | Elf | 12 | | Gnome | 6 | | Half-elf | 12 | `
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 10986](../books/phb.md#L10986)**: Short chunk (142 characters) in Appendix 3: Wizard Spells > Sixth-Level Spells > Chain Lightning.
+  - Text: `The material components are a bit of fur, a piece of amber, glass, or crystal rod, and one silver pi`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 17461](../books/phb.md#L17461)**: Short chunk (61 characters) in Appendix 4: Priest Spells > Seventh-Level Spells > Earthquake > VEGETATION.
+  - Text: `**Small growth—No effect** Trees—1 in 3 are uprooted and fall`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 17465](../books/phb.md#L17465)**: Short chunk (141 characters) in Appendix 4: Priest Spells > Seventh-Level Spells > Earthquake > STRUCTURES.
+  - Text: `All structures—Sustain 5d12 points of structural damage; those suffering full damage are thrown down`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 17890](../books/phb.md#L17890)**: Short chunk (36 characters) in Appendix 6: Priest Spells by Sphere > Astral.
+  - Text: `Plane Shift (5th) Astral Spell (7th)`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 17902](../books/phb.md#L17902)**: Short chunk (104 characters) in Appendix 6: Priest Spells by Sphere > Guardian.
+  - Text: `Silence, 15-foot Radius (2nd) Wyvern Watch (2nd) Glyph of Warding (3rd) Blade Barrier (6th) Symbol (`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 17906](../books/phb.md#L17906)**: Short chunk (129 characters) in Appendix 6: Priest Spells by Sphere > Healing.
+  - Text: `Cure Light Wounds (1st) Slow Poison (2nd) Cure Serious Wounds (4th) Neutralize Poison (4th) Cure Cri`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+- **[line 17928](../books/phb.md#L17928)**: Short chunk (91 characters) in Appendix 6: Priest Spells by Sphere > Sun.
+  - Text: `Light (1st) Continual Light (3rd) Starshine (3rd) Moonbeam (5th) Rainbow (5th) Sunray (7th)`
+  - Hint: Usually fine: a brief section or a chapter introduction. Check only if it looks like a fragment of a longer passage.
+
+#### heading-bold-line (55)
+
+- **[line 27](../books/phb.md#L27)**: Bold line treated by the chunker as a subheading: "Credits".
+  - Text: `**Credits**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 37](../books/phb.md#L37)**: Bold line treated by the chunker as a subheading: "Cover Illustration: Jeff Easley".
+  - Text: `**Cover Illustration: Jeff Easley**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 43](../books/phb.md#L43)**: Bold line treated by the chunker as a subheading: "Diagrams: Diesel".
+  - Text: `**Diagrams: Diesel**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 93](../books/phb.md#L93)**: Bold line treated by the chunker as a subheading: "Tables".
+  - Text: `**Tables**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 107](../books/phb.md#L107)**: Bold line treated by the chunker as a subheading: "Welcome to the AD&D Game".
+  - Text: `**Welcome to the AD&D Game**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 447](../books/phb.md#L447)**: Bold line treated by the chunker as a subheading: "Step 1: Roll Ability Scores (chapter 1)".
+  - Text: `**Step 1: Roll Ability Scores (chapter 1)**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 451](../books/phb.md#L451)**: Bold line treated by the chunker as a subheading: "Step 2: Choose a Race (chapter 2)".
+  - Text: `**Step 2: Choose a Race (chapter 2)**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 471](../books/phb.md#L471)**: Bold line treated by the chunker as a subheading: "Step 3: Select a Class (chapter 3)".
+  - Text: `**Step 3: Select a Class (chapter 3)**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 501](../books/phb.md#L501)**: Bold line treated by the chunker as a subheading: "Step 4: Choose an Alignment (chapter 4)".
+  - Text: `**Step 4: Choose an Alignment (chapter 4)**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 515](../books/phb.md#L515)**: Bold line treated by the chunker as a subheading: "Step 6: Roll Hit Points (chapter 3)".
+  - Text: `**Step 6: Roll Hit Points (chapter 3)**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 525](../books/phb.md#L525)**: Bold line treated by the chunker as a subheading: "Step 7: Record Base Movement (chapter 14)".
+  - Text: `**Step 7: Record Base Movement (chapter 14)**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1870](../books/phb.md#L1870)**: Bold line treated by the chunker as a subheading: "Requirements".
+  - Text: `**Requirements**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1874](../books/phb.md#L1874)**: Bold line treated by the chunker as a subheading: "Weapons Allowed".
+  - Text: `**Weapons Allowed**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1914](../books/phb.md#L1914)**: Bold line treated by the chunker as a subheading: "Spells Allowed".
+  - Text: `**Spells Allowed**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1956](../books/phb.md#L1956)**: Bold line treated by the chunker as a subheading: "Granted Powers".
+  - Text: `**Granted Powers**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1972](../books/phb.md#L1972)**: Bold line treated by the chunker as a subheading: "Ethos".
+  - Text: `**Ethos**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1976](../books/phb.md#L1976)**: Bold line treated by the chunker as a subheading: "Priest Titles".
+  - Text: `**Priest Titles**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1984](../books/phb.md#L1984)**: Bold line treated by the chunker as a subheading: "Balancing It All".
+  - Text: `**Balancing It All**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 1996](../books/phb.md#L1996)**: Bold line treated by the chunker as a subheading: "Requirements".
+  - Text: `**Requirements**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- **[line 2000](../books/phb.md#L2000)**: Bold line treated by the chunker as a subheading: "Weapons Allowed".
+  - Text: `**Weapons Allowed**`
+  - Hint: No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.
+- ... and 35 more of this kind.
+
+#### page-inline (87)
 
 - **[line 181](../books/phb.md#L181)**: Page marker inside a line of text.
   - Text: `Finally, let’s put the board somewhere you can’t see it. Let’s give it to one of the players and mak...`
@@ -1129,207 +1163,10 @@ Work through **Fix** first, then **Review**. Rerun the check after each round of
 - **[line 2957](../books/phb.md#L2957)**: Page marker inside a line of text.
   - Text: `Furthermore, the character retains special abilities that would normally be lost in darkness, althou...`
   - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3029](../books/phb.md#L3029)**: Page marker inside a line of text.
-  - Text: `A character with healing proficiency can also attempt to diagnose and treat diseases. When dealing w...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3057](../books/phb.md#L3057)**: Page marker inside a line of text.
-  - Text: `**Mining:** A character with mining proficiency is needed to site and supervise the operations of an...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3089](../books/phb.md#L3089)**: Page marker inside a line of text.
-  - Text: `Riding, Land-Based: Those skilled in land riding are proficient in the art of riding and handling ho...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3123](../books/phb.md#L3123)**: Page marker inside a line of text.
-  - Text: `Singing: The character is an accomplished singer and can use this ability to entertain others and pe...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3133](../books/phb.md#L3133)**: Page marker inside a line of text.
-  - Text: `A character skilled in survival has a basic knowledge of the hazards he might face in that land. He ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3540](../books/phb.md#L3540)**: Page marker inside a line of text.
-  - Text: `A dromond can be used both for shipping and war. As a warship, a ram projects from the front just ab...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3738](../books/phb.md#L3738)**: Page marker inside a line of text.
-  - Text: `**Lance:** The different lances are rated according to size and sturdiness. Each type can be used on...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3746](../books/phb.md#L3746)**: Page marker inside a line of text.
-  - Text: `**Awl Pike:** Essentially this is a long spear 12 to 20 feet long ending in a spike point or tapered...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 3764](../books/phb.md#L3764)**: Page marker inside a line of text.
-  - Text: `**Guisarme-voulge:** This weapon has a modified axe blade mounted on an 8-foot-long shaft. The end o...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4062](../books/phb.md#L4062)**: Page marker inside a line of text.
-  - Text: `_Greater divinations_ are more powerful than lesser divinations <!-- page 108 --> (see below). These...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4108](../books/phb.md#L4108)**: Page marker inside a line of text.
-  - Text: `Of course, in a fantasy world many more things can be believed than in the real world. Flames do not...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4128](../books/phb.md#L4128)**: Page marker inside a line of text.
-  - Text: `Illusions of creatures do not automatically behave like those creatures, nor do they have those crea...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4180](../books/phb.md#L4180)**: Page marker inside a line of text.
-  - Text: `Some spells are reversible (they can be cast for an effect opposite to that of the standard spell). ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4212](../books/phb.md#L4212)**: Page marker inside a line of text.
-  - Text: `A being’s carried equipment and possessions are assumed to make their saving throws against special ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4330](../books/phb.md#L4330)**: Page marker inside a line of text.
-  - Text: `The DM may also throw in situational modifiers, (for example, a bonus if the target is struck from b...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4754](../books/phb.md#L4754)**: Page marker inside a line of text.
-  - Text: `However, a character in an AD&D game is not an Olympic sprinter running in a straight line. He is tr...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 4880](../books/phb.md#L4880)**: Page marker inside a line of text.
-  - Text: `If multiple attackers are all attempting to pull down a single target, make only one attack roll wit...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5112](../books/phb.md#L5112)**: Page marker inside a line of text.
-  - Text: `**Save vs. Breath Weapon:** A character uses this save when facing monsters with breath weapons, par...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5160](../books/phb.md#L5160)**: Page marker inside a line of text.
-  - Text: `Magic resistance is also an individual ability. A creature with magic resistance _cannot_ impart thi...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5321](../books/phb.md#L5321)**: Page marker inside a line of text.
-  - Text: `The character’s experience points drop to halfway between the minimum needed for his new (post-drain...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5363](../books/phb.md#L5363)**: Page marker inside a line of text.
-  - Text: `If a character has complete bed rest (doing nothing for an entire day), he can regain 3 hit points f...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5421](../books/phb.md#L5421)**: Page marker inside a line of text.
-  - Text: `Treasure comes in many different forms and sizes, ranging from the mundane to the exotic. There are ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5445](../books/phb.md#L5445)**: Page marker inside a line of text.
-  - Text: `When you find a magical weapon, more than likely you do not know its properties. Some functions, suc...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5525](../books/phb.md#L5525)**: Page marker inside a line of text.
-  - Text: `It is important to bear in mind that surprise and ambush are two different things. Surprise works as...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5557](../books/phb.md#L5557)**: Page marker inside a line of text.
-  - Text: `**Fight:** Of course, there are times when you don’t want to or can’t run away. (Running all the tim...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 5834](../books/phb.md#L5834)**: Page marker inside a line of text.
-  - Text: `Proficient swimmers can double their swimming speed, if a successful Strength check is rolled (vs. h...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 6299](../books/phb.md#L6299)**: Page marker inside a line of text.
-  - Text: `When the wizard casts this spell, a jet of searing flame shoots from his fingertips. His hands must ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7438](../books/phb.md#L7438)**: Page marker inside a line of text.
-  - Text: `A _flaming sphere_ spell creates a burning globe of fire within 10 yards of the caster. This sphere ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7542](../books/phb.md#L7542)**: Page marker inside a line of text.
-  - Text: `When this spell is cast, the wizard creates a weaving, twisting pattern of subtle colors in the air....`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7630](../books/phb.md#L7630)**: Page marker inside a line of text.
-  - Text: `The _knock_ spell opens stuck, barred, locked, held, or wizard-locked doors. It opens secret doors, ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7736](../books/phb.md#L7736)**: Page marker inside a line of text.
-  - Text: `When this spell is cast, the wizard imbues the chosen object with an enchanted mouth that suddenly a...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 7832](../books/phb.md#L7832)**: Page marker inside a line of text.
-  - Text: `A _pyrotechnics_ spell draws on an existing fire source to produce one of two effects, at the option...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 8106](../books/phb.md#L8106)**: Page marker inside a line of text.
-  - Text: `A _wizard lock_ spell cast upon a door, chest, or portal magically locks it. The caster can freely p...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 8295](../books/phb.md#L8295)**: Page marker inside a line of text.
-  - Text: `A fireball is an explosive burst of flame, which detonates with a low roar and delivers damage propo...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 8489](../books/phb.md#L8489)**: Page marker inside a line of text.
-  - Text: `This spell confers invisibility upon all creatures within 10 feet of the recipient. Gear carried and...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 8583](../books/phb.md#L8583)**: Page marker inside a line of text.
-  - Text: `B) The wizard discharges only one meteor per round. In addition to releasing the missile, the caster...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 8761](../books/phb.md#L8761)**: Page marker inside a line of text.
-  - Text: `A _slow_ spell causes affected creatures to move and attack at half their normal rates. It negates a...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 8981](../books/phb.md#L8981)**: Page marker inside a line of text.
-  - Text: `Wandering creatures move as far from the caster as possible, <!-- page 199 --> according to their mo...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9477](../books/phb.md#L9477)**: Page marker inside a line of text.
-  - Text: `This spell enables the wizard to create an item of nonliving, vegetable nature—soft goods, rope, woo...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 9799](../books/phb.md#L9799)**: Page marker inside a line of text.
-  - Text: `When this spell is cast, the wizard creates a billowing mass of misty vapors similar to a _wall of f...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10183](../books/phb.md#L10183)**: Page marker inside a line of text.
-  - Text: `When this spell is cast, the wizard sends his mind to another plane of existence in order to receive...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10386](../books/phb.md#L10386)**: Page marker inside a line of text.
-  - Text: `When this spell is cast, the wizard is able to confound any attempt to scry (by means of either a sp...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10496](../books/phb.md#L10496)**: Page marker inside a line of text.
-  - Text: `This spell enables a specially constructed chest to be hidden deep within the Ethereal Plane, to be ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 10936](../books/phb.md#L10936)**: Page marker inside a line of text.
-  - Text: `The antimagic shell also hedges out charmed, summoned, or conjured creatures. It cannot, however, be...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11330](../books/phb.md#L11330)**: Page marker inside a line of text.
-  - Text: `This spell creates an immobile, faintly shimmering, magical sphere around the caster that prevents a...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11676](../books/phb.md#L11676)**: Page marker inside a line of text.
-  - Text: `By means of this spell, the wizard creates a nonmaterial duplicate of himself, projecting it to any ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11760](../books/phb.md#L11760)**: Page marker inside a line of text.
-  - Text: `The _stone to flesh_ spell turns any sort of stone into flesh. If the recipient stone object was for...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 11850](../books/phb.md#L11850)**: Page marker inside a line of text.
-  - Text: `The _veil_ spell enables the wizard to instantly change the appearance of his surroundings and party...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 12130](../books/phb.md#L12130)**: Page marker inside a line of text.
-  - Text: `By means of this spell, the wizard conjures up an extradimensional dwelling, entrance to which can b...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 12325](../books/phb.md#L12325)**: Page marker inside a line of text.
-  - Text: `By means of this spell, the wizard is able to create a duplicate of any creature. The duplicate appe...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 12473](../books/phb.md#L12473)**: Page marker inside a line of text.
-  - Text: `_Sympathy:_ By casting the sympathy application of the spell, the wizard can cause a particular type...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 12765](../books/phb.md#L12765)**: Page marker inside a line of text.
-  - Text: `When an _Otto’s irresistible dance_ spell is placed upon a creature, the spell causes the recipient ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 13153](../books/phb.md#L13153)**: Page marker inside a line of text.
-  - Text: `This spell grants the caster a powerful sixth sense in relation to himself or another. Although cast...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 13752](../books/phb.md#L13752)**: Page marker inside a line of text.
-  - Text: `This spell enables the caster to outline one or more objects or creatures with a pale glowing light....`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 13964](../books/phb.md#L13964)**: Page marker inside a line of text.
-  - Text: `The priest casting this spell instills courage in the spell recipient, raising the creature’s saving...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 14692](../books/phb.md#L14692)**: Page marker inside a line of text.
-  - Text: `This spell is known as _wyvern watch_ because of the insubstantial haze brought forth by its casting...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 15010](../books/phb.md#L15010)**: Page marker inside a line of text.
-  - Text: `This spell helps locate a known or familiar object. The priest casts the spell, slowly turns, and wi...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 15206](../books/phb.md#L15206)**: Page marker inside a line of text.
-  - Text: `The reverse of the spell is not permanent; the _bestow curse_ spell lasts for one turn for every exp...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 15308](../books/phb.md#L15308)**: Page marker inside a line of text.
-  - Text: `Wherever any type of plant growth of moderate size or density is found, this spell can be used. The ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 15378](../books/phb.md#L15378)**: Page marker inside a line of text.
-  - Text: `The attacked creature sustains 2 points of damage if it does nothing but attempt to flee or fend off...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 15691](../books/phb.md#L15691)**: Page marker inside a line of text.
-  - Text: `This spell enables the creature touched to move and attack normally for the duration of the spell, e...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 15874](../books/phb.md#L15874)**: Page marker inside a line of text.
-  - Text: `The _plant door_ spell opens a magical portal or passageway through trees, undergrowth, thickets, or...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 16856](../books/phb.md#L16856)**: Page marker inside a line of text.
-  - Text: `The spell enables the subject to sense the correct direction that will eventually lead him to his de...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 16962](../books/phb.md#L16962)**: Page marker inside a line of text.
-  - Text: `This spell enables the priest to bring forth a great feast that serves as many creatures as the prie...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 17154](../books/phb.md#L17154)**: Page marker inside a line of text.
-  - Text: `If the wall of thorns is chopped at, it takes at least four turns to cut a path through a 10-foot th...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 17487](../books/phb.md#L17487)**: Page marker inside a line of text.
-  - Text: `When this spell is employed, the priest confronts some powerful creature from another plane (includi...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
-- **[line 17716](../books/phb.md#L17716)**: Page marker inside a line of text.
-  - Text: `The reversed application of the spell causes the priest to be transported to the immediate vicinity ...`
-  - Hint: Handled automatically: the chunker removes the marker and records both pages. Move it to its own line only if you prefer a cleaner file.
+- ... and 67 more of this kind.
+
+#### heading-jump (1)
+
 - **[line 17938](../books/phb.md#L17938)**: Heading jumps from level 2 to level 4.
   - Text: `#### Table 1: Strength`
   - Hint: Harmless for search: this is a table title, and the chunker skips the missing levels. Leave it unless you want consistent levels.

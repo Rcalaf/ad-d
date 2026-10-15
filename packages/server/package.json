@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "exports": "./src/index.ts",
+  "scripts": {
+    "check-model": "tsx --env-file=../../.env src/cli/checkModel.ts"
+  },
   "dependencies": {
     "@dnd/knowledge": "workspace:*",
     "@dnd/rules": "workspace:*",
