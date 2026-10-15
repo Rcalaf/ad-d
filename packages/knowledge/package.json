@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check-books": "tsx src/cli/checkBooks.ts"
+    "check-books": "tsx src/cli/checkBooks.ts",
+    "build-index": "tsx --env-file=../../.env src/cli/buildIndex.ts",
+    "search-rules": "tsx --env-file=../../.env src/cli/search.ts"
   },
   "exports": "./src/index.ts",
   "dependencies": {

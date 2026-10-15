@@ -12,6 +12,8 @@ export interface Chunk {
   text: string;
   /** Printed pages the chunk comes from; empty if the book has no page markers. */
   pages: number[];
+  /** Line in the book file where the chunk's text starts (1-based), to find it when fixing the source. */
+  line: number;
   /** True when the chunk contains a Markdown table. */
   hasTable: boolean;
 }
@@ -21,10 +23,12 @@ export interface ChunkOptions {
   maxChars?: number;
 }
 
-/** A line of the book, with the printed page it appears on. */
+/** A line of the book, with the printed pages it appears on (two if a page break falls inside it). */
 interface Line {
   text: string;
-  page?: number;
+  pages: number[];
+  /** Line number in the book file, 1-based. */
+  line: number;
 }
 
 /** A paragraph or a table: the smallest unit the chunker never cuts. */
@@ -39,7 +43,16 @@ interface Section {
 
 const HEADING = /^(#{1,6})\s+(.+?)\s*$/;
 const SEPARATOR = /^\s*(-{3,}|\*{3,}|_{3,})\s*$/;
-const PAGE_MARKER = /^\s*<!--\s*page\s+(\d+)\s*-->\s*$/i;
+/** A page marker anywhere in a line. The "g" flag finds every marker, not only the first. */
+const PAGE_MARKER = /<!--\s*page\s+(\d+)\s*-->/gi;
+/** A heading that is a table title, such as "Table 8: Racial Ability Adjustments". */
+const TABLE_TITLE = /^\s*(?:\*\*)?\s*Table\s+\d+\s*[:.]/i;
+const TABLE_ROW = /^\s*\|/;
+/**
+ * A table footnote: starts with a reference mark, an escaped asterisk (\*), possibly in italics (*\*),
+ * a dagger, or "Note:". A normal bullet point ("* text") is not a footnote.
+ */
+const TABLE_NOTE = /^\s*[*_]{0,2}\s*(\\\*|†|‡|notes?:)/i;
 
 /**
  * Splits a Markdown book into chunks that follow its headings.
@@ -48,17 +61,24 @@ const PAGE_MARKER = /^\s*<!--\s*page\s+(\d+)\s*-->\s*$/i;
 export function chunkMarkdown(markdown: string, book: string, options: ChunkOptions = {}): Chunk[] {
   const maxChars = options.maxChars ?? 2000;
   const chunks: Chunk[] = [];
+  // Counts pieces per heading path across the whole book, so a path that appears more than once
+  // (a section continuing after a table, or two sections with the same title) never repeats an id.
+  const piecesPerPath = new Map<string, number>();
 
   for (const section of splitIntoSections(markdown)) {
     const blocks = splitIntoBlocks(section.lines);
-    for (const [index, piece] of packBlocks(blocks, maxChars).entries()) {
+    for (const piece of packBlocks(blocks, maxChars)) {
       const text = blocksText(piece);
+      const pathKey = section.headingPath.join("|");
+      const index = piecesPerPath.get(pathKey) ?? 0;
+      piecesPerPath.set(pathKey, index + 1);
       chunks.push({
         id: makeId(book, section.headingPath, index),
         book,
         headingPath: section.headingPath,
         text,
         pages: pagesOf(piece),
+        line: piece[0].lines[0].line,
         hasTable: isTable(text),
       });
     }
@@ -77,33 +97,74 @@ function splitIntoSections(markdown: string): Section[] {
   const sections: Section[] = [];
   let current: Section = { headingPath: [], lines: [] };
   let page: number | undefined;
+  /** While inside a "Table N:" section: where to return when the table ends, and whether rows have started. */
+  let table: { parentPath: string[]; rowsSeen: boolean } | undefined;
 
-  for (const text of markdown.split(/\r?\n/)) {
-    const pageMarker = PAGE_MARKER.exec(text);
-    if (pageMarker) {
-      page = Number(pageMarker[1]);
-      continue;
-    }
+  for (const [lineIndex, raw] of markdown.split(/\r?\n/).entries()) {
+    const read = readPageMarkers(raw, page);
+    page = read.page;
+    if (read.markerOnly) continue;
+    const text = read.text;
+
     const heading = HEADING.exec(text);
     if (heading) {
       sections.push(current);
+      if (TABLE_TITLE.test(heading[2])) {
+        // A table title covers only its table. Remember the section it sits in, to return there afterwards.
+        const parentPath = table ? table.parentPath : current.headingPath;
+        table = { parentPath, rowsSeen: false };
+        current = { headingPath: [...parentPath, heading[2]], lines: [] };
+        continue;
+      }
+      table = undefined;
       const level = heading[1].length;
       path.splice(level - 1); // forget headings at this level and deeper
       path[level - 1] = heading[2];
       current = { headingPath: path.filter((h): h is string => Boolean(h)), lines: [] };
       continue;
     }
-    if (!SEPARATOR.test(text)) current.lines.push({ text, page });
+
+    if (table) {
+      if (TABLE_ROW.test(text)) {
+        table.rowsSeen = true;
+      } else if (table.rowsSeen && text.trim() !== "" && !TABLE_NOTE.test(text)) {
+        // The table has ended: what follows belongs to the section the table sits in.
+        sections.push(current);
+        current = { headingPath: table.parentPath, lines: [] };
+        table = undefined;
+      }
+    }
+    if (!SEPARATOR.test(text)) current.lines.push({ text, pages: read.pages, line: lineIndex + 1 });
   }
   sections.push(current);
   return sections;
+}
+
+/**
+ * Finds the page markers in a line, wherever they are, and removes them from the text.
+ * Text before a marker belongs to the previous page, text after it to the new one.
+ */
+function readPageMarkers(raw: string, pageBefore: number | undefined) {
+  const markers = [...raw.matchAll(PAGE_MARKER)];
+  if (markers.length === 0) {
+    return { text: raw, pages: pageBefore === undefined ? [] : [pageBefore], page: pageBefore, markerOnly: false };
+  }
+  const pages: number[] = [];
+  if (pageBefore !== undefined && raw.slice(0, markers[0].index).trim() !== "") pages.push(pageBefore);
+  markers.forEach((marker, i) => {
+    const after = raw.slice(marker.index + marker[0].length, markers[i + 1]?.index ?? raw.length);
+    if (after.trim() !== "") pages.push(Number(marker[1]));
+  });
+  const text = raw.replace(PAGE_MARKER, " ").replace(/\s{2,}/g, " ").trim();
+  const page = Number(markers[markers.length - 1][1]);
+  return { text, pages, page, markerOnly: text === "" };
 }
 
 /** Step 2: split a section into blocks at blank lines. A table has no blank lines, so it is one block. */
 function splitIntoBlocks(lines: Line[]): Block[] {
   const blocks: Block[] = [];
   let current: Line[] = [];
-  for (const line of [...lines, { text: "" }]) {
+  for (const line of [...lines, { text: "", pages: [], line: 0 }]) {
     if (line.text.trim() === "") {
       if (current.length > 0) blocks.push({ lines: current });
       current = [];
@@ -147,12 +208,12 @@ function blocksText(blocks: Block[]): string {
 }
 
 function pagesOf(blocks: Block[]): number[] {
-  const pages = blocks.flatMap((b) => b.lines.map((l) => l.page)).filter((p): p is number => p !== undefined);
+  const pages = blocks.flatMap((b) => b.lines.flatMap((l) => l.pages));
   return [...new Set(pages)].sort((a, b) => a - b);
 }
 
 function isTable(text: string): boolean {
-  return text.split("\n").some((line) => line.trimStart().startsWith("|"));
+  return text.split("\n").some((line) => TABLE_ROW.test(line));
 }
 
 function makeId(book: string, headingPath: string[], index: number): string {

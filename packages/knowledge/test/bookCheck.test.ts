@@ -69,6 +69,14 @@ describe("checkBook", () => {
     ]);
   });
 
+  it("reports page markers inside a line as information, and checks their order too", () => {
+    const findings = checkBook("<!-- page 135 -->\nOne principle (which <!-- page 136 --> makes it) is variety.\n<!-- page 136 -->").findings;
+    expect(findings.map((f) => [f.kind, f.severity, f.line])).toEqual([
+      ["page-inline", "info", 2],
+      ["page-order", "fix", 3],
+    ]);
+  });
+
   it("lists passages the converter marked as unclear, as something to fix", () => {
     const [finding] = checkBook("Text\n<!-- UNCLEAR: smudged value in row 4 -->\nMore").findings;
     expect(finding).toMatchObject({ kind: "unclear", severity: "fix", line: 2 });
@@ -77,16 +85,19 @@ describe("checkBook", () => {
 });
 
 describe("formatReport", () => {
-  it("writes a summary table, groups findings by severity, and links lines to the book", () => {
+  it("writes a summary table, groups findings by severity and kind, and links lines to the book", () => {
     const report = checkBook("# Book\n## Chapter\n#### Too deep\n<!-- UNCLEAR: torn page -->");
-    const markdown = formatReport(
-      [{ file: "phb.md", report, chunks: { count: 3, medianChars: 400, oversizedText: [{ location: "Glossary", chars: 4450 }], short: 1 } }],
-      "../books",
-      new Date("2026-10-13T10:00:00Z"),
-    );
+    const markdown = formatReport([{ file: "phb.md", report, chunkCount: 3, medianChunkChars: 400 }], "../books", new Date("2026-10-13T10:00:00Z"));
     expect(markdown).toContain("| phb.md | 1 | 1 | 0 |");
     expect(markdown.indexOf("### Fix")).toBeLessThan(markdown.indexOf("### Review"));
+    expect(markdown).toContain("#### unclear (1)");
     expect(markdown).toContain("[line 4](../books/phb.md#L4)");
-    expect(markdown).toContain("**Glossary**: section text is 4450 characters");
+  });
+
+  it("shows at most 20 examples per kind and counts the rest", () => {
+    const report = checkBook(Array.from({ length: 25 }, (_, i) => `Text ${i}.\n\n${i + 1}\n`).join("\n"));
+    const markdown = formatReport([{ file: "phb.md", report, chunkCount: 1, medianChunkChars: 10 }], "../books", new Date());
+    expect(markdown).toContain("#### text-bare-number (25)");
+    expect(markdown).toContain("... and 5 more of this kind.");
   });
 });
