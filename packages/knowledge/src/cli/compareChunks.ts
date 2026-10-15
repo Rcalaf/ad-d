@@ -29,12 +29,33 @@ async function main() {
     ``,
   ];
 
+  // Moved chunks grouped by their new location, largest groups first: a wrong subheading that
+  // swallows many chunks shows up as one line with a high count.
+  const movedGroups = new Map<string, ChunkChange[]>();
+  for (const c of result.moved) {
+    const destination = `${c.book}: ${where(c.after)}`;
+    movedGroups.set(destination, [...(movedGroups.get(destination) ?? []), c]);
+  }
+  const movedSection = [
+    `## Moved: same text, new location (${result.moved.length} chunks, ${movedGroups.size} new locations)`,
+    ``,
+    `Grouped by new location, largest first. Check the large groups first: a wrong subheading collects everything after it.`,
+    ``,
+    ...[...movedGroups.entries()]
+      .sort((a, b) => b[1].length - a[1].length)
+      .flatMap(([destination, changes]) => [
+        `- **${destination}** (${changes.length}), from: ${[...new Set(changes.map((c) => where(c.before)))].join("; ")}`,
+        `  - \`${excerpt(changes[0])}\``,
+      ]),
+    ``,
+  ];
+
   const report = [
     `# Chunk comparison: index vs. current chunker`,
     ``,
     `Indexed chunks: ${indexed.length}. Chunks now: ${current.length}. Unchanged: ${result.unchanged}.`,
     ``,
-    ...section("Moved: same text, new location", result.moved, (c) => `- **${c.book}**: ${where(c.before)} → **${where(c.after)}**\n  - \`${excerpt(c)}\``),
+    ...movedSection,
     ...section("Added or changed: text not in the index", result.added, (c) => `- **${c.book}**: ${where(c.after)}\n  - \`${excerpt(c)}\``),
     ...section("Removed or changed: indexed text not produced any more", result.removed, (c) => `- **${c.book}**: ${where(c.before)}\n  - \`${excerpt(c)}\``),
   ].join("\n");

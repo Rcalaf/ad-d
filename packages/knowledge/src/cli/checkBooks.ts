@@ -3,6 +3,7 @@ import path from "node:path";
 import { checkBook } from "../bookCheck";
 import { chunkMarkdown } from "../chunker";
 import { inspectChunks } from "../chunkInspect";
+import { formatFixList } from "../fixList";
 import { countBySeverity, formatReport, groupByKind, type BookResult } from "../reportFormat";
 import { dataPaths, explainError } from "./config";
 
@@ -13,8 +14,10 @@ async function main() {
   if (files.length === 0) throw new Error(`No books found in ${booksDir}.`);
 
   const results: BookResult[] = [];
+  const markdownByFile = new Map<string, string>();
   for (const file of files) {
     const markdown = await readFile(path.join(booksDir, file), "utf8");
+    markdownByFile.set(file, markdown);
     const report = checkBook(markdown);
     const chunks = chunkMarkdown(markdown, path.basename(file, ".md"));
     report.findings.push(...inspectChunks(chunks));
@@ -25,7 +28,16 @@ async function main() {
 
   await mkdir(reportsDir, { recursive: true });
   const reportPath = path.join(reportsDir, "check-books.md");
-  await writeFile(reportPath, formatReport(results, path.relative(reportsDir, booksDir), new Date()), "utf8");
+  const booksPath = path.relative(reportsDir, booksDir);
+  const now = new Date();
+  await writeFile(reportPath, formatReport(results, booksPath, now), "utf8");
+  // One fix list per book: the same findings, ordered by page, with a guide per kind of problem.
+  const fixLists: string[] = [];
+  for (const { file, report } of results) {
+    const fixListPath = path.join(reportsDir, `fix-list-${path.basename(file, ".md")}.md`);
+    await writeFile(fixListPath, formatFixList(file, markdownByFile.get(file) ?? "", report.findings, booksPath, now), "utf8");
+    fixLists.push(path.relative(process.cwd(), fixListPath) || fixListPath);
+  }
 
   for (const { file, report } of results) {
     const c = countBySeverity(report.findings);
@@ -37,6 +49,7 @@ async function main() {
     }
   }
   console.log(`\nFull report with hints: ${path.relative(process.cwd(), reportPath) || reportPath}`);
+  console.log(`Fix lists by page, one per book: ${fixLists.join(", ")}`);
   console.log("Open it in VS Code and press Cmd+Shift+V for the preview; line links open the book at that line.");
 }
 
