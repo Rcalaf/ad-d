@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "check-books": "tsx src/cli/checkBooks.ts",
+    "compare-chunks": "tsx src/cli/compareChunks.ts",
     "build-index": "tsx --env-file=../../.env src/cli/buildIndex.ts",
     "search-rules": "tsx --env-file=../../.env src/cli/search.ts"
   },

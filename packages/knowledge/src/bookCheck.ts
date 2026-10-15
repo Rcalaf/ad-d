@@ -1,3 +1,5 @@
+import { boldHeadingTitle } from "./chunker";
+
 /**
  * Structural checks for a converted Markdown book, run before indexing.
  * It finds problems a conversion typically introduces. It cannot tell whether a value is right,
@@ -12,6 +14,8 @@ export type FindingKind =
   | "table-no-separator"
   | "table-columns"
   | "table-no-title"
+  | "table-title-in-table"
+  | "table-flattened"
   | "table-number-missing"
   | "table-number-duplicate"
   | "page-order"
@@ -31,6 +35,7 @@ export type FindingKind =
   | "text-encoding"
   | "text-code-fence"
   | "text-html"
+  | "text-garbled"
   | "chunk-short"
   | "chunk-duplicate"
   | "chunk-starts-midsentence"
@@ -63,8 +68,15 @@ const PAGE_MARKER = /<!--\s*page\s+(\d+)\s*-->/gi;
 const UNCLEAR = /<!--\s*UNCLEAR:?\s*(.*?)\s*-->/i;
 const TABLE_ROW = /^\s*\|/;
 const SEPARATOR_ROW = /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$/;
-/** A table title at the start of a line, as a heading, in bold, or plain: "#### Table 14: ...". */
-const TABLE_TITLE = /^\s*(?:#{1,6}\s+|\*\*)?\s*Table\s+(\d+)\s*[:.]/i;
+/**
+ * A table title: as a heading, with or without a colon ("#### Table 14: ...", "#### Table 83"),
+ * or as a bold or plain line with a colon ("**Table 14: ...**"). Plain lines need the colon,
+ * so a sentence like "Table 31 can be used..." is not mistaken for a title.
+ */
+const TABLE_TITLE = /^\s*(?:#{1,6}\s+(?:\*\*)?\s*Table\s+(\d+)\b|(?:\*\*)?\s*Table\s+(\d+)\s*[:.])/i;
+const tableNumber = (match: RegExpExecArray) => Number(match[1] ?? match[2]);
+/** Fragments of a table title inside table cells, such as "Tab Wis" or "able 3:". */
+const TITLE_IN_TABLE = /\bTab|able\s*\d+\s*:/i;
 
 export function checkBook(markdown: string): BookReport {
   const lines = markdown.split(/\r?\n/);
@@ -156,7 +168,17 @@ function checkTables(lines: string[], findings: Finding[]): number {
       });
     });
     const above = lines.slice(Math.max(0, start - 4), start).filter((l) => l.trim() !== "");
-    if (!above.some((l) => TABLE_TITLE.test(l))) {
+    const titleInside = rows.slice(0, 2).find((row) => TITLE_IN_TABLE.test(row));
+    if (titleInside) {
+      findings.push({
+        kind: "table-title-in-table",
+        severity: "fix",
+        line: start + 1,
+        excerpt: titleInside.trim(),
+        message: "The table's title seems to have been captured inside the table, broken across cells.",
+        hint: 'Move the title above the table as "#### Table N: Title", and check every header cell and value against the printed page: when the title was misplaced, columns have often shifted too.',
+      });
+    } else if (!above.some((l) => TABLE_TITLE.test(l))) {
       findings.push({
         kind: "table-no-title",
         severity: "review",
@@ -180,7 +202,7 @@ function checkTableNumbers(lines: string[], findings: Finding[]): number[] {
   lines.forEach((text, i) => {
     const match = TABLE_TITLE.exec(text);
     if (!match) return;
-    const n = Number(match[1]);
+    const n = tableNumber(match);
     occurrences.set(n, [...(occurrences.get(n) ?? []), i + 1]);
   });
   const found = [...occurrences.keys()].sort((a, b) => a - b);
@@ -191,11 +213,31 @@ function checkTableNumbers(lines: string[], findings: Finding[]): number[] {
       kind: "table-number-missing",
       severity: "review",
       message: `Table ${n} is missing from the sequence ${found[0]} to ${found[found.length - 1]}.`,
-      hint: `Look for Table ${n} in the printed book. If it exists, add it with its title in the right place; if the book skips the number, ignore this.`,
+      hint: `Look for Table ${n} in the printed book. Often its title was captured inside another table (see table-title-in-table findings). If the table exists, give it its title; if the book skips the number, ignore this.`,
     });
   }
   for (const [n, at] of occurrences) {
     if (at.length < 2) continue;
+    // A "#### Table N" heading followed within a few lines by "Table N: ..." as plain text:
+    // the converter wrote the table as one line of text. Report that, not a duplicate.
+    const flattened = at.find((line, i) => {
+      const heading = at[i - 1];
+      const text = lines[line - 1];
+      // A flattened table carries its values on the line: several numbers after the title.
+      const values = (text.replace(TABLE_TITLE, "").match(/\d+/g) ?? []).length;
+      return heading !== undefined && line - heading <= 6 && HEADING.test(lines[heading - 1]) && !HEADING.test(text) && !TABLE_ROW.test(text) && values >= 4;
+    });
+    if (flattened !== undefined && at.length === 2) {
+      findings.push({
+        kind: "table-flattened",
+        severity: "fix",
+        line: flattened,
+        excerpt: lines[flattened - 1].trim(),
+        message: `Table ${n} was written as a single line of text instead of a table.`,
+        hint: `Rebuild it from the printed page as a Markdown table under its heading "#### Table ${n}: Title", and move any text that follows the values on the same line back into the paragraph it belongs to.`,
+      });
+      continue;
+    }
     for (const line of at) {
       findings.push({
         kind: "table-number-duplicate",
@@ -278,7 +320,6 @@ function previousContentLine(lines: string[], index: number): number | undefined
 }
 
 const UNDERLINE = /^\s*(=+|-+)\s*$/;
-const BOLD_LINE = /^\s*\*\*([^*]+)\*\*\s*$/;
 const HEADING_MARKUP = /[*_`[\]]|#\s*$/;
 const MAX_HEADING_CHARS = 100;
 
@@ -299,16 +340,16 @@ function checkHeadingShapes(lines: string[], findings: Finding[]): void {
         hint: `Write it as "${level} ${text.trim()}" (choosing the level that fits the book's structure), and delete the underline.`,
       });
     }
-    // A bold line standing alone between blank lines, without final punctuation: probably a heading.
-    const bold = BOLD_LINE.exec(text);
-    if (bold && (before === undefined || before.trim() === "") && (next === undefined || next.trim() === "") && !/[.:;,]$/.test(bold[1].trim())) {
+    // A bold line standing alone: the chunker treats it as a subheading, using the same rule.
+    const boldTitle = boldHeadingTitle(lines, i);
+    if (boldTitle !== undefined) {
       findings.push({
         kind: "heading-bold-line",
-        severity: "review",
+        severity: "info",
         line: i + 1,
         excerpt: text.trim(),
-        message: "Bold line standing alone: it may be a heading the converter wrote as bold text.",
-        hint: "If the book shows this as a section title, turn it into a heading (for example #### Title) so its text becomes its own section. If it's only emphasis, leave it.",
+        message: `Bold line treated by the chunker as a subheading: "${boldTitle}".`,
+        hint: "No action needed. Turn it into a real heading only if you want a cleaner file, or remove the bold if it is not a section title.",
       });
     }
     const heading = HEADING.exec(text) ?? /^(#{1,6})\s*$/.exec(text);
@@ -385,6 +426,10 @@ const HTML_TAG = /<\/?([a-zA-Z][a-zA-Z0-9-]*)(\s[^<>]*)?\/?>/g;
 /** Table tags are reported once, as a table, by checkTableShapes. */
 const TABLE_TAGS = new Set(["table", "thead", "tbody", "tfoot", "tr", "td", "th", "caption"]);
 const REPEAT_THRESHOLD = 5;
+/** "Range: Touch", "**Saving Throw:** None": a short label, a colon, and a value. */
+const FIELD_LINE = /^[*_]{0,2}[A-Z][A-Za-z /'-]{1,30}:[*_]{0,2}\s*\S/;
+/** A label in parentheses, possibly bold and followed by one word: "**(Alteration)**", "**(Alteration)Reversible**". */
+const LABEL_LINE = /^[*_]{0,2}\([^)]*\)\s*[A-Za-z]*[*_]{0,2}$/;
 
 /** Leftovers from the page layout or the conversion that end up inside the text. */
 function checkText(lines: string[], findings: Finding[]): void {
@@ -423,6 +468,17 @@ function checkText(lines: string[], findings: Finding[]): void {
         hint: "Retype the affected words. Ligatures look normal but are single characters, so searches for 'fighter' won't find 'ﬁghter'.",
       });
     }
+    const garbled = garbledReason(text);
+    if (garbled) {
+      findings.push({
+        kind: "text-garbled",
+        severity: "review",
+        line: i + 1,
+        excerpt: text.trim().slice(0, 100),
+        message: `Text looks garbled: ${garbled}.`,
+        hint: "Compare with the printed page and retype the passage. Decorative fonts and drop capitals are the usual cause; the agents would read this text as it is.",
+      });
+    }
     const tags = [...new Set([...text.matchAll(HTML_TAG)].map((m) => m[1].toLowerCase()))].filter((t) => !TABLE_TAGS.has(t));
     if (tags.length > 0) {
       findings.push({
@@ -445,7 +501,9 @@ function checkText(lines: string[], findings: Finding[]): void {
       });
     }
     const normalized = text.trim();
-    if (normalized.length >= 10 && !HEADING.test(text) && !TABLE_ROW.test(text) && !PAGE_MARKER.test(text)) {
+    // Field lines ("Saving Throw: None") and labels ("**(Alteration)**") legitimately repeat, as in spell entries.
+    const isFieldOrLabel = FIELD_LINE.test(normalized) || LABEL_LINE.test(normalized);
+    if (normalized.length >= 10 && !isFieldOrLabel && !HEADING.test(text) && !TABLE_ROW.test(text) && !PAGE_MARKER.test(text)) {
       counts.set(normalized, [...(counts.get(normalized) ?? []), i + 1]);
     }
     PAGE_MARKER.lastIndex = 0;
@@ -462,4 +520,40 @@ function checkText(lines: string[], findings: Finding[]): void {
       hint: "If it is a running header or footer from the printed pages, delete every occurrence; it adds noise to many chunks.",
     });
   }
+}
+
+/** Symbols that never appear four in a row in real text, except Markdown markup (*, _, |, #, `). */
+const SYMBOL_RUN = /[!"#$%&'()*+,/:;<=>?@[\]\\^`{|}~]{4,}/g;
+/** One- and two-letter words common in these books; any other very short token suggests fragments. */
+const COMMON_SHORT = new Set([
+  "a", "i", "an", "as", "at", "be", "by", "do", "go", "he", "if", "in", "is", "it", "me", "my", "no", "of", "on", "or", "so", "to", "up", "us", "we",
+  "dm", "ac", "hp", "xp", "gp", "sp", "cp", "ep", "pp", "hd", "ft", "yd", "rd", "lb", "oz", "pc", "vs", "ok",
+]);
+const MIN_TOKENS_FOR_FRAGMENTS = 15;
+
+/** Why a line looks garbled, or undefined. Two signals: runs of mixed symbols, and many word fragments. */
+function garbledReason(raw: string): string | undefined {
+  if (TABLE_ROW.test(raw)) return undefined;
+  const text = raw.replace(/<!--[\s\S]*?-->/g, " ");
+  // Markdown markup doesn't count: "**Method I (3d6):**" ends in "):**", which is only "):" without it.
+  const symbolRun = [...text.matchAll(SYMBOL_RUN)]
+    .map((m) => m[0])
+    .find((run) => {
+      const withoutMarkup = run.replace(/[*_|#`]/g, "");
+      return withoutMarkup.length >= 4 && new Set(withoutMarkup).size >= 3;
+    });
+  if (symbolRun) return `a run of mixed symbols ("${symbolRun}")`;
+
+  // Tokens with a slash or a digit are abbreviations or values ("F/C", "1d6"), not fragments.
+  const tokens = text
+    .split(/\s+/)
+    .filter((t) => !/[/\d]/.test(t))
+    .map((t) => t.replace(/[^A-Za-z]/g, ""))
+    .filter((t) => t.length > 0);
+  if (tokens.length < MIN_TOKENS_FOR_FRAGMENTS) return undefined;
+  const fragments = tokens.filter((t) => t.length <= 2 && !COMMON_SHORT.has(t.toLowerCase()));
+  if (fragments.length >= 3 && fragments.length / tokens.length >= 0.15) {
+    return `many word fragments (${fragments.slice(0, 6).join(", ")})`;
+  }
+  return undefined;
 }

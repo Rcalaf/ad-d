@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import * as lancedb from "@lancedb/lancedb";
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { buildIndex, chunkMarkdown, RulesIndex, type Embedder } from "../src/index";
+import { buildIndex, chunkMarkdown, listIndexedChunks, RulesIndex, type Embedder } from "../src/index";
 
 /**
  * Fake embedder for tests: counts words into a fixed number of buckets.
@@ -172,6 +172,22 @@ describe("buildIndex and RulesIndex", { timeout: 15_000 }, () => {
     await buildIndex(dir, chunks, embedder);
     const table = await (await lancedb.connect(dir)).openTable("chunks");
     expect(await table.listVersions()).toHaveLength(1);
+  });
+
+  it("returns the converter's notes with each result", async () => {
+    const embedder = new WordCountEmbedder();
+    const md = "# Book\n\n## Combat\n\n<!-- UNCLEAR: header cells not detected -->\n\nThieves backstab from behind with a bonus.";
+    await buildIndex(dir, chunkMarkdown(md, "phb"), embedder);
+    const [result] = await (await RulesIndex.open(dir, embedder)).search("thieves backstab", { limit: 1 });
+    expect(result.notes).toEqual(["UNCLEAR: header cells not detected"]);
+  });
+
+  it("lists every indexed chunk without needing the embedding model", async () => {
+    const chunks = chunkMarkdown(book, "phb");
+    await buildIndex(dir, chunks, new WordCountEmbedder());
+    const listed = await listIndexedChunks(dir);
+    expect(listed).toHaveLength(chunks.length);
+    expect(listed[0]).toEqual({ book: "phb", headingPath: chunks[0].headingPath, text: chunks[0].text });
   });
 
   it("refuses to search with a different embedding model than the one that built the index", async () => {

@@ -22,6 +22,7 @@ async function main() {
     const keyword = r.keywordRank ? `keyword #${r.keywordRank}` : "keyword -";
     console.log(`\n${rank + 1}. [${vector} | ${keyword}] ${r.book}: ${r.headingPath.slice(1).join(" > ")}${pages}`);
     console.log(`   ${r.text.slice(0, 200).replace(/\s+/g, " ")}${r.text.length > 200 ? "..." : ""}`);
+    for (const note of r.notes) console.log(`   ⚠ Converter note: ${note}`);
   }
 }
 

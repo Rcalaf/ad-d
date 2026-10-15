@@ -14,6 +14,11 @@ export interface Chunk {
   pages: number[];
   /** Line in the book file where the chunk's text starts (1-based), to find it when fixing the source. */
   line: number;
+  /**
+   * Converter notes about this text, such as "UNCLEAR: header cells not detected". Removed from the text,
+   * since they are not book content, but kept so an agent can warn that a source may be unreliable.
+   */
+  notes: string[];
   /** True when the chunk contains a Markdown table. */
   hasTable: boolean;
 }
@@ -29,6 +34,8 @@ interface Line {
   pages: number[];
   /** Line number in the book file, 1-based. */
   line: number;
+  /** Converter notes that apply to this line. */
+  notes: string[];
 }
 
 /** A paragraph or a table: the smallest unit the chunker never cuts. */
@@ -45,14 +52,19 @@ const HEADING = /^(#{1,6})\s+(.+?)\s*$/;
 const SEPARATOR = /^\s*(-{3,}|\*{3,}|_{3,})\s*$/;
 /** A page marker anywhere in a line. The "g" flag finds every marker, not only the first. */
 const PAGE_MARKER = /<!--\s*page\s+(\d+)\s*-->/gi;
-/** A heading that is a table title, such as "Table 8: Racial Ability Adjustments". */
-const TABLE_TITLE = /^\s*(?:\*\*)?\s*Table\s+\d+\s*[:.]/i;
+/** A heading that is a table title, such as "Table 8: Racial Ability Adjustments" or "Table 83". */
+const TABLE_TITLE = /^\s*(?:\*\*)?\s*Table\s+\d+\b/i;
+/** Any HTML comment except page markers: notes the converter left, such as <!-- UNCLEAR: ... -->. */
+const NOTE_COMMENT = /<!--(?!\s*page\s+\d+\s*-->)\s*([\s\S]*?)\s*-->/gi;
+/** A line that is entirely bold text. */
+const BOLD_LINE = /^\s*\*\*([^*]+)\*\*\s*$/;
 const TABLE_ROW = /^\s*\|/;
 /**
- * A table footnote: starts with a reference mark, an escaped asterisk (\*), possibly in italics (*\*),
- * a dagger, or "Note:". A normal bullet point ("* text") is not a footnote.
+ * A table footnote: starts with a reference mark: an escaped asterisk (\*), possibly in italics (*\*),
+ * a dagger, "Note:", or one to three plain asterisks and a space ("* Maximum spell ability").
+ * A bullet with a bold label ("* **Granted Powers:** ...") is not a footnote.
  */
-const TABLE_NOTE = /^\s*[*_]{0,2}\s*(\\\*|†|‡|notes?:)/i;
+const TABLE_NOTE = /^\s*(?:[*_]{0,2}\s*(\\\*|†|‡|notes?:)|\*{1,3}\s+(?!\*\*))/i;
 
 /**
  * Splits a Markdown book into chunks that follow its headings.
@@ -79,6 +91,7 @@ export function chunkMarkdown(markdown: string, book: string, options: ChunkOpti
         text,
         pages: pagesOf(piece),
         line: piece[0].lines[0].line,
+        notes: [...new Set(piece.flatMap((b) => b.lines.flatMap((l) => l.notes)))],
         hasTable: isTable(text),
       });
     }
@@ -93,17 +106,31 @@ export function embeddingText(chunk: Chunk): string {
 
 /** Step 1: walk the lines, track headings and pages, and group lines by section. */
 function splitIntoSections(markdown: string): Section[] {
+  const lines = markdown.split(/\r?\n/);
   const path: (string | undefined)[] = [];
   const sections: Section[] = [];
   let current: Section = { headingPath: [], lines: [] };
   let page: number | undefined;
+  /** Level of the last real (#) heading: bold subheadings go one level below it. */
+  let headingLevel = 0;
+  /** Notes from comment-only lines, waiting for the next line of content they describe. */
+  let pendingNotes: string[] = [];
   /** While inside a "Table N:" section: where to return when the table ends, and whether rows have started. */
   let table: { parentPath: string[]; rowsSeen: boolean } | undefined;
 
-  for (const [lineIndex, raw] of markdown.split(/\r?\n/).entries()) {
-    const read = readPageMarkers(raw, page);
+  const startSection = (level: number, title: string) => {
+    path.splice(level - 1); // forget headings at this level and deeper
+    path[level - 1] = title;
+    current = { headingPath: path.filter((h): h is string => Boolean(h)), lines: [] };
+  };
+
+  for (const [lineIndex, raw] of lines.entries()) {
+    const read = readMarkers(raw, page);
     page = read.page;
-    if (read.markerOnly) continue;
+    if (read.markerOnly) {
+      pendingNotes.push(...read.notes);
+      continue;
+    }
     const text = read.text;
 
     const heading = HEADING.exec(text);
@@ -117,10 +144,18 @@ function splitIntoSections(markdown: string): Section[] {
         continue;
       }
       table = undefined;
-      const level = heading[1].length;
-      path.splice(level - 1); // forget headings at this level and deeper
-      path[level - 1] = heading[2];
-      current = { headingPath: path.filter((h): h is string => Boolean(h)), lines: [] };
+      headingLevel = heading[1].length;
+      startSection(headingLevel, heading[2]);
+      continue;
+    }
+
+    const boldTitle = boldHeadingTitle(lines, lineIndex);
+    // A bold line repeating the current section's title adds nothing: keep it as text.
+    if (boldTitle !== undefined && boldTitle !== current.headingPath.at(-1)) {
+      // A bold line standing alone: a subheading the converter wrote as bold text.
+      sections.push(current);
+      table = undefined;
+      startSection(headingLevel + 1, boldTitle);
       continue;
     }
 
@@ -134,37 +169,72 @@ function splitIntoSections(markdown: string): Section[] {
         table = undefined;
       }
     }
-    if (!SEPARATOR.test(text)) current.lines.push({ text, pages: read.pages, line: lineIndex + 1 });
+    if (SEPARATOR.test(text)) continue;
+    const notes = text.trim() === "" ? [] : [...pendingNotes, ...read.notes];
+    if (text.trim() !== "") pendingNotes = [];
+    current.lines.push({ text, pages: read.pages, line: lineIndex + 1, notes });
   }
   sections.push(current);
   return sections;
 }
 
+/** Short words that stay lowercase in English titles ("Fighting from Horseback"). */
+const TITLE_SMALL_WORDS = new Set(["a", "an", "the", "and", "or", "nor", "but", "of", "to", "in", "on", "at", "for", "from", "by", "with", "as", "vs", "per", "into", "onto"]);
+const MAX_TITLE_WORDS = 8;
+
 /**
- * Finds the page markers in a line, wherever they are, and removes them from the text.
- * Text before a marker belongs to the previous page, text after it to the new one.
+ * The title of a bold line that stands alone between blank lines, like "**Weapons Allowed**",
+ * or undefined if the line is not one. Real subheadings in these books are short titles with
+ * capitalized words; garbled converter output and sentences are not, so they are rejected:
+ * lines ending in punctuation, spell school labels like "(Alteration)" (with or without a word
+ * after them), table fragments ("Table 89:"), lines over 8 words, and lowercase content words
+ * (words inside parentheses don't count: "Step 1: Roll Ability Scores (chapter 1)" is a title).
+ * Shared with the book checker, so both apply exactly the same rule.
  */
-function readPageMarkers(raw: string, pageBefore: number | undefined) {
-  const markers = [...raw.matchAll(PAGE_MARKER)];
-  if (markers.length === 0) {
-    return { text: raw, pages: pageBefore === undefined ? [] : [pageBefore], page: pageBefore, markerOnly: false };
-  }
+export function boldHeadingTitle(lines: string[], index: number): string | undefined {
+  const match = BOLD_LINE.exec(lines[index] ?? "");
+  if (!match) return undefined;
+  const title = match[1].trim();
+  const blankBefore = index === 0 || lines[index - 1].trim() === "";
+  const blankAfter = index === lines.length - 1 || lines[index + 1].trim() === "";
+  if (!blankBefore || !blankAfter) return undefined;
+  if (title.length < 3 || /[.:;,]$/.test(title) || title.startsWith("(") || /Table\s*\d/i.test(title)) return undefined;
+  const words = title.replace(/\([^)]*\)/g, " ").split(/\s+/).filter((w) => /[A-Za-z]/.test(w));
+  if (words.length === 0 || words.length > MAX_TITLE_WORDS) return undefined;
+  const lowercaseContent = words.some((w, i) => i > 0 && /^[a-z]/.test(w) && !TITLE_SMALL_WORDS.has(w.toLowerCase()));
+  if (lowercaseContent || /^[a-z]/.test(words[0])) return undefined;
+  return title;
+}
+
+/**
+ * Finds the page markers and converter notes in a line, wherever they are, and removes them from the text.
+ * Text before a page marker belongs to the previous page, text after it to the new one.
+ */
+function readMarkers(raw: string, pageBefore: number | undefined) {
+  const notes = [...raw.matchAll(NOTE_COMMENT)].map((m) => m[1].trim()).filter(Boolean);
+  const withoutNotes = notes.length > 0 ? raw.replace(NOTE_COMMENT, " ") : raw;
+  const markers = [...withoutNotes.matchAll(PAGE_MARKER)];
   const pages: number[] = [];
-  if (pageBefore !== undefined && raw.slice(0, markers[0].index).trim() !== "") pages.push(pageBefore);
-  markers.forEach((marker, i) => {
-    const after = raw.slice(marker.index + marker[0].length, markers[i + 1]?.index ?? raw.length);
-    if (after.trim() !== "") pages.push(Number(marker[1]));
-  });
-  const text = raw.replace(PAGE_MARKER, " ").replace(/\s{2,}/g, " ").trim();
-  const page = Number(markers[markers.length - 1][1]);
-  return { text, pages, page, markerOnly: text === "" };
+  if (markers.length === 0) {
+    if (pageBefore !== undefined) pages.push(pageBefore);
+  } else {
+    if (pageBefore !== undefined && withoutNotes.slice(0, markers[0].index).trim() !== "") pages.push(pageBefore);
+    markers.forEach((marker, i) => {
+      const after = withoutNotes.slice(marker.index + marker[0].length, markers[i + 1]?.index ?? withoutNotes.length);
+      if (after.trim() !== "") pages.push(Number(marker[1]));
+    });
+  }
+  const changed = notes.length > 0 || markers.length > 0;
+  const text = changed ? withoutNotes.replace(PAGE_MARKER, " ").replace(/\s{2,}/g, " ").trim() : raw;
+  const page = markers.length > 0 ? Number(markers[markers.length - 1][1]) : pageBefore;
+  return { text, pages, page, notes, markerOnly: changed && text === "" };
 }
 
 /** Step 2: split a section into blocks at blank lines. A table has no blank lines, so it is one block. */
 function splitIntoBlocks(lines: Line[]): Block[] {
   const blocks: Block[] = [];
   let current: Line[] = [];
-  for (const line of [...lines, { text: "", pages: [], line: 0 }]) {
+  for (const line of [...lines, { text: "", pages: [], line: 0, notes: [] }]) {
     if (line.text.trim() === "") {
       if (current.length > 0) blocks.push({ lines: current });
       current = [];
