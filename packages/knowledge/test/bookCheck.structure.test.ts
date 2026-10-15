@@ -15,10 +15,14 @@ describe("checkBook: headings", () => {
     expect(kinds("Text.\n\n---\n\nMore.")).not.toContain("heading-underlined");
   });
 
-  it("finds bold lines that look like headings, standing alone between blank lines", () => {
+  it("reports bold lines the chunker treats as subheadings, as information", () => {
     const md = "Text.\n\n**Racial Abilities**\n\nDwarves see in the dark.\n\n**Note:** this is a sentence, not a heading.\n\nMore.";
     const found = find(md, "heading-bold-line");
-    expect(found.map((f) => f.line)).toEqual([3]);
+    expect(found.map((f) => [f.line, f.severity])).toEqual([[3, "info"]]);
+  });
+
+  it("does not report spell school labels as bold headings", () => {
+    expect(kinds("### Fireball\n\n**(Evocation)**\n\nRange: 10 yds.")).not.toContain("heading-bold-line");
   });
 
   it("flags headings that are too long to be headings, and empty headings", () => {
@@ -43,6 +47,24 @@ describe("checkBook: tables", () => {
     const [f] = find(md, "table-no-separator");
     expect(f.message).toMatch(/continues the table/);
     expect(f.hint).toMatch(/join/i);
+  });
+
+  it("recognizes a title captured inside the table, broken across cells", () => {
+    const md = "Text.\n\n|  | Magical | Tab Wis | le 5: dom Chance |  |\n| --- | --- | --- | --- | --- |\n| 3 | -3 | 50% | - | - |";
+    const found = checkBook(md).findings;
+    expect(found.map((f) => f.kind)).toContain("table-title-in-table");
+    expect(found.map((f) => f.kind)).not.toContain("table-no-title");
+  });
+
+  it("finds a table flattened into one line of text under its heading, instead of reporting a duplicate", () => {
+    const md = "#### Table 30\n\nTable 30: Thief\u2019s Level Damage Multiplier 1\u20134 2 5\u20138 3 9\u201312 4 13+ 5";
+    const found = checkBook(md).findings;
+    expect(found.map((f) => f.kind)).toEqual(["table-flattened"]);
+    expect(found[0]).toMatchObject({ severity: "fix", line: 3 });
+  });
+
+  it("accepts a table heading without a colon as the table's title", () => {
+    expect(kinds("#### Table 83\n\n| A |\n| --- |\n| 1 |")).not.toContain("table-no-title");
   });
 
   it("finds HTML tables, as something to fix", () => {
@@ -75,6 +97,39 @@ describe("checkBook: text", () => {
 
   it("does not flag hyphenated words that continue normally", () => {
     expect(kinds("A half-\nElf is not broken here.")).not.toContain("text-hyphenation");
+  });
+
+  it("does not report repeated spell fields or school labels as page headers", () => {
+    const spell = (i: number) => `**(Alteration)**\n\nRange: Touch\nComponents: V, S, M\nSaving Throw: None\n\nDescription of spell number ${i}.`;
+    expect(kinds(Array.from({ length: 6 }, (_, i) => spell(i)).join("\n\n"))).not.toContain("text-repeated-line");
+  });
+
+  it("does not report school labels with a word after them as page headers", () => {
+    const spell = (i: number) => `**(Alteration)Reversible**\n\nRange: Touch\n\nDescription of spell number ${i}.`;
+    expect(kinds(Array.from({ length: 6 }, (_, i) => spell(i)).join("\n\n"))).not.toContain("text-repeated-line");
+  });
+
+  it("finds text garbled by a decorative font, as runs of mixed symbols", () => {
+    const [f] = find('The Player\u2019s Handbook and the D!"#$%" l&\'($) fuide give you what you need.', "text-garbled");
+    expect(f).toMatchObject({ line: 1, severity: "review" });
+  });
+
+  it("finds text scrambled into fragments", () => {
+    const md = "P The P the m a DM the A ships Cla the addit enco W easily helps Ye really chara to dri her a The Player's Handbook.";
+    expect(find(md, "text-garbled")).toHaveLength(1);
+  });
+
+  it("does not report normal prose, tables, comments or dice notation as garbled", () => {
+    const md = [
+      "Dwarves are short and stocky, and they are very brave in a fight. A dwarf is at home in the dark.",
+      "<!-- page 12 --> and <!-- UNCLEAR: smudge --> are comments.",
+      "| S | M | L | a | b | c | d | e | f | g | h | i |",
+      "Roll 1d6 + 2 or 2d4, then 1d8 vs. AC 5 at 30 ft. (a 10-ft. radius) for 1 rd. per lvl. If it is so, do it.",
+      "**Note:** *italic* and ***bold italic*** text.",
+      "**Method I (3d6):** roll three dice. **Weapons (missile):** bows.",
+      "* **Half-Elf:** Fighter, Ranger, Mage, Cleric, Druid, Thief, Bard, F/C, F/T, F/D, F/M, C/R, C/M, T/M",
+    ].join("\n");
+    expect(kinds(md)).not.toContain("text-garbled");
   });
 
   it("finds lines repeated many times, like leftover page headers", () => {

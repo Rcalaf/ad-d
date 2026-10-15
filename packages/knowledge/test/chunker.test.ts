@@ -159,6 +159,68 @@ Elves are graceful.`;
     expect(chunks.map((c) => [c.text, c.line])).toEqual([["Intro.", 3], ["First.", 7], ["Second.", 9]]);
   });
 
+  it("treats a bold line standing alone as a subheading of the current section", () => {
+    const md = "## Priests\n\nIntro.\n\n**Requirements**\n\nWisdom 9.\n\n**Weapons Allowed**\n\nBlunt weapons.\n\n## Rogues\n\nThieves.";
+    expect(chunkMarkdown(md, "phb").map((c) => c.headingPath.join(" > "))).toEqual([
+      "Priests",
+      "Priests > Requirements",
+      "Priests > Weapons Allowed",
+      "Rogues",
+    ]);
+  });
+
+  it("does not treat spell school labels, sentences or bold text inside a paragraph as subheadings", () => {
+    const md = "### Fireball\n\n**(Evocation)**\n\nRange: 10 yds.\n\n**Note:** this is a sentence.\n\nA **bold** word in a line.";
+    expect(new Set(chunkMarkdown(md, "phb").map((c) => c.headingPath.join(" > ")))).toEqual(new Set(["Fireball"]));
+  });
+
+  it("only treats bold lines that look like titles as subheadings", () => {
+    const md = [
+      "## Magical Item Tables", "", "Intro.", "",
+      "**Subtable B (3–4)Table 89:Table 89: D20 Potions and Oils (D6) Roll Item XP Value**", "", "Garbled line above.", "",
+      "**Spellcaster employing spells usable**", "", "Not a title: lowercase words.", "",
+      "**(Alteration)Reversible**", "", "A spell school label.", "",
+      "**Step 1: Roll Ability Scores (chapter 1)**", "", "A real subheading, with a lowercase word in parentheses.", "",
+      "**Fighting from Horseback**", "", "A real subheading with a small lowercase word.",
+    ].join("\n");
+    expect([...new Set(chunkMarkdown(md, "dmg").map((c) => c.headingPath.join(" > ")))]).toEqual([
+      "Magical Item Tables",
+      "Magical Item Tables > Step 1: Roll Ability Scores (chapter 1)",
+      "Magical Item Tables > Fighting from Horseback",
+    ]);
+  });
+
+  it("ignores a bold line that repeats the title of its own section", () => {
+    const md = "### Encounter Reactions\n\nIntro.\n\n**Encounter Reactions**\n\nMore text.";
+    expect([...new Set(chunkMarkdown(md, "dmg").map((c) => c.headingPath.join(" > ")))]).toEqual(["Encounter Reactions"]);
+  });
+
+  it("recognizes a table title without a colon", () => {
+    const md = "## Combat\n\n#### Table 83\n\n| A |\n| --- |\n| 1 |\n\nText after the table.";
+    expect(chunkMarkdown(md, "dmg").map((c) => c.headingPath.join(" > "))).toEqual(["Combat > Table 83", "Combat"]);
+  });
+
+  it("keeps footnotes marked with plain asterisks with their table, but not bullets with a bold label", () => {
+    const md = "### Priests\n\n#### Table 24: Spells\n\n| Level | Spells |\n| --- | --- |\n| 1 | 2* |\n\n* Maximum spell ability\n*** All 1s and 2s count as 3s.\n\n* **Granted Powers:** a bullet point.";
+    const chunks = chunkMarkdown(md, "phb");
+    expect(chunks.map((c) => c.headingPath.at(-1))).toEqual(["Table 24: Spells", "Priests"]);
+    expect(chunks[0].text).toContain("* Maximum spell ability");
+    expect(chunks[0].text).toContain("*** All 1s and 2s");
+  });
+
+  it("removes converter comments from the text and keeps them as notes on the chunk they describe", () => {
+    const md = "## Races\n\n#### Table 7: Limits\n\n<!-- UNCLEAR: header cells not detected -->\n\n| A | B |\n| --- | --- |\n| 1 | 2 |\n\nText <!-- UNCLEAR: smudged word --> here.";
+    const chunks = chunkMarkdown(md, "phb");
+    expect(chunks.every((c) => !c.text.includes("<!--"))).toBe(true);
+    expect(chunks.map((c) => c.notes)).toEqual([["UNCLEAR: header cells not detected"], ["UNCLEAR: smudged word"]]);
+    expect(chunks[1].text).toBe("Text here.");
+  });
+
+  it("drops a chunk that would contain only a converter comment", () => {
+    const md = "## Races\n\n<!-- UNCLEAR: something -->\n\n## Classes\n\nText.";
+    expect(chunkMarkdown(md, "phb").map((c) => c.headingPath.at(-1))).toEqual(["Classes"]);
+  });
+
   it("produces stable ids, and an embedding text that starts with the heading path", () => {
     expect(chunkMarkdown(sample, "phb").map((c) => c.id)).toEqual(chunks.map((c) => c.id));
     expect(new Set(chunks.map((c) => c.id)).size).toBe(chunks.length);

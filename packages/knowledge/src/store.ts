@@ -22,6 +22,15 @@ export interface SearchResult {
   similarity?: number;
   /** Rank in the keyword search (1 = best keyword match), if it was found there. */
   keywordRank?: number;
+  /** Converter notes about this text, such as an unreliable table. Empty when there are none. */
+  notes: string[];
+}
+
+/** A chunk as stored in the index, without its vector: for comparing the index with the books. */
+export interface IndexedChunk {
+  book: string;
+  headingPath: string[];
+  text: string;
 }
 
 /** hybrid: both searches combined (default). vector or keyword: one search alone, to compare. */
@@ -54,6 +63,8 @@ interface ChunkRow {
   searchText: string;
   pages: string;
   hasTable: boolean;
+  /** Converter notes, as JSON. */
+  notes: string;
   vector: number[];
 }
 
@@ -83,6 +94,7 @@ export async function buildIndex(dir: string, chunks: Chunk[], embedder: Embedde
     searchText: embeddingText(chunk),
     pages: JSON.stringify(chunk.pages),
     hasTable: chunk.hasTable,
+    notes: JSON.stringify(chunk.notes),
     vector: vectors[i],
   }));
   const meta: MetaRow = { model: embedder.model, dimensions, chunkCount: rows.length, builtAt: new Date().toISOString() };
@@ -97,6 +109,18 @@ export async function buildIndex(dir: string, chunks: Chunk[], embedder: Embedde
   // so older versions are never needed: remove them to keep data/index from growing.
   for (const table of tables) await table.optimize({ cleanupOlderThan: new Date() });
   return meta;
+}
+
+/**
+ * Reads every chunk stored in an index, without vectors and without needing the embedding model.
+ * Used to compare what is indexed with what the chunker produces now.
+ */
+export async function listIndexedChunks(dir: string): Promise<IndexedChunk[]> {
+  const db = await lancedb.connect(dir);
+  if (!(await db.tableNames()).includes(CHUNKS_TABLE)) throw new Error(`No index found in ${dir}. Build it first.`);
+  const table = await db.openTable(CHUNKS_TABLE);
+  const rows = await table.query().select(["book", "headingPath", "text"]).limit(await table.countRows()).toArray();
+  return rows.map((row) => ({ book: row.book, headingPath: JSON.parse(row.headingPath), text: row.text }));
 }
 
 /** A built index, opened for searching. */
@@ -163,6 +187,7 @@ export class RulesIndex {
         // Cosine distance is 1 minus cosine similarity, so similarity is 1 minus the distance.
         similarity: similarityById.get(id),
         keywordRank: ranks[1],
+        notes: row.notes ? JSON.parse(row.notes) : [],
       };
     });
   }
