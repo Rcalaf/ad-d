@@ -17,6 +17,15 @@ describe("loadSettings", () => {
     expect(settings.llmApiKey).toBeUndefined();
   });
 
+  it("reads the context window and answer length, with defaults of 8,192 and 1,024 tokens", () => {
+    expect(loadSettings({ LLM_MODEL: "x" })).toMatchObject({ contextTokens: 8192, answerTokens: 1024 });
+    expect(loadSettings({ LLM_MODEL: "x", LLM_CONTEXT_TOKENS: "16384", LLM_MAX_ANSWER_TOKENS: "2048" })).toMatchObject({ contextTokens: 16384, answerTokens: 2048 });
+  });
+
+  it("refuses an answer length that leaves no room for the prompt", () => {
+    expect(() => loadSettings({ LLM_MODEL: "x", LLM_CONTEXT_TOKENS: "4096", LLM_MAX_ANSWER_TOKENS: "4000" })).toThrow(/LLM_MAX_ANSWER_TOKENS must be less than half of LLM_CONTEXT_TOKENS/);
+  });
+
   it("locates the index folder at the repository root", () => {
     expect(loadSettings({ LLM_MODEL: "x" }).indexDir).toMatch(/[/\\]data[/\\]index$/);
   });
@@ -29,12 +38,18 @@ describe("loadSettings", () => {
 });
 
 describe("getChatModel", () => {
-  const base = { llmModel: "test-model", temperature: 0.3, embeddingModel: "bge-m3", indexDir: "/tmp/index" };
+  const base = { llmModel: "test-model", temperature: 0.3, embeddingModel: "bge-m3", indexDir: "/tmp/index", contextTokens: 8192, answerTokens: 1024 };
 
   it("creates the model class that matches the configured provider", () => {
     expect(getChatModel({ ...base, llmProvider: "ollama" })).toBeInstanceOf(ChatOllama);
     expect(getChatModel({ ...base, llmProvider: "openai_compatible", llmBaseUrl: "http://localhost:1234/v1" })).toBeInstanceOf(ChatOpenAI);
     expect(getChatModel({ ...base, llmProvider: "anthropic", llmApiKey: "test-key" })).toBeInstanceOf(ChatAnthropic);
+  });
+
+  it("asks Ollama for the configured context window and answer length", () => {
+    const model = getChatModel({ ...base, llmProvider: "ollama" }) as ChatOllama;
+    expect(model.numCtx).toBe(8192);
+    expect(model.numPredict).toBe(1024);
   });
 
   it("lets a caller override the temperature for one use", () => {
