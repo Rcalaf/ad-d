@@ -21,6 +21,15 @@ export interface Chunk {
   notes: string[];
   /** True when the chunk contains a Markdown table. */
   hasTable: boolean;
+  /**
+   * Number of the section in the book, counting sections in book order from 0. Tables belong to the
+   * section they sit in, so a section's pieces run in book order: text, table, text after the table.
+   */
+  section: number;
+  /** Position of the chunk within its section, from 0. */
+  piece: number;
+  /** How many pieces the section has. */
+  pieceCount: number;
 }
 
 export interface ChunkOptions {
@@ -46,6 +55,11 @@ interface Block {
 interface Section {
   headingPath: string[];
   lines: Line[];
+  /**
+   * Sections that share a group are one stretch of the book: a section, the tables inside it,
+   * and its text after each table. A new heading (real or bold) starts a new group.
+   */
+  group: number;
 }
 
 const HEADING = /^(#{1,6})\s+(.+?)\s*$/;
@@ -76,14 +90,22 @@ export function chunkMarkdown(markdown: string, book: string, options: ChunkOpti
   // Counts pieces per heading path across the whole book, so a path that appears more than once
   // (a section continuing after a table, or two sections with the same title) never repeats an id.
   const piecesPerPath = new Map<string, number>();
+  // Section numbers follow the groups in book order, counting only groups that produce chunks.
+  const sectionOfGroup = new Map<number, number>();
+  const piecesInSection = new Map<number, number>();
 
   for (const section of splitIntoSections(markdown)) {
-    const blocks = splitIntoBlocks(section.lines);
-    for (const piece of packBlocks(blocks, maxChars)) {
+    const pieces = packBlocks(splitIntoBlocks(section.lines), maxChars);
+    if (pieces.length === 0) continue;
+    if (!sectionOfGroup.has(section.group)) sectionOfGroup.set(section.group, sectionOfGroup.size);
+    const sectionNumber = sectionOfGroup.get(section.group)!;
+    for (const piece of pieces) {
       const text = blocksText(piece);
       const pathKey = section.headingPath.join("|");
       const index = piecesPerPath.get(pathKey) ?? 0;
       piecesPerPath.set(pathKey, index + 1);
+      const position = piecesInSection.get(sectionNumber) ?? 0;
+      piecesInSection.set(sectionNumber, position + 1);
       chunks.push({
         id: makeId(book, section.headingPath, index),
         book,
@@ -93,9 +115,13 @@ export function chunkMarkdown(markdown: string, book: string, options: ChunkOpti
         line: piece[0].lines[0].line,
         notes: [...new Set(piece.flatMap((b) => b.lines.flatMap((l) => l.notes)))],
         hasTable: isTable(text),
+        section: sectionNumber,
+        piece: position,
+        pieceCount: 0, // set below, once the whole section is known
       });
     }
   }
+  for (const chunk of chunks) chunk.pieceCount = piecesInSection.get(chunk.section)!;
   return chunks;
 }
 
@@ -109,7 +135,8 @@ function splitIntoSections(markdown: string): Section[] {
   const lines = markdown.split(/\r?\n/);
   const path: (string | undefined)[] = [];
   const sections: Section[] = [];
-  let current: Section = { headingPath: [], lines: [] };
+  let group = 0;
+  let current: Section = { headingPath: [], lines: [], group };
   let page: number | undefined;
   /** Level of the last real (#) heading: bold subheadings go one level below it. */
   let headingLevel = 0;
@@ -121,7 +148,7 @@ function splitIntoSections(markdown: string): Section[] {
   const startSection = (level: number, title: string) => {
     path.splice(level - 1); // forget headings at this level and deeper
     path[level - 1] = title;
-    current = { headingPath: path.filter((h): h is string => Boolean(h)), lines: [] };
+    current = { headingPath: path.filter((h): h is string => Boolean(h)), lines: [], group: ++group };
   };
 
   for (const [lineIndex, raw] of lines.entries()) {
@@ -140,7 +167,8 @@ function splitIntoSections(markdown: string): Section[] {
         // A table title covers only its table. Remember the section it sits in, to return there afterwards.
         const parentPath = table ? table.parentPath : current.headingPath;
         table = { parentPath, rowsSeen: false };
-        current = { headingPath: [...parentPath, heading[2]], lines: [] };
+        // The table stays in the group of the section it sits in.
+        current = { headingPath: [...parentPath, heading[2]], lines: [], group: current.group };
         continue;
       }
       table = undefined;
@@ -165,7 +193,7 @@ function splitIntoSections(markdown: string): Section[] {
       } else if (table.rowsSeen && text.trim() !== "" && !TABLE_NOTE.test(text)) {
         // The table has ended: what follows belongs to the section the table sits in.
         sections.push(current);
-        current = { headingPath: table.parentPath, lines: [] };
+        current = { headingPath: table.parentPath, lines: [], group: current.group };
         table = undefined;
       }
     }
@@ -181,6 +209,12 @@ function splitIntoSections(markdown: string): Section[] {
 /** Short words that stay lowercase in English titles ("Fighting from Horseback"). */
 const TITLE_SMALL_WORDS = new Set(["a", "an", "the", "and", "or", "nor", "but", "of", "to", "in", "on", "at", "for", "from", "by", "with", "as", "vs", "per", "into", "onto"]);
 const MAX_TITLE_WORDS = 8;
+
+/** The table title at the end of a heading path, such as "Table 8: Racial Ability Adjustments", if any. */
+export function tableTitleOf(headingPath: string[]): string | undefined {
+  const last = headingPath.at(-1);
+  return last !== undefined && TABLE_TITLE.test(last) ? last : undefined;
+}
 
 /**
  * The title of a bold line that stands alone between blank lines, like "**Weapons Allowed**",
