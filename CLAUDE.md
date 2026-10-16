@@ -26,7 +26,7 @@ TypeScript monorepo with dependencies in one direction only:
 
 | Module | Role |
 | --- | --- |
-| `chunker.ts` | Splits a Markdown book by headings. A bold line standing alone (`**Weapons Allowed**`) counts as a subheading if it looks like a title (see Known pitfalls); a bold line repeating its own section's title is ignored. Tables are never cut; a "Table N" heading covers only its table (footnotes included, also plain `* ` ones), then text returns to the parent section. Page markers may be inline. Converter comments (`<!-- UNCLEAR: ... -->`) are removed from the text and kept as the chunk's `notes`. Ids are unique per book and stable across rebuilds. |
+| `chunker.ts` | Splits a Markdown book by headings. A bold line standing alone (`**Weapons Allowed**`) counts as a subheading if it looks like a title (see Known pitfalls); a bold line repeating its own section's title is ignored. Tables are never cut; a "Table N" heading covers only its table (footnotes included, also plain `* ` ones), then text returns to the parent section. Page markers may be inline. Converter comments (`<!-- UNCLEAR: ... -->`) are removed from the text and kept as the chunk's `notes`. Each chunk records its section number (in book order) and its piece position, so adjacent pieces can be found. Tables belong to the section they sit in: a section's pieces run in book order (text, table, text after the table); a new heading, real or bold, starts a new section. Ids are unique per book and stable across rebuilds. |
 | `bookCheck.ts` | Line-level structural checks on a converted book: headings, tables (including titles captured inside tables and tables flattened into one line), page markers, HTML, garbled text, other text artifacts. |
 | `chunkInspect.ts` | Chunk-level checks: short, duplicated, mid-sentence, oversized, orphan chunks, table titles without tables. |
 | `chunkCompare.ts` | Compares the chunks stored in the index with what the chunker produces now: unchanged, moved, added, removed. The report groups moved chunks by their new location, largest groups first. |
@@ -34,7 +34,7 @@ TypeScript monorepo with dependencies in one direction only:
 | `fixList.ts` | Per-book fix list for correcting the Markdown by hand: tasks ordered by printed page, with a guide per kind of problem. Every kind that needs action must have a guide (a test enforces it). |
 | `embedder.ts` | `Embedder` interface; `OllamaEmbedder` sends texts in batches. |
 | `fusion.ts` | Reciprocal rank fusion of ranked lists. |
-| `store.ts` | Builds the LanceDB index (vectors plus a keyword index) and searches it: hybrid by default, or vector or keyword alone. Results include the converter notes, so agents can warn about unreliable sources. |
+| `store.ts` | Builds the LanceDB index (vectors plus a keyword index) and searches it. Builds reuse vectors from an embedding cache keyed by a fingerprint of the model and the embedded text, so only new or changed chunks are embedded; builds report progress and stage timings. Search is hybrid by default, or vector or keyword alone. Results include the converter notes, so agents can warn about unreliable sources. `expand()` turns results into passages: neighbouring pieces of the same section, merged by section, within a size budget (12,000 characters by default; the pieces the search found are always kept). The radius counts text pieces only, so tables in between come along without using it up; a table's title is put in front of its rows; a table that doesn't fit is named in its place ("[Table 8: ..., not included]"). |
 
 ### `packages/server/src`
 
@@ -47,7 +47,7 @@ TypeScript monorepo with dependencies in one direction only:
 ## Data
 
 - `data/books/`: the book text in Markdown (`phb.md`, `dmg.md`), from the owner's own copies. Local only, ignored by Git. Files ending in `-condensed.md` are never indexed.
-- `data/index/`: the LanceDB index. Local only, ignored by Git. Rebuilt from scratch on every `build-index`; old versions are deleted.
+- `data/index/`: the LanceDB index, and its `embedding_cache` table. Local only, ignored by Git. Rewritten on every `build-index`, reusing cached vectors for unchanged chunks; the cache keeps only the current chunks' vectors, and old table versions are deleted.
 - `data/reports/`: check reports, fix lists and chunk comparisons. Local only, ignored by Git, since they quote the books.
 - Never commit, print in full, or reproduce book text in outputs to players. Agents may read and apply it, and cite where a rule comes from.
 
@@ -67,8 +67,8 @@ TypeScript monorepo with dependencies in one direction only:
 - `pnpm typecheck`: TypeScript check across the workspace
 - `pnpm --filter @dnd/knowledge check-books`: checks every book; full report in `data/reports/check-books.md`, and a fix list per book, ordered by page, in `data/reports/fix-list-<book>.md`
 - `pnpm --filter @dnd/knowledge compare-chunks`: compares the index with the current chunker output; report in `data/reports/compare-chunks.md`
-- `pnpm --filter @dnd/knowledge build-index`: rebuilds the index from `data/books` (needs Ollama running)
-- `pnpm --filter @dnd/knowledge search-rules "question" [--vector | --keyword]`: searches the index
+- `pnpm --filter @dnd/knowledge build-index`: rebuilds the index from `data/books` (needs Ollama running); reports progress, how many chunks were reused or embedded, and each stage's duration. In a terminal, a spinner line shows the current stage and its elapsed time, and during embedding the time since the last batch: a growing "last batch ... ago" means the build is waiting for Ollama; a spinner that stops turning means the build itself is blocked
+- `pnpm --filter @dnd/knowledge search-rules "question" [--vector | --keyword] [--full | --context]`: searches the index; `--full` prints whole chunks, `--context` prints the passages exactly as the model will receive them
 - `pnpm --filter @dnd/server check-model`: checks the configured model answers, and how fast
 
 Rebuild the index after any change to the books, the chunker or the index format. After a chunker change, run `compare-chunks` first: it needs the old index to compare against.
@@ -79,7 +79,9 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 
 - Never name a package script after a built-in pnpm command (`search`, `test`, `install`...): the built-in wins and the script never runs. `pnpm run <name>` always runs the script.
 - LanceDB index configurations (`Index.fts()`) can only be used once: create a new one for each index.
+- LanceDB prints "No existing dataset ... will be created" warnings straight to the terminal the first time a table is created (they cross the spinner line); `LANCE_LOG` and `RUST_LOG` don't silence them in this version. Harmless.
 - The first LanceDB operation in a process loads its native library and can take seconds: index tests have a 15 s limit and a warm-up.
+- Mixed fractions lost their space in the conversion ("31/2" for "3 1/2"): in VS Code, regex search `\b(\d)([123]/[234])\b` in `data/books` finds them; check each against the page before restoring the space.
 - English stemming in keyword search handles regular plurals but not irregular ones (dwarf/dwarves, thief/thieves); vector search covers those.
 - A bold subheading lasts until the next heading, like a real one: content after it that belongs to the parent section is attributed to the subheading. `compare-chunks` shows such cases.
 - A bold line counts as a subheading only if it looks like a title: capitalized words, at most 8, no "Table N", not a school label in parentheses. A one-word subheading that isn't one (like "Water" in the List of Rings) can't be told apart by a rule: `compare-chunks` shows it as a group of moved chunks; remove the bold in the source.
@@ -101,13 +103,14 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
   - Settled: mid-sentence chunks in the DMG (about 60) come from the transcription (scrambled sentence openings, blank lines inside paragraphs), not from the chunker.
   - Quick source fixes: the DMG's name printed in a decorative font (`D!"#$%" l&'($) fuide`) can be replaced across the file with search and replace, after checking it against the page; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading.
   - Source fixing: by hand, with the fix lists, as time allows. Proposed priority: the Player's Handbook tables iteration 2 needs (abilities, races, classes, saving throws, THAC0); the PDF converter remains an option for the rest.
-  - In progress: 1.7 ask the rules. Done: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, on the first call). Next: 1.7b, neighbouring pieces (section and piece numbers on each chunk, `expand` with a size budget; requires an index rebuild); 1.7c, the answering workflow (search, expand, the model answers only from numbered sources with citations, the code checks the citations); 1.7d, the `ask` command.
+  - In progress: 1.7 ask the rules. Done: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). Next: 1.7c, the answering workflow (search, expand, model answers only from numbered sources with citations, code checks the citations); 1.7d, the `ask` command.
   - After 1.7: 1.8 evaluation (questions with known answers and known source sections).
 - Next iterations: 2, Character Designer; 3, Campaign Designer.
 
 ## Backlog
 
 - PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages). Higher priority after the diagnostics: table extraction is the weakest part of the current conversions.
-- Embedding cache, so a rebuild only embeds new or changed chunks.
 - Reranker, if the evaluation shows the first results are often in the wrong order.
+- Context window of the chat model (needed in 1.7c): Ollama runs a model with a fixed context window (`ollama ps` showed 4096 tokens) and silently cuts off the start of a longer prompt, where the instructions are. Set the window explicitly for `qwen2.5:7b` (for example 8,192 tokens, which the model supports), estimate the prompt's size before sending it (about 4 characters per token for English) and fail clearly if it doesn't fit. A larger window costs memory and makes the Mac read the prompt more slowly: measure.
+- Passage budget priority (decide with the 1.8 evaluation): the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
 - MCP server exposing `search_rules` (iteration 1b, undecided).

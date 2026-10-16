@@ -221,6 +221,36 @@ Elves are graceful.`;
     expect(chunkMarkdown(md, "phb").map((c) => c.headingPath.at(-1))).toEqual(["Classes"]);
   });
 
+  it("numbers each chunk's section in book order, and its piece within the section", () => {
+    const md = `# Book\n\n## Races\n\n${"A".repeat(150)}\n\n${"B".repeat(150)}\n\n${"C".repeat(150)}\n\n## Classes\n\nFighters.`;
+    const chunks = chunkMarkdown(md, "phb", { maxChars: 320 });
+    expect(chunks.map((c) => [c.headingPath.at(-1), c.section, c.piece, c.pieceCount])).toEqual([
+      ["Races", 0, 0, 2],
+      ["Races", 0, 1, 2],
+      ["Classes", 1, 0, 1],
+    ]);
+  });
+
+  it("keeps a table and the text around it in one section, in book order, so they are adjacent", () => {
+    const md = "## Dwarves\n\nBefore the table.\n\n#### Table 8: X\n\n| A |\n| --- |\n| 1 |\n\n#### Table 9: Y\n\n| B |\n| --- |\n| 2 |\n\nAfter the tables.\n\n## Elves\n\nElves.";
+    const chunks = chunkMarkdown(md, "phb");
+    expect(chunks.map((c) => [c.headingPath.at(-1), c.section, c.piece, c.pieceCount])).toEqual([
+      ["Dwarves", 0, 0, 4],
+      ["Table 8: X", 0, 1, 4],
+      ["Table 9: Y", 0, 2, 4],
+      ["Dwarves", 0, 3, 4],
+      ["Elves", 1, 0, 1],
+    ]);
+  });
+
+  it("starts a new section at a bold subheading, as at a real heading", () => {
+    const md = "## Priests\n\nIntro.\n\n**Requirements**\n\nWisdom 9.";
+    expect(chunkMarkdown(md, "phb").map((c) => [c.headingPath.at(-1), c.section])).toEqual([
+      ["Priests", 0],
+      ["Requirements", 1],
+    ]);
+  });
+
   it("produces stable ids, and an embedding text that starts with the heading path", () => {
     expect(chunkMarkdown(sample, "phb").map((c) => c.id)).toEqual(chunks.map((c) => c.id));
     expect(new Set(chunks.map((c) => c.id)).size).toBe(chunks.length);
