@@ -40,8 +40,13 @@ TypeScript monorepo with dependencies in one direction only:
 
 | Module | Role |
 | --- | --- |
-| `config.ts` | Reads the settings from `.env` (model provider, model, temperature, embedding model, index folder); errors name the variable to fix. |
-| `llm/provider.ts` | `getChatModel()`: the only place that knows model providers; optional temperature override per use. |
+| `config.ts` | Reads the settings from `.env` (model provider, model, temperature, context window, answer length, embedding model, index folder); errors name the variable to fix. |
+| `llm/provider.ts` | `getChatModel()`: the only place that knows model providers; optional temperature override per use. Passes the context window and answer length to Ollama (`num_ctx`, `num_predict`). |
+| `answering/prompt.ts` | The instructions for answering rules questions (sources only, cite by number, say when the sources don't answer, mention exceptions and converter notes, answer in the question's language) and the messages sent to the model. |
+| `answering/sources.ts` | Turns passages into numbered sources: book title, location, pages, converter notes, text. |
+| `answering/citations.ts` | Finds the source numbers an answer cites; flags unknown numbers and answers citing nothing. |
+| `answering/answerQuestion.ts` | The answering workflow: source budget from the window, search, expand, numbered sources, prompt check, model, citation and usage checks. Receives its search and model from outside, so tests use fakes. If the search finds nothing, the model is not called. |
+| `llm/contextWindow.ts` | Keeps prompts inside the context window: estimates tokens (3 characters per token, deliberately pessimistic), derives the space left for sources, refuses a prompt that doesn't fit, and checks the token count the model reports. |
 | `cli/errors.ts` | Turns model errors (Ollama not running, model not downloaded) into what to check. |
 
 ## Data
@@ -82,6 +87,7 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 - LanceDB prints "No existing dataset ... will be created" warnings straight to the terminal the first time a table is created (they cross the spinner line); `LANCE_LOG` and `RUST_LOG` don't silence them in this version. Harmless.
 - The first LanceDB operation in a process loads its native library and can take seconds: index tests have a 15 s limit and a warm-up.
 - Mixed fractions lost their space in the conversion ("31/2" for "3 1/2"): in VS Code, regex search `\b(\d)([123]/[234])\b` in `data/books` finds them; check each against the page before restoring the space.
+- Ollama runs every model with its own default context window (4,096 tokens here) unless `num_ctx` is set, and a longer prompt is not refused: part of it is dropped, the beginning (the instructions) most at risk. The window and answer length are set in `.env` (`LLM_CONTEXT_TOKENS`, default 8,192; `LLM_MAX_ANSWER_TOKENS`, default 1,024) and checked in `llm/contextWindow.ts`.
 - English stemming in keyword search handles regular plurals but not irregular ones (dwarf/dwarves, thief/thieves); vector search covers those.
 - A bold subheading lasts until the next heading, like a real one: content after it that belongs to the parent section is attributed to the subheading. `compare-chunks` shows such cases.
 - A bold line counts as a subheading only if it looks like a title: capitalized words, at most 8, no "Table N", not a school label in parentheses. A one-word subheading that isn't one (like "Water" in the List of Rings) can't be told apart by a rule: `compare-chunks` shows it as a group of moved chunks; remove the bold in the source.
@@ -103,14 +109,14 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
   - Settled: mid-sentence chunks in the DMG (about 60) come from the transcription (scrambled sentence openings, blank lines inside paragraphs), not from the chunker.
   - Quick source fixes: the DMG's name printed in a decorative font (`D!"#$%" l&'($) fuide`) can be replaced across the file with search and replace, after checking it against the page; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading.
   - Source fixing: by hand, with the fix lists, as time allows. Proposed priority: the Player's Handbook tables iteration 2 needs (abilities, races, classes, saving throws, THAC0); the PDF converter remains an option for the rest.
-  - In progress: 1.7 ask the rules. Done: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). Next: 1.7c, the answering workflow (search, expand, model answers only from numbered sources with citations, code checks the citations); 1.7d, the `ask` command.
-  - After 1.7: 1.8 evaluation (questions with known answers and known source sections).
+  - In progress: 1.7 ask the rules. Done: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner; 1.7c0, context window management (window set explicitly, token estimates, source budget derived from the window, prompt check before sending, usage check after); 1.7c, the answering workflow (single pass; the answer's language is left to the instructions, since telling Catalan from Spanish reliably needs a detection library) (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). Next: 1.7d, the `ask` command.
+  - After 1.7: 1.8 evaluation (questions with known answers and known source sections); 1.9 evaluator-optimizer where 1.8 shows it helps (claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer), compared against the 1.8 baseline.
 - Next iterations: 2, Character Designer; 3, Campaign Designer.
 
 ## Backlog
 
 - PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages). Higher priority after the diagnostics: table extraction is the weakest part of the current conversions.
 - Reranker, if the evaluation shows the first results are often in the wrong order.
-- Context window of the chat model (needed in 1.7c): Ollama runs a model with a fixed context window (`ollama ps` showed 4096 tokens) and silently cuts off the start of a longer prompt, where the instructions are. Set the window explicitly for `qwen2.5:7b` (for example 8,192 tokens, which the model supports), estimate the prompt's size before sending it (about 4 characters per token for English) and fail clearly if it doesn't fit. A larger window costs memory and makes the Mac read the prompt more slowly: measure.
+- Context window, remaining work: calibrate `CHARS_PER_TOKEN` (3, pessimistic) against the token counts Ollama reports once real questions run (1.7d); confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed on the Mac.
 - Passage budget priority (decide with the 1.8 evaluation): the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
 - MCP server exposing `search_rules` (iteration 1b, undecided).
