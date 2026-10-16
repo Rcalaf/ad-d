@@ -12,11 +12,18 @@ const SettingsSchema = z
     llmBaseUrl: z.string().url("LLM_BASE_URL must be a full address, for example http://localhost:11434").optional(),
     llmApiKey: z.string().optional(),
     temperature: z.coerce.number().min(0).max(2, "LLM_TEMPERATURE must be between 0 and 2"),
+    /** Tokens the model can attend to at once: instructions, sources, question and answer together. */
+    contextTokens: z.coerce.number().int().min(2048, "LLM_CONTEXT_TOKENS must be at least 2048"),
+    /** Tokens reserved for the answer, inside the context window. */
+    answerTokens: z.coerce.number().int().min(128, "LLM_MAX_ANSWER_TOKENS must be at least 128"),
     embeddingModel: z.string().min(1),
     indexDir: z.string(),
   })
   .refine((s) => s.llmProvider !== "anthropic" || Boolean(s.llmApiKey), {
     message: "LLM_API_KEY is required when LLM_PROVIDER is anthropic",
+  })
+  .refine((s) => s.answerTokens < s.contextTokens / 2, {
+    message: "LLM_MAX_ANSWER_TOKENS must be less than half of LLM_CONTEXT_TOKENS, to leave room for the prompt",
   });
 
 export type Settings = z.infer<typeof SettingsSchema>;
@@ -38,6 +45,9 @@ export function loadSettings(env: NodeJS.ProcessEnv = process.env): Settings {
     llmBaseUrl: value("LLM_BASE_URL"),
     llmApiKey: value("LLM_API_KEY"),
     temperature: value("LLM_TEMPERATURE") ?? 0.7,
+    // Ollama's own default is smaller (4,096 tokens); Qwen 2.5 supports up to 32,768.
+    contextTokens: value("LLM_CONTEXT_TOKENS") ?? 8192,
+    answerTokens: value("LLM_MAX_ANSWER_TOKENS") ?? 1024,
     embeddingModel: value("EMBEDDING_MODEL") ?? "bge-m3",
     // This file lives in packages/server/src, three levels below the repository root.
     indexDir: path.resolve(import.meta.dirname, "../../../data/index"),

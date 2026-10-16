@@ -17,16 +17,26 @@ export function getChatModel(settings: Settings, options: ModelOptions = {}): Ba
   const temperature = options.temperature ?? settings.temperature;
   switch (settings.llmProvider) {
     case "ollama":
-      return new ChatOllama({ model: settings.llmModel, baseUrl: settings.llmBaseUrl, temperature });
+      // numCtx and numPredict reach Ollama as num_ctx and num_predict. Without numCtx, Ollama uses its
+      // own default window and silently drops part of a longer prompt.
+      return new ChatOllama({
+        model: settings.llmModel,
+        baseUrl: settings.llmBaseUrl,
+        temperature,
+        numCtx: settings.contextTokens,
+        numPredict: settings.answerTokens,
+      });
     case "openai_compatible":
       return new ChatOpenAI({
         model: settings.llmModel,
         // Local servers such as LM Studio don't check the key, but the client requires one.
         apiKey: settings.llmApiKey ?? "not-needed",
         temperature,
+        // The window is set on the server for these providers; only the answer length is set here.
+        maxTokens: settings.answerTokens,
         configuration: { baseURL: settings.llmBaseUrl },
       });
     case "anthropic":
-      return new ChatAnthropic({ model: settings.llmModel, apiKey: settings.llmApiKey, temperature });
+      return new ChatAnthropic({ model: settings.llmModel, apiKey: settings.llmApiKey, temperature, maxTokens: settings.answerTokens });
   }
 }
