@@ -95,6 +95,7 @@ TypeScript monorepo with dependencies in one direction only:
 - `pnpm --filter @dnd/server check-model`: checks the configured model answers, and how fast
 - `pnpm --filter @dnd/server evaluate [--only id1,id2]`: runs the rules evaluation; report in `data/reports/eval-<date>.md`, runs saved in `data/eval/runs/`
 - `pnpm --filter @dnd/server ask "question"`: answers a rules question from the books, with numbered sources, warnings, and measurements (search and answer time, prompt size, estimated and reported tokens, real characters per token)
+- `pnpm --filter @dnd/server games [create "name" --preset easy | show <id>]`: lists, creates and shows saved games, with each setting described and cited
 
 Rebuild the index after any change to the books, the chunker or the index format. After a chunker change, run `compare-chunks` first: it needs the old index to compare against.
 
