@@ -1,0 +1,171 @@
+[
+  {
+    "id": "dwarf-mage",
+    "question": "Can a dwarf be a mage?",
+    "kind": "rule",
+    "expected": "No. Mages may be human, elf or half-elf, and dwarves are nonmagical and never use wizard spells. The DMG lets a DM allow non-standard race and class combinations case by case.",
+    "expectedSections": [{ "book": "phb", "section": "Mage" }, { "book": "phb", "section": "Dwarves" }, { "book": "dmg", "section": "A Nonhuman World" }],
+    "status": "draft",
+    "note": "From the passages in the search output for this question."
+  },
+  {
+    "id": "mage-requirements",
+    "question": "What ability score does a mage need?",
+    "kind": "rule",
+    "expected": "Intelligence 9, which is also the prime requisite; with Intelligence 16 or more the mage gains a 10% experience bonus.",
+    "expectedSections": [{ "book": "phb", "section": "Mage" }],
+    "status": "draft",
+    "note": "From the Mage passage in the search output."
+  },
+  {
+    "id": "half-elf-classes",
+    "question": "Which classes can a half-elf choose?",
+    "kind": "rule",
+    "expected": "Cleric, druid, fighter, ranger, mage, specialist wizard, thief or bard, plus several multi-class combinations.",
+    "expectedSections": [{ "book": "phb", "section": "Half-Elves" }],
+    "status": "draft",
+    "note": "From the Half-Elves passage in the search output."
+  },
+  {
+    "id": "dwarf-infravision",
+    "question": "How far can dwarves see with infravision?",
+    "kind": "rule",
+    "expected": "60 feet in the dark.",
+    "expectedSections": [{ "book": "phb", "section": "Dwarves" }],
+    "status": "draft",
+    "note": "From the Dwarves passage in the search output."
+  },
+  {
+    "id": "dwarf-magic-saves",
+    "question": "What saving throw bonus do dwarves get against magic?",
+    "kind": "rule",
+    "expected": "+1 for every 3 1/2 points of Constitution against wands, staves, rods and spells (summarized in Table 9); the same bonus applies against poison.",
+    "expectedSections": [{ "book": "phb", "section": "Dwarves" }],
+    "status": "draft",
+    "note": "From the Dwarves passage in the search output."
+  },
+  {
+    "id": "thac0-definition",
+    "question": "What is THAC0?",
+    "kind": "rule",
+    "expected": "To Hit Armor Class 0: the number an attacker needs to hit a target with Armor Class 0. It depends on group and level for characters, or Hit Dice for monsters.",
+    "expectedSections": [{ "book": "phb", "section": "Definitions" }, { "book": "phb", "section": "Calculating THAC0" }],
+    "status": "draft",
+    "note": "From the THAC0 search output."
+  },
+  {
+    "id": "dwarf-fighter-max-level",
+    "question": "What is the maximum level a dwarf fighter can reach?",
+    "kind": "rule",
+    "expected": "15th level (Table 7, Racial Class and Level Limits).",
+    "expectedSections": [{ "book": "dmg", "section": "A Nonhuman World" }],
+    "status": "draft",
+    "note": "From Table 7 in the search output; the table carries a converter note (read from a bar chart)."
+  },
+  {
+    "id": "thief-backstab",
+    "question": "How does a thief's backstab work?",
+    "kind": "rule",
+    "expected": "Attacking from behind without being noticed, the thief gets +4 to hit and multiplies the weapon's damage by level: x2 at levels 1-4, x3 at 5-8, x4 at 9-12, x5 at 13 and above.",
+    "expectedSections": [{ "book": "phb", "section": "Thief" }],
+    "status": "draft",
+    "note": "Multipliers from the flattened Table 30 seen in the check report; the +4 and the section from knowledge of 2nd Edition: check against the books, including which book has Table 30."
+  },
+  {
+    "id": "charging",
+    "question": "What are the effects of charging an opponent?",
+    "kind": "rule",
+    "expected": "The charging character gets a bonus to the attack roll but loses Dexterity bonuses to Armor Class and suffers an Armor Class penalty; a set spear or polearm against a charge does double damage.",
+    "expectedSections": [{ "book": "phb", "section": "Charging an Opponent" }],
+    "status": "draft",
+    "note": "Section from the search output; the exact modifiers are deliberately left out: write them from the book when confirming."
+  },
+  {
+    "id": "saving-throw-categories",
+    "question": "What are the categories of saving throws?",
+    "kind": "rule",
+    "expected": "Five: paralyzation, poison or death magic; rod, staff or wand; petrification or polymorph; breath weapon; spell.",
+    "expectedSections": [{ "book": "phb", "section": "Saving Throws" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition; the section title is a guess."
+  },
+  {
+    "id": "ability-score-method",
+    "question": "How are ability scores rolled with the standard method?",
+    "kind": "rule",
+    "expected": "Roll 3d6 for each ability, in order; the books also describe alternative methods.",
+    "expectedSections": [{ "book": "phb", "section": "Rolling Ability Scores" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition; the section title is a guess."
+  },
+  {
+    "id": "exceptional-strength",
+    "question": "Which characters can have exceptional strength?",
+    "kind": "rule",
+    "expected": "Warriors (fighters, rangers, paladins) with Strength 18 roll percentile dice for exceptional strength (18/01 to 18/00).",
+    "expectedSections": [{ "book": "phb", "section": "Strength" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition; the section title is a guess."
+  },
+  {
+    "id": "paladin-requirements",
+    "question": "What are the requirements to be a paladin?",
+    "kind": "rule",
+    "expected": "Strength 12, Constitution 9, Wisdom 13, Charisma 17; must be human and lawful good.",
+    "expectedSections": [{ "book": "phb", "section": "Paladin" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition: check every number against the book."
+  },
+  {
+    "id": "initiative",
+    "question": "How is initiative determined in combat?",
+    "kind": "rule",
+    "expected": "In the standard method each side rolls 1d10 and the lowest roll acts first; the books describe optional variants and modifiers.",
+    "expectedSections": [{ "book": "phb", "section": "Initiative" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition; the section title is a guess."
+  },
+  {
+    "id": "elf-sleep-charm",
+    "question": "Do elves resist sleep and charm spells?",
+    "kind": "rule",
+    "expected": "Yes: elves have 90% resistance to sleep and charm-related spells.",
+    "expectedSections": [{ "book": "phb", "section": "Elves" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition (half-elves have 30%, seen in the search output)."
+  },
+  {
+    "id": "zero-hit-points",
+    "question": "What happens when a character reaches 0 hit points?",
+    "kind": "rule",
+    "expected": "The character dies; an optional rule lets characters hover unconscious until -10 hit points.",
+    "expectedSections": [{ "book": "phb", "section": "Character Death" }],
+    "status": "draft",
+    "note": "From knowledge of 2nd Edition; the section title is a guess."
+  },
+  {
+    "id": "trap-advantage",
+    "question": "How does the advantage mechanic work?",
+    "kind": "trap",
+    "expected": "Not part of 2nd Edition (advantage is a 5th Edition mechanic): the system should say the books don't cover it.",
+    "expectedSections": [],
+    "status": "draft",
+    "note": "Answered with invented content in the first real test."
+  },
+  {
+    "id": "trap-bonus-action",
+    "question": "What can I do with my bonus action?",
+    "kind": "trap",
+    "expected": "Not part of 2nd Edition (bonus actions are a 5th Edition mechanic): the system should say the books don't cover it.",
+    "expectedSections": [],
+    "status": "draft"
+  },
+  {
+    "id": "trap-inspiration",
+    "question": "How does a player earn inspiration?",
+    "kind": "trap",
+    "expected": "Not part of 2nd Edition (inspiration is a 5th Edition mechanic): the system should say the books don't cover it.",
+    "expectedSections": [],
+    "status": "draft"
+  }
+]
