@@ -119,15 +119,43 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
   - Quick source fixes: the DMG's name printed in a decorative font (`D!"#$%" l&'($) fuide`) can be replaced across the file with search and replace, after checking it against the page; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading.
   - Source fixing: by hand, with the fix lists, as time allows. Proposed priority: the Player's Handbook tables iteration 2 needs (abilities, races, classes, saving throws, THAC0); the PDF converter remains an option for the rest.
   - Done: 1.7 ask the rules: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner; 1.7c0, context window management (window set explicitly, token estimates, source budget derived from the window, prompt check before sending, usage check after); 1.7c, the answering workflow (single pass; the answer's language is left to the instructions, since telling Catalan from Spanish reliably needs a detection library) (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). 1.7d, the `ask` command (verified end to end against a stand-in Ollama: num_ctx 8192, num_predict 1024 and temperature 0.1 reach Ollama). First real answers (qwen2.5:7b, 16 to 21 s each, 4.2 to 4.3 characters per token): "Can a dwarf be a mage?" answered no correctly but claimed no exceptions exist, missing the DM's case-by-case advice in its own source, and ignored the converter note; a Catalan question was misread (see Backlog); the "advantage" trap (a 5th Edition mechanic) was answered with invented content citing real sources, which the citation checks cannot catch (motivates 1.9). Questions and answers are now English-only, with a fixed reply to other languages.
-  - In progress: 1.8, lean evaluation: 19 questions (16 rules, 3 traps from 5th Edition), all draft; the `evaluate` command scores retrieval, grounding and traps, and the report collects Roger's verdicts on content. Next: confirm the questions against the books, run the baseline, then Iteration 2 (Character Designer).
+  - Done: 1.8, lean evaluation (tooling): 19 questions (16 rules, 3 traps from 5th Edition), all draft; the `evaluate` command scores retrieval, grounding and traps, and the report collects Roger's verdicts on content. Built and tested end to end; the baseline is deferred until the books are fixed (TODO, groups A and B).
+- Next: Iteration 2, Character Designer.
   - After 1.7: 1.8 evaluation (questions with known answers and known source sections); 1.9 evaluator-optimizer where 1.8 shows it helps (claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer), compared against the 1.8 baseline.
 - Next iterations: 2, Character Designer; 3, Campaign Designer.
 
-## Backlog
+## TODO: deferred for better results
 
-- PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages). Higher priority after the diagnostics: table extraction is the weakest part of the current conversions.
-- Multilingual support (Catalan, Spanish), deferred: the 7B model took a Catalan question for French, translated "nan" (dwarf) as "elf" and answered in English, and keyword search finds nothing for non-English words. Options: translate the player's question into English first, naming the language from settings rather than detecting it, with a glossary of game terms provided by Roger (not invented); search and answer in English; translate the answer back. A translation tool the Game Master can call for occasional cases. A larger or more multilingual model, measured against the evaluation.
-- Reranker, if the evaluation shows the first results are often in the wrong order.
-- Context window, remaining work: calibrate `CHARS_PER_TOKEN` (3, pessimistic) with the "characters per token" that `ask` prints for real questions; confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed on the Mac.
-- Passage budget priority (decide with the 1.8 evaluation): the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
-- MCP server exposing `search_rules` (iteration 1b, undecided).
+Work set aside to keep moving towards a playable system. Grouped by what each item waits for, in the order it would be done.
+
+### A. Book sources (Roger, in progress)
+
+1. Fix the Markdown books with the fix lists (`data/reports/fix-list-<book>.md`), working page by page against the PDFs. **Priority: the Player's Handbook tables Iteration 2 needs** (abilities, races, classes, saving throws, THAC0).
+2. Check every converter warning "header cells that were not detected" against the printed page: Table 1 was a false alarm (its top-left cell is empty in print too, which the converter flagged), but others may hide lost or shifted headings. Delete the comment only when the table matches the page.
+3. Quick fixes: the DMG's name in a decorative font (`D!"#$%" l&'($) fuide`) by search and replace after checking it; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading. Mixed fractions are already done.
+4. After each batch: `check-books`, `compare-chunks`, `build-index` (the embedding cache keeps rebuilds short).
+
+### B. Evaluation baseline (after A)
+
+5. Run `evaluate`, fix the expected section titles it reports as missing, rerun those with `--only`.
+6. Confirm the 19 questions against the books: correct each expected answer in our own words (never copied), write the charging modifiers from the book, set `status` to `confirmed`, commit `eval/rules-questions.json`.
+7. Full run as the baseline; verdicts in the report (correct, partly right, wrong) with a reason (model, retrieval, book); share the summary.
+
+### C. Answer quality (decide with the baseline from B)
+
+8. Step 1.9, evaluator-optimizer: claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer; compared against the baseline. Motivated by the first real answers: a missed exception, an ignored converter note, and a trap answered with invented content citing real sources, which the citation checks can't catch.
+9. Passage budget priority: the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
+10. Reranker, if the evaluation shows the first results are often in the wrong order.
+
+### D. Performance and calibration
+
+11. Calibrate `CHARS_PER_TOKEN` (3, pessimistic): `ask` measured 4.2 to 4.3 characters per token on the first four questions; adjust after more questions.
+12. Confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed (first answers: 16 to 21 s for about 3,000 tokens).
+13. One search took 10.8 s instead of 0.2 to 1.7 s: check with `ollama ps` right after a slow search whether the embedding model was unloaded to make room for the chat model.
+14. One full build took 923 s instead of about 210 s, cause unknown: the progress line ("last batch ... ago") will show whether Ollama pauses, if it happens again.
+
+### E. Larger items
+
+15. Multilingual support (Catalan, Spanish): the 7B model took a Catalan question for French, translated "nan" (dwarf) as "elf" and answered in English, and keyword search finds nothing for non-English words. Options: translate the player's question into English first, naming the language from settings rather than detecting it, with a glossary of game terms provided by Roger (not invented); search and answer in English; translate the answer back. A translation tool the Game Master can call for occasional cases. A larger or more multilingual model, measured against the evaluation.
+16. PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages): table extraction is the weakest part of the current conversions.
+17. MCP server exposing `search_rules` (iteration 1b, undecided).
