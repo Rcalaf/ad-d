@@ -20,6 +20,8 @@ const SettingsSchema = z
     /** Ollama's address for embeddings; read from OLLAMA_HOST, like the knowledge package, so both reach the same server. */
     ollamaHost: z.string().url("OLLAMA_HOST must be a full address, for example http://localhost:11434").optional(),
     indexDir: z.string(),
+    /** The game database: games, and later characters and play state. */
+    gamesDbPath: z.string(),
   })
   .refine((s) => s.llmProvider !== "anthropic" || Boolean(s.llmApiKey), {
     message: "LLM_API_KEY is required when LLM_PROVIDER is anthropic",
@@ -54,6 +56,7 @@ export function loadSettings(env: NodeJS.ProcessEnv = process.env): Settings {
     ollamaHost: value("OLLAMA_HOST"),
     // This file lives in packages/server/src, three levels below the repository root.
     indexDir: path.resolve(import.meta.dirname, "../../../data/index"),
+    gamesDbPath: path.resolve(import.meta.dirname, "../../../data/games.db"),
   });
   if (!result.success) {
     throw new Error(`Invalid settings in .env: ${result.error.issues.map((i) => i.message).join("; ")}`);

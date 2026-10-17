@@ -31,8 +31,10 @@ describe("loadSettings", () => {
     expect(loadSettings({ LLM_MODEL: "x" }).ollamaHost).toBeUndefined();
   });
 
-  it("locates the index folder at the repository root", () => {
-    expect(loadSettings({ LLM_MODEL: "x" }).indexDir).toMatch(/[/\\]data[/\\]index$/);
+  it("locates the index folder and the game database in the repository's data folder", () => {
+    const settings = loadSettings({ LLM_MODEL: "x" });
+    expect(settings.indexDir).toMatch(/[/\\]data[/\\]index$/);
+    expect(settings.gamesDbPath).toMatch(/[/\\]data[/\\]games\.db$/);
   });
 
   it("explains a missing model, an unknown provider and a missing API key in plain words", () => {
@@ -43,7 +45,7 @@ describe("loadSettings", () => {
 });
 
 describe("getChatModel", () => {
-  const base = { llmModel: "test-model", temperature: 0.3, embeddingModel: "bge-m3", indexDir: "/tmp/index", contextTokens: 8192, answerTokens: 1024 };
+  const base = { llmModel: "test-model", temperature: 0.3, embeddingModel: "bge-m3", indexDir: "/tmp/index", gamesDbPath: "/tmp/games.db", contextTokens: 8192, answerTokens: 1024 };
 
   it("creates the model class that matches the configured provider", () => {
     expect(getChatModel({ ...base, llmProvider: "ollama" })).toBeInstanceOf(ChatOllama);
