@@ -5,10 +5,11 @@ packages:
 # unless listed here. true = allowed, false = denied deliberately.
 allowBuilds:
   esbuild: true            # used by tsx and Vitest; its script downloads its binary
+  better-sqlite3: true
   onnxruntime-node: false  # pulled in by LanceDB for its own embeddings; we use Ollama instead
   protobufjs: false        # same origin, not needed
   sharp: false             # same origin, image processing, not needed
-
+  
 # Vitest 4 accepts Vite 6, 7 or 8. Vite 7 and 8 need Node 22.12+, so we keep Vite 6 for Node 22.11.
 overrides:
   vite: "^6.4.4"

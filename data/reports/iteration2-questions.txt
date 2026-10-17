@@ -1,0 +1,149 @@
+=================== What methods does the Player's Handbook give for generating ability scores?
+
+The Player's Handbook provides several methods for generating ability scores:
+
+1. **Method I**: Roll three six-sided dice (3d6) for each ability score, repeating this for all six abilities. This method typically results in scores ranging from 3 to 18, with most scores in the 9 to 12 range [1].
+
+2. **Method II**: Roll 3d6 twice for each ability score, choosing the higher of the two rolls. This method generally ensures that no ability score is very low [1].
+
+3. **Method III**: Roll 3d6 six times and assign the scores to the abilities as desired [1].
+
+4. **Method IV**: Roll 3d6 twelve times, then choose the six best rolls to assign to the abilities [1].
+
+5. **Method V**: Roll four six-sided dice (4d6), discard the lowest die, and total the remaining three. Repeat this five more times, then assign the six numbers to the abilities as desired [1].
+
+6. **Method VI**: Start each ability score at 8, then roll seven dice, adding all the points from a die to a single ability score. No ability score can exceed 18 [1].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores · p. 18
+    [2] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores > Alternative Dice-Rolling Methods · p. 18-19
+    [3] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method II (3d6 twice, keep desired score): · p. 11
+      ⚠ Converter note: UNCLEAR: table on page 11 has header cells that were not detected; check column headings against the printed page
+    [4] Player's Handbook (AD&D 2nd Edition, Revised) · The Real Basics > Step-by-Step Player Character Generation > Step 1: Roll Ability Scores (chapter 1) · p. 16
+
+Search 1.7 s · answer 23.3 s · prompt 6230 characters, about 2078 tokens estimated, 1556 read by the model (4.0 characters per token)
+=================== How does Method V for generating ability scores work?
+
+Method V for generating ability scores involves rolling four six-sided dice (4d6), discarding the lowest die, and totaling the remaining three dice. This process is repeated five more times, resulting in six totals. These six numbers are then assigned to the character’s six ability scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma) as desired [2, 1]. This method is designed to create above-average characters, as it tends to produce more high ability scores compared to Method I [2].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores · p. 18
+  ✓ [2] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method V (4d6, drop lowest, arrange as desired): · p. 13-14
+      ⚠ Converter note: UNCLEAR: table on page 13 has header cells that were not detected; check column headings against the printed page
+      ⚠ Converter note: UNCLEAR: table on page 14 has header cells that were not detected; check column headings against the printed page
+    [3] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores > Alternative Dice-Rolling Methods · p. 18-19
+
+Search 1.8 s · answer 12.2 s · prompt 7559 characters, about 2522 tokens estimated, 1920 read by the model (3.9 characters per token)
+=================== How does Method I for generating ability scores work?
+
+Method I for generating ability scores involves rolling three six-sided dice (3d6) for each of the six ability scores: Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma. The total of each roll determines the character’s ability score. This process is repeated for each ability score in that order. The range of scores is from 3 to 18, with most results falling in the 9 to 12 range [1, 3].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores · p. 18
+    [2] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores > Alternative Dice-Rolling Methods · p. 18-19
+  ✓ [3] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method I (3d6, In order): · p. 11
+      ⚠ Converter note: UNCLEAR: table on page 11 has header cells that were not detected; check column headings against the printed page
+    [4] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method II (3d6 twice, keep desired score): · p. 11
+      ⚠ Converter note: UNCLEAR: table on page 11 has header cells that were not detected; check column headings against the printed page
+
+Search 0.1 s · answer 9.1 s · prompt 7899 characters, about 2635 tokens estimated, 2016 read by the model (3.9 characters per token)
+=================== Who decides which method is used to generate ability scores?
+
+The Dungeon Master decides which method is used to generate ability scores [2, 3, 4].
+
+Sources (✓ = cited in the answer):
+    [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores · p. 18
+  ✓ [2] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Rolling Ability Scores > Alternative Dice-Rolling Methods · p. 18-19
+  ✓ [3] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method I (3d6, In order): · p. 11
+      ⚠ Converter note: UNCLEAR: table on page 11 has header cells that were not detected; check column headings against the printed page
+  ✓ [4] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method V (4d6, drop lowest, arrange as desired): · p. 13-14
+      ⚠ Converter note: UNCLEAR: table on page 13 has header cells that were not detected; check column headings against the printed page
+      ⚠ Converter note: UNCLEAR: table on page 14 has header cells that were not detected; check column headings against the printed page
+
+Search 0.1 s · answer 4.8 s · prompt 9522 characters, about 3176 tokens estimated, 2452 read by the model (3.9 characters per token)
+=================== Are non-weapon proficiencies an optional rule?
+
+Yes, non-weapon proficiencies are an optional rule [1, 4].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) · p. 70
+    [2] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > NPC Proficiencies · p. 45
+    [3] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Weapon Proficiencies > Effects of Weapon Proficiencies · p. 72
+  ✓ [4] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies · p. 74-75
+    [5] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Nonweapon Proficiencies · p. 45-47
+
+Search 0.1 s · answer 9.6 s · prompt 10632 characters, about 3546 tokens estimated, 2193 read by the model (4.8 characters per token)
+=================== Are weapon proficiencies an optional rule?
+
+Yes, weapon proficiencies are an optional rule [2].
+
+Sources (✓ = cited in the answer):
+    [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Weapon Proficiencies > Effects of Weapon Proficiencies · p. 72
+  ✓ [2] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) · p. 70
+    [3] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Weapon Proficiencies > Weapon Specialization · p. 73
+    [4] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > NPC Proficiencies · p. 45
+    [5] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Weapon Proficiencies · p. 71-72
+
+Search 0.1 s · answer 8.1 s · prompt 8369 characters, about 2791 tokens estimated, 1863 read by the model (4.5 characters per token)
+=================== Is weapon specialization an optional rule, and which classes can use it?
+
+Yes, weapon specialization is an optional rule [1]. It is available only to single-class fighters and cannot be used by multi-class characters [1].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Weapon Proficiencies > Weapon Specialization · p. 73
+    [2] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) > Weapon Proficiencies > Effects of Weapon Proficiencies · p. 72
+    [3] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 5: Proficiencies (Optional) · p. 70
+    [4] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule) · p. 32-33
+    [5] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 9: Combat > The Attack Roll > Weapon Type vs. Armor Modifiers (Optional Rule) > The Various Types of Weapons · p. 74-75
+
+Search 0.1 s · answer 11.9 s · prompt 10568 characters, about 3524 tokens estimated, 2512 read by the model (4.2 characters per token)
+=================== What happens when a character's hit points reach 0?
+
+When a character's hit points reach 0, that character is slain. The character is immediately dead and unable to do anything unless some specialized magical effect takes precedence. [2, 3]
+
+This rule is typically in effect, but the Dungeon Master Guide offers an optional rule that allows characters to survive for short periods of time even after their hit points reach or drop below 0, depending on the campaign's lethality. [1]
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death > Hovering on Death’s Door (Optional Rule) · p. 104
+  ✓ [2] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death · p. 141
+  ✓ [3] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death · p. 103
+    [4] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death > Death from Massive Damage · p. 104
+    [5] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death > Death From Massive Damage · p. 141
+
+Search 0.1 s · answer 9.1 s · prompt 5607 characters, about 1871 tokens estimated, 1295 read by the model (4.3 characters per token)
+=================== Is there an optional rule that lets characters survive below 0 hit points?
+
+Yes, there is an optional rule that lets characters survive below 0 hit points. According to the Dungeon Master Guide [1], when this rule is in use, a character can remain alive until his hit points reach –10.
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death > Hovering on Death’s Door (Optional Rule) · p. 104
+    [2] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 8: Experience > Constant Goals > Character Survival · p. 67
+    [3] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 3: Player Character Classes > 0-Level Characters · p. 27
+    [4] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 1: Player Character Ability Scores > The Ability Scores > Constitution · p. 20-21
+    [5] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 9: Combat > Character Death > Raising the Dead · p. 104
+
+Search 0.1 s · answer 12.6 s · prompt 12864 characters, about 4290 tokens estimated, 2827 read by the model (4.6 characters per token)
+=================== Which races can be multi-class characters?
+
+Demihuman races can be multi-class characters. Specifically, dwarves, elves, gnomes, half-elves, and halflings can be multi-classed according to the combinations listed in the Player's Handbook [3]. Humans can be dual-class characters, but demihumans cannot [1, 4].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 3: Player Character Classes > Multi-Class and Dual-Class Characters · p. 61
+    [2] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 2: Player Character Races > Creating New Player Character Races · p. 25
+  ✓ [3] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 3: Player Character Classes > Multi-Class and Dual-Class Characters > Multi-Class Combinations · p. 61
+  ✓ [4] Player's Handbook (AD&D 2nd Edition, Revised) · Chapter 2: Player Character Races > Class Restrictions and Level Limits · p. 27
+    [5] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 2: Player Character Races · p. 20
+
+Search 0.1 s · answer 13.3 s · prompt 10587 characters, about 3531 tokens estimated, 2317 read by the model (4.6 characters per token)
+=================== What does the Dungeon Master's Guide advise about how difficult encounters should be?
+
+The Dungeon Master's Guide advises that encounters should be challenging but not impossible for the player characters. If an encounter is too difficult, the DM can adjust it by having the monsters flee, lowering their hit points, allowing the player characters to hit or inflict more damage, having the monsters miss when they should hit, or having the creatures make mistakes [1]. Conversely, if an encounter is too easy, the DM can make it tougher in the next encounter [4]. The overall goal is to keep the game engaging and balanced [5].
+
+Sources (✓ = cited in the answer):
+  ✓ [1] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 11: Encounters > Fixing Things in Play > The Encounter is Too Difficult · p. 141
+    [2] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 11: Encounters > Fixing Things in Play · p. 141
+    [3] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 8: Experience · p. 66
+  ✓ [4] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 11: Encounters > Fixing Things in Play > The Encounter Was Too Easy · p. 141
+  ✓ [5] Dungeon Master Guide (AD&D 2nd Edition, Revised) · Chapter 11: Encounters > DMing Encounters > Is This Encounter Necessary? · p. 138
+
+Search 0.4 s · answer 8.0 s · prompt 3536 characters, about 1181 tokens estimated, 807 read by the model (4.4 characters per token)

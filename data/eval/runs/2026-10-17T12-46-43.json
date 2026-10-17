@@ -1,0 +1,1396 @@
+{
+  "startedAt": "2026-10-17T12:46:43.044Z",
+  "model": "qwen2.5:7b",
+  "results": [
+    {
+      "id": "dwarf-mage",
+      "question": "Can a dwarf be a mage?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "No. Mages may be human, elf or half-elf, and dwarves are nonmagical and never use wizard spells. The DMG lets a DM allow non-standard race and class combinations case by case.",
+      "answer": "No, a dwarf cannot be a mage. According to the rules in [1], dwarves are restricted to being clerics, fighters, or thieves, and there is no option for them to be a mage.\n\n[1]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > A Nonhuman World",
+          "pages": [
+            21,
+            22
+          ],
+          "notes": [
+            "Printed as a bar chart: one bar per race and class, each labelled with its maximum level. The values below are the numbers printed on the bars."
+          ]
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Wizard > Mage",
+          "pages": [
+            44,
+            45
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Dwarves",
+          "pages": [
+            27,
+            28
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races",
+          "pages": [
+            26
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Half-Elves",
+          "pages": [
+            30
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Mage",
+        "phb: Dwarves",
+        "dmg: A Nonhuman World"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1,
+        2,
+        3
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 19625.099625
+    },
+    {
+      "id": "mage-requirements",
+      "question": "What ability score does a mage need?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Intelligence 9, which is also the prime requisite; with Intelligence 16 or more the mage gains a 10% experience bonus.",
+      "answer": "A mage requires an Intelligence score of 9 [1, 5].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Wizard > Mage",
+          "pages": [
+            44,
+            45
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method I (3d6, In order):",
+          "pages": [
+            11
+          ],
+          "notes": [
+            "UNCLEAR: table on page 11 has header cells that were not detected; check column headings against the printed page"
+          ]
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Wizard > Specialist Wizards",
+          "pages": [
+            45
+          ],
+          "notes": [
+            "UNCLEAR: no table number/title detected next to this table on page 45",
+            "UNCLEAR: table on page 45 has header cells that were not detected; check column headings against the printed page"
+          ]
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Hopeless Characters > Dealing with Dissatisfied Players",
+          "pages": [
+            15,
+            16
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Class Ability Score Requirements",
+          "pages": [
+            35,
+            36
+          ],
+          "notes": [
+            "UNCLEAR: no table number/title detected next to this table on page 35",
+            "UNCLEAR: table on page 35 has header cells that were not detected; check column headings against the printed page"
+          ]
+        }
+      ],
+      "cited": [
+        1,
+        5
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Mage"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 14910.321707999996
+    },
+    {
+      "id": "half-elf-classes",
+      "question": "Which classes can a half-elf choose?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Cleric, druid, fighter, ranger, mage, specialist wizard, thief or bard, plus several multi-class combinations.",
+      "answer": "A half-elf can choose from the following classes: cleric, druid, fighter, ranger, mage, specialist wizard, thief, and bard. Additionally, a half-elf can choose from the following multi-class combinations: cleric (or druid)/fighter, cleric (or druid)/fighter/mage, cleric (or druid)/ranger, cleric (or druid)/mage, fighter/mage, fighter/thief, fighter/mage/thief, and mage/thief. [1, 4]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Half-Elves",
+          "pages": [
+            30,
+            31
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Elves",
+          "pages": [
+            28,
+            29
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races",
+          "pages": [
+            26
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > A Nonhuman World",
+          "pages": [
+            21,
+            22
+          ],
+          "notes": [
+            "Printed as a bar chart: one bar per race and class, each labelled with its maximum level. The values below are the numbers printed on the bars."
+          ]
+        }
+      ],
+      "cited": [
+        1,
+        4
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Half-Elves"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 17680.817749999995
+    },
+    {
+      "id": "dwarf-infravision",
+      "question": "How far can dwarves see with infravision?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "60 feet in the dark.",
+      "answer": "Dwarves can see up to 60 feet in the dark with their infravision. [2, 1]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 13: Vision and Light > Infravision > Standard Infravision",
+          "pages": [
+            160
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Dwarves",
+          "pages": [
+            28
+          ],
+          "notes": [
+            "UNCLEAR: table on page 28 may contain text from the surrounding column; check against the printed page"
+          ]
+        },
+        {
+          "number": 3,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 13: Vision and Light > Other Forms of Sight",
+          "pages": [
+            160
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > Third-Level Spells > Infravision",
+          "pages": [
+            193
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Unusual Combat Situations > Underwater Combat > Infravision",
+          "pages": [
+            110
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        2
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Dwarves"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        2
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 8553.216165999998
+    },
+    {
+      "id": "dwarf-magic-saves",
+      "question": "What saving throw bonus do dwarves get against magic?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "+1 for every 3 1/2 points of Constitution against wands, staves, rods and spells (summarized in Table 9); the same bonus applies against poison.",
+      "answer": "Dwarves get a saving throw bonus against magical attacks based on their Constitution score. According to Table 9 in source [1]:\n\n| Constitution Score | Saving Throw Bonus |\n|---|---|\n| 4–6 | +1 |\n| 7–10 | +2 |\n| 11–13 | +3 |\n| 14–17 | +4 |\n| 18–19 | +5 |\n\nThis bonus is summarized in the racial ability adjustments for dwarves [1, 3].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Dwarves",
+          "pages": [
+            27,
+            28
+          ],
+          "notes": [
+            "UNCLEAR: table on page 28 may contain text from the surrounding column; check against the printed page"
+          ]
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Saving Throw > Modifying Saving Throws",
+          "pages": [
+            93
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Saving Throw > Modifying Saving Throws",
+          "pages": [
+            135
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        3
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Dwarves"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 18166.497292
+    },
+    {
+      "id": "thac0-definition",
+      "question": "What is THAC0?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "To Hit Armor Class 0: the number an attacker needs to hit a target with Armor Class 0. It depends on group and level for characters, or Hit Dice for monsters.",
+      "answer": "THAC0 is an acronym for \"To Hit Armor Class 0.\" It represents the number a character, NPC, or monster needs to attack an Armor Class 0 target successfully. This number can be used to determine the number needed to hit any Armor Class. THAC0 depends on a character’s group and level, or a monster’s Hit Dice [1, 2, 3].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Definitions",
+          "pages": [
+            119
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Calculating THAC0",
+          "pages": [
+            75
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Calculating THAC0",
+          "pages": [
+            121
+          ],
+          "notes": [
+            "UNCLEAR: table \"Table 54: THAC0 Advancement\" on page 121 could not be rebuilt as a table; the content follows as extracted, check the printed page"
+          ]
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Definitions",
+          "pages": [
+            73
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        2,
+        3
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Definitions",
+        "phb: Calculating THAC0"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1,
+        3
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 152870.97424999997
+    },
+    {
+      "id": "dwarf-fighter-max-level",
+      "question": "What is the maximum level a dwarf fighter can reach?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "15th level (Table 7, Racial Class and Level Limits).",
+      "answer": "The maximum level a dwarf fighter can reach is 15 [1].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > A Nonhuman World",
+          "pages": [
+            21,
+            22
+          ],
+          "notes": [
+            "Printed as a bar chart: one bar per race and class, each labelled with its maximum level. The values below are the numbers printed on the bars."
+          ]
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Rogue > Thief > Backstab Damage Multipliers",
+          "pages": [
+            57,
+            58
+          ],
+          "notes": [
+            "UNCLEAR: Table 30 on page 56: title and table structure were not recovered; its content follows as extracted text, check the printed page",
+            "UNCLEAR: table on page 58 has header cells that were not detected; check column headings against the printed page"
+          ]
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Warrior > Fighter",
+          "pages": [
+            37,
+            38
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Multi-Class and Dual-Class Characters > Dual-Class Benefits and Restrictions",
+          "pages": [
+            62
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Creating New Player Character Races",
+          "pages": [
+            25
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "dmg: A Nonhuman World"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 37788.47641599999
+    },
+    {
+      "id": "thief-backstab",
+      "question": "How does a thief's backstab work?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Attacking from behind without being noticed, the thief gets +4 to hit and multiplies the weapon's damage by level: x2 at levels 1-4, x3 at 5-8, x4 at 9-12, x5 at 13 and above.",
+      "answer": "A thief can use the backstab ability to gain a +4 bonus to hit and to negate the target's shield and Dexterity bonuses when attacking someone by surprise from behind. The damage dealt is multiplied by a factor based on the thief's level, as shown in Table 30 [1, 2]. However, the backstab is only effective if the victim is unaware of the attack, and the thief must be able to reach a significant target area. The backstabbing does not apply to every creature; it is limited to generally humanoid targets with a definable back. Additionally, the initial surprise effect is lost once the thief makes the first attack, and the backstab cannot be used on every creature, such as oozes or jellies [1].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Rogue > Thief > Skill Explanations",
+          "pages": [
+            57
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Rogue > Thief > Backstab Damage Multipliers",
+          "pages": [
+            57,
+            58
+          ],
+          "notes": [
+            "UNCLEAR: Table 30 on page 56: title and table structure were not recovered; its content follows as extracted text, check the printed page",
+            "UNCLEAR: table on page 58 has header cells that were not detected; check column headings against the printed page"
+          ]
+        }
+      ],
+      "cited": [
+        1,
+        2
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Thief"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1,
+        2
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 23452.78154200001
+    },
+    {
+      "id": "charging",
+      "question": "What are the effects of charging an opponent?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "The charging character gets a bonus to the attack roll but loses Dexterity bonuses to Armor Class and suffers an Armor Class penalty; a set spear or polearm against a charge does double damage.",
+      "answer": "A character who charges an opponent gains a +2 bonus to their attack roll and can make an attack at the end of their movement. However, they suffer a -2 penalty to their initiative roll, lose Dexterity bonuses to Armor Class, and take a -1 penalty to their Armor Class. Additionally, if the defender is using a spear or polearm and sets it against the charge, they can deal double damage on a successful hit.\n\n[1, 2]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Movement in Combat > Charging an Opponent",
+          "pages": [
+            128
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Movement in Combat > Charging an Opponent",
+          "pages": [
+            84
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > First-Level Spells > Shocking Grasp",
+          "pages": [
+            178
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3 > Rings > List of Rings > Water",
+          "pages": [
+            201,
+            202
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > The Ability Scores > Strength",
+          "pages": [
+            19,
+            20
+          ],
+          "notes": [
+            "UNCLEAR: no table number/title detected next to this table on page 20",
+            "UNCLEAR: table on page 20 has header cells that were not detected; check column headings against the printed page"
+          ]
+        }
+      ],
+      "cited": [
+        1,
+        2
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Charging an Opponent"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 21174.822583
+    },
+    {
+      "id": "saving-throw-categories",
+      "question": "What are the categories of saving throws?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Five: paralyzation, poison or death magic; rod, staff or wand; petrification or polymorph; breath weapon; spell.",
+      "answer": "The categories of saving throws are as follows:\n\n- Save vs. Paralyzation, Poison, and Death Magic\n- Save vs. Rod, Staff, or Wand\n- Save vs. Petrification or Polymorph\n- Save vs. Breath Weapon\n- Save vs. Spell [1, 2]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Saving Throw > Saving Throw Priority",
+          "pages": [
+            134,
+            135
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Saving Throw > Saving Throw Priority",
+          "pages": [
+            92,
+            93
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Saving Throw",
+          "pages": [
+            133
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 6: Money and Equipment > Damaging Equipment > Attack Forms",
+          "pages": [
+            58
+          ],
+          "notes": [
+            "UNCLEAR: table on page 58 has header cells that were not detected; check column headings against the printed page"
+          ]
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Saving Throw > Rolling Saving Throws",
+          "pages": [
+            91,
+            92
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        2
+      ],
+      "retrieval": "none",
+      "expectedFound": [],
+      "expectedMissing": [
+        "phb: Saving Throws"
+      ],
+      "matchingSources": [],
+      "citesExpected": false,
+      "warnings": [],
+      "answerMs": 19766.60950000002
+    },
+    {
+      "id": "ability-score-method",
+      "question": "How are ability scores rolled with the standard method?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Roll 3d6 for each ability, in order; the books also describe alternative methods.",
+      "answer": "The standard method for rolling ability scores involves rolling three six-sided dice (3d6) for each of the six ability scores: Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma. The total of each roll determines the character’s ability score, resulting in a range of scores from 3 to 18. This method, known as Method I, typically produces scores in the 9 to 12 range, with fewer characters having high scores above 15 [1, 3].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Rolling Ability Scores",
+          "pages": [
+            18
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Rolling Ability Scores > Alternative Dice-Rolling Methods",
+          "pages": [
+            18,
+            19
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method I (3d6, In order):",
+          "pages": [
+            11
+          ],
+          "notes": [
+            "UNCLEAR: table on page 11 has header cells that were not detected; check column headings against the printed page"
+          ]
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Choosing a Character Creation Method > Method III (3d6, arranged to taste):",
+          "pages": [
+            11,
+            13
+          ],
+          "notes": [
+            "UNCLEAR: table on page 13 has header cells that were not detected; check column headings against the printed page"
+          ]
+        }
+      ],
+      "cited": [
+        1,
+        3
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Rolling Ability Scores"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1,
+        2
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 13383.636083999998
+    },
+    {
+      "id": "exceptional-strength",
+      "question": "Which characters can have exceptional strength?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Warriors (fighters, rangers, paladins) with Strength 18 roll percentile dice for exceptional strength (18/01 to 18/00).",
+      "answer": "Characters with a Strength score of 18 can roll percentile dice to determine exceptional Strength [1, 2]. This applies to any character, regardless of race [1]. However, dwarves cannot roll for exceptional Strength [3]. The Dungeon Master may allow exceptions in certain cases, such as a hill giant with a Strength score of 6 [4].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Warrior > Fighter",
+          "pages": [
+            36,
+            37
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > The Ability Scores > Strength",
+          "pages": [
+            19,
+            20
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Dwarves",
+          "pages": [
+            27
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Creating New Player Character Races",
+          "pages": [
+            24,
+            25
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Super Characters",
+          "pages": [
+            14
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Strength"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        2
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 19811.109041999967
+    },
+    {
+      "id": "paladin-requirements",
+      "question": "What are the requirements to be a paladin?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Strength 12, Constitution 9, Wisdom 13, Charisma 17; must be human and lawful good.",
+      "answer": "To be a paladin, a character must meet the following requirements:\n\n- Be a human [1].\n- Have minimum ability scores of Strength 12, Constitution 9, Wisdom 13, and Charisma 17 [1].\n- Have Strength and Charisma as prime requisites [1].\n- Be lawful good in alignment and must always remain lawful good [1].\n\nThese are the strict requirements for becoming a paladin in Advanced Dungeons & Dragons 2nd Edition.",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Warrior > Paladin",
+          "pages": [
+            38,
+            39,
+            40
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Adventurers and Society > Paladins",
+          "pages": [
+            28
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Paladin"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 13236.290207999991
+    },
+    {
+      "id": "initiative",
+      "question": "How is initiative determined in combat?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "In the standard method each side rolls 1d10 and the lowest roll acts first; the books describe optional variants and modifiers.",
+      "answer": "Initiative in combat is normally determined by rolling 1d10 for each side in the conflict. The side with the lowest roll acts first. If more than two sides are involved, the remaining sides act in ascending order of their initiative rolls [1, 2, 3, 4].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Initiative",
+          "pages": [
+            124
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Initiative",
+          "pages": [
+            78
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Initiative > Standard Initiative Procedure",
+          "pages": [
+            124
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Initiative > Standard Initiative Procedure",
+          "pages": [
+            78
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Initiative > Individual Initiative (Optional Rule)",
+          "pages": [
+            126
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Initiative"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1,
+        3,
+        5
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 9332.394540999958
+    },
+    {
+      "id": "elf-sleep-charm",
+      "question": "Do elves resist sleep and charm spells?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "Yes: elves have 90% resistance to sleep and charm-related spells.",
+      "answer": "Yes, elves resist sleep and charm spells. According to the sources:\n\nElves have 90% resistance to sleep and all charm-related spells [1]. This resistance is explicitly mentioned for elves and aligns with their resistance to similar enchantments like _domination_, where it is noted that elves and half-elves resist this enchantment as they do all charm-type spells [3].",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Elves",
+          "pages": [
+            28,
+            29
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 2: Player Character Races > Half-Elves",
+          "pages": [
+            30,
+            31
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > Fifth-Level Spells > Domination",
+          "pages": [
+            214
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > First-Level Spells > Sleep",
+          "pages": [
+            178,
+            179
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > Second-Level Spells > Scare",
+          "pages": [
+            187
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        3
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Elves"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        1
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 17539.852083000005
+    },
+    {
+      "id": "zero-hit-points",
+      "question": "What happens when a character reaches 0 hit points?",
+      "kind": "rule",
+      "status": "draft",
+      "expected": "The character dies; an optional rule lets characters hover unconscious until -10 hit points.",
+      "answer": "When a character reaches 0 hit points, that character is slain. The character is immediately dead and unable to do anything unless some specialized magical effect takes precedence. [2, 3]\n\nHowever, if the campaign uses the optional rule for \"Hovering on Death’s Door,\" the character can remain alive until his hit points reach –10. [1]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Character Death > Hovering on Death’s Door (Optional Rule)",
+          "pages": [
+            104
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Character Death",
+          "pages": [
+            141
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Character Death",
+          "pages": [
+            103
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Character Death > Death From Massive Damage",
+          "pages": [
+            141
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Character Death > Death from Massive Damage",
+          "pages": [
+            104
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        2,
+        3
+      ],
+      "retrieval": "all",
+      "expectedFound": [
+        "phb: Character Death"
+      ],
+      "expectedMissing": [],
+      "matchingSources": [
+        2,
+        4
+      ],
+      "citesExpected": true,
+      "warnings": [],
+      "answerMs": 8499.83058400004
+    },
+    {
+      "id": "trap-advantage",
+      "question": "How does the advantage mechanic work?",
+      "kind": "trap",
+      "status": "draft",
+      "expected": "Not part of 2nd Edition (advantage is a 5th Edition mechanic): the system should say the books don't cover it.",
+      "answer": "The advantage mechanic in AD&D 2nd Edition, as described in the sources, works by giving a bonus to the initiative roll of the defender when an attacker charges. Specifically:\n\n- Charging characters gain no Dexterity bonuses to Armor Class and suffer an AC penalty of 1.\n- Opponents of a charging character gain a -2 bonus to their initiative rolls.\n\nThis means that when a character charges, their opponent gets a significant advantage in determining who acts first in the combat round, which can affect the outcome of the encounter. [1, 3, 5]",
+      "sources": [
+        {
+          "number": 1,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Attack Roll > Modifiers to the Attack Roll",
+          "pages": [
+            74
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes",
+          "pages": [
+            26
+          ],
+          "notes": []
+        },
+        {
+          "number": 3,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Movement in Combat > Charging an Opponent",
+          "pages": [
+            128
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > Second-Level Spells > Knock",
+          "pages": [
+            184,
+            185
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > Movement in Combat > Charging an Opponent",
+          "pages": [
+            84
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        1,
+        3,
+        5
+      ],
+      "expectedFound": [],
+      "expectedMissing": [],
+      "matchingSources": [],
+      "citesExpected": false,
+      "passed": false,
+      "warnings": [],
+      "answerMs": 14034.795416999958
+    },
+    {
+      "id": "trap-bonus-action",
+      "question": "What can I do with my bonus action?",
+      "kind": "trap",
+      "status": "draft",
+      "expected": "Not part of 2nd Edition (bonus actions are a 5th Edition mechanic): the system should say the books don't cover it.",
+      "answer": "Please ask your question in English.",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Appendix 3: Wizard Spells > Fourth-Level Spells > Phantasmal Killer",
+          "pages": [
+            205
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 8: Experience > Experience Point Awards > Group Awards",
+          "pages": [
+            68,
+            69
+          ],
+          "notes": [
+            "UNCLEAR: table on page 69: the first column seems to contain values from the next column; check against the printed page",
+            "UNCLEAR: table on page 69 may contain text from the surrounding column; check against the printed page"
+          ]
+        },
+        {
+          "number": 3,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Beginning Character Levels > Creating New Character Classes (Optional Rule)",
+          "pages": [
+            33,
+            34
+          ],
+          "notes": [
+            "UNCLEAR: table on page 33 may contain text from the surrounding column; check against the printed page",
+            "UNCLEAR: table on page 34 has header cells that were not detected; check column headings against the printed page"
+          ]
+        },
+        {
+          "number": 4,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 13: Vision and Light > Using Mirrors",
+          "pages": [
+            155
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 9: Combat > The Attack Roll > Modifiers to the Attack Roll",
+          "pages": [
+            74
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [],
+      "expectedFound": [],
+      "expectedMissing": [],
+      "matchingSources": [],
+      "citesExpected": false,
+      "passed": true,
+      "warnings": [
+        "declined as not English"
+      ],
+      "answerMs": 19255.208082999976
+    },
+    {
+      "id": "trap-inspiration",
+      "question": "How does a player earn inspiration?",
+      "kind": "trap",
+      "status": "draft",
+      "expected": "Not part of 2nd Edition (inspiration is a 5th Edition mechanic): the system should say the books don't cover it.",
+      "answer": "A bard can inspire allies, granting them bonuses to attack rolls, saving throws, or morale. This inspiration lasts one round per level of the bard and requires the bard to spend at least three full rounds singing or reciting before the battle begins, with a range of 10 feet per experience level of the bard. [5]\n\nPlease ask your question in English.",
+      "sources": [
+        {
+          "number": 1,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 8: Experience > Individual Experience Awards",
+          "pages": [
+            117
+          ],
+          "notes": []
+        },
+        {
+          "number": 2,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 8: Experience > Experience Point Awards > Individual Experience Awards (Optional Rule)",
+          "pages": [
+            70
+          ],
+          "notes": [
+            "The printed table has no column headings.",
+            "The printed table uses \"Warrior\" as the first column heading and Priest, Wizard and Rogue as group rows."
+          ]
+        },
+        {
+          "number": 3,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 8: Experience > Effects of Experience",
+          "pages": [
+            71
+          ],
+          "notes": []
+        },
+        {
+          "number": 4,
+          "book": "dmg",
+          "title": "Dungeon Master Guide (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 1: Player Character Ability Scores > Character Background > Letting Players Do the Work",
+          "pages": [
+            18
+          ],
+          "notes": []
+        },
+        {
+          "number": 5,
+          "book": "phb",
+          "title": "Player's Handbook (AD&D 2nd Edition, Revised)",
+          "location": "Chapter 3: Player Character Classes > Rogue > Bard",
+          "pages": [
+            60
+          ],
+          "notes": []
+        }
+      ],
+      "cited": [
+        5
+      ],
+      "expectedFound": [],
+      "expectedMissing": [],
+      "matchingSources": [],
+      "citesExpected": false,
+      "passed": false,
+      "warnings": [],
+      "answerMs": 15100.965625000012
+    }
+  ]
+}

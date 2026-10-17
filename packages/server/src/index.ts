@@ -4,3 +4,5 @@ export * from "./llm/contextWindow";
 export * from "./answering/answerQuestion";
 export * from "./answering/citations";
 export * from "./answering/sources";
+export * from "./state/database";
+export * from "./state/games";

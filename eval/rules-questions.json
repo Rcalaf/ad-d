@@ -4,7 +4,20 @@
     "question": "Can a dwarf be a mage?",
     "kind": "rule",
     "expected": "No. Mages may be human, elf or half-elf, and dwarves are nonmagical and never use wizard spells. The DMG lets a DM allow non-standard race and class combinations case by case.",
-    "expectedSections": [{ "book": "phb", "section": "Mage" }, { "book": "phb", "section": "Dwarves" }, { "book": "dmg", "section": "A Nonhuman World" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Mage"
+      },
+      {
+        "book": "phb",
+        "section": "Dwarves"
+      },
+      {
+        "book": "dmg",
+        "section": "A Nonhuman World"
+      }
+    ],
     "status": "draft",
     "note": "From the passages in the search output for this question."
   },
@@ -13,7 +26,12 @@
     "question": "What ability score does a mage need?",
     "kind": "rule",
     "expected": "Intelligence 9, which is also the prime requisite; with Intelligence 16 or more the mage gains a 10% experience bonus.",
-    "expectedSections": [{ "book": "phb", "section": "Mage" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Mage"
+      }
+    ],
     "status": "draft",
     "note": "From the Mage passage in the search output."
   },
@@ -22,7 +40,12 @@
     "question": "Which classes can a half-elf choose?",
     "kind": "rule",
     "expected": "Cleric, druid, fighter, ranger, mage, specialist wizard, thief or bard, plus several multi-class combinations.",
-    "expectedSections": [{ "book": "phb", "section": "Half-Elves" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Half-Elves"
+      }
+    ],
     "status": "draft",
     "note": "From the Half-Elves passage in the search output."
   },
@@ -31,7 +54,12 @@
     "question": "How far can dwarves see with infravision?",
     "kind": "rule",
     "expected": "60 feet in the dark.",
-    "expectedSections": [{ "book": "phb", "section": "Dwarves" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Dwarves"
+      }
+    ],
     "status": "draft",
     "note": "From the Dwarves passage in the search output."
   },
@@ -40,7 +68,12 @@
     "question": "What saving throw bonus do dwarves get against magic?",
     "kind": "rule",
     "expected": "+1 for every 3 1/2 points of Constitution against wands, staves, rods and spells (summarized in Table 9); the same bonus applies against poison.",
-    "expectedSections": [{ "book": "phb", "section": "Dwarves" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Dwarves"
+      }
+    ],
     "status": "draft",
     "note": "From the Dwarves passage in the search output."
   },
@@ -49,7 +82,16 @@
     "question": "What is THAC0?",
     "kind": "rule",
     "expected": "To Hit Armor Class 0: the number an attacker needs to hit a target with Armor Class 0. It depends on group and level for characters, or Hit Dice for monsters.",
-    "expectedSections": [{ "book": "phb", "section": "Definitions" }, { "book": "phb", "section": "Calculating THAC0" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Definitions"
+      },
+      {
+        "book": "phb",
+        "section": "Calculating THAC0"
+      }
+    ],
     "status": "draft",
     "note": "From the THAC0 search output."
   },
@@ -58,7 +100,12 @@
     "question": "What is the maximum level a dwarf fighter can reach?",
     "kind": "rule",
     "expected": "15th level (Table 7, Racial Class and Level Limits).",
-    "expectedSections": [{ "book": "dmg", "section": "A Nonhuman World" }],
+    "expectedSections": [
+      {
+        "book": "dmg",
+        "section": "A Nonhuman World"
+      }
+    ],
     "status": "draft",
     "note": "From Table 7 in the search output; the table carries a converter note (read from a bar chart)."
   },
@@ -67,7 +114,12 @@
     "question": "How does a thief's backstab work?",
     "kind": "rule",
     "expected": "Attacking from behind without being noticed, the thief gets +4 to hit and multiplies the weapon's damage by level: x2 at levels 1-4, x3 at 5-8, x4 at 9-12, x5 at 13 and above.",
-    "expectedSections": [{ "book": "phb", "section": "Thief" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Thief"
+      }
+    ],
     "status": "draft",
     "note": "Multipliers from the flattened Table 30 seen in the check report; the +4 and the section from knowledge of 2nd Edition: check against the books, including which book has Table 30."
   },
@@ -76,7 +128,12 @@
     "question": "What are the effects of charging an opponent?",
     "kind": "rule",
     "expected": "The charging character gets a bonus to the attack roll but loses Dexterity bonuses to Armor Class and suffers an Armor Class penalty; a set spear or polearm against a charge does double damage.",
-    "expectedSections": [{ "book": "phb", "section": "Charging an Opponent" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Charging an Opponent"
+      }
+    ],
     "status": "draft",
     "note": "Section from the search output; the exact modifiers are deliberately left out: write them from the book when confirming."
   },
@@ -85,7 +142,12 @@
     "question": "What are the categories of saving throws?",
     "kind": "rule",
     "expected": "Five: paralyzation, poison or death magic; rod, staff or wand; petrification or polymorph; breath weapon; spell.",
-    "expectedSections": [{ "book": "phb", "section": "Saving Throws" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Saving Throws"
+      }
+    ],
     "status": "draft",
     "note": "From knowledge of 2nd Edition; the section title is a guess."
   },
@@ -94,7 +156,12 @@
     "question": "How are ability scores rolled with the standard method?",
     "kind": "rule",
     "expected": "Roll 3d6 for each ability, in order; the books also describe alternative methods.",
-    "expectedSections": [{ "book": "phb", "section": "Rolling Ability Scores" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Rolling Ability Scores"
+      }
+    ],
     "status": "draft",
     "note": "From knowledge of 2nd Edition; the section title is a guess."
   },
@@ -103,7 +170,12 @@
     "question": "Which characters can have exceptional strength?",
     "kind": "rule",
     "expected": "Warriors (fighters, rangers, paladins) with Strength 18 roll percentile dice for exceptional strength (18/01 to 18/00).",
-    "expectedSections": [{ "book": "phb", "section": "Strength" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Strength"
+      }
+    ],
     "status": "draft",
     "note": "From knowledge of 2nd Edition; the section title is a guess."
   },
@@ -112,7 +184,12 @@
     "question": "What are the requirements to be a paladin?",
     "kind": "rule",
     "expected": "Strength 12, Constitution 9, Wisdom 13, Charisma 17; must be human and lawful good.",
-    "expectedSections": [{ "book": "phb", "section": "Paladin" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Paladin"
+      }
+    ],
     "status": "draft",
     "note": "From knowledge of 2nd Edition: check every number against the book."
   },
@@ -121,7 +198,12 @@
     "question": "How is initiative determined in combat?",
     "kind": "rule",
     "expected": "In the standard method each side rolls 1d10 and the lowest roll acts first; the books describe optional variants and modifiers.",
-    "expectedSections": [{ "book": "phb", "section": "Initiative" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Initiative"
+      }
+    ],
     "status": "draft",
     "note": "From knowledge of 2nd Edition; the section title is a guess."
   },
@@ -130,7 +212,12 @@
     "question": "Do elves resist sleep and charm spells?",
     "kind": "rule",
     "expected": "Yes: elves have 90% resistance to sleep and charm-related spells.",
-    "expectedSections": [{ "book": "phb", "section": "Elves" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Elves"
+      }
+    ],
     "status": "draft",
     "note": "From knowledge of 2nd Edition (half-elves have 30%, seen in the search output)."
   },
@@ -139,9 +226,18 @@
     "question": "What happens when a character reaches 0 hit points?",
     "kind": "rule",
     "expected": "The character dies; an optional rule lets characters hover unconscious until -10 hit points.",
-    "expectedSections": [{ "book": "phb", "section": "Character Death" }],
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Character Death"
+      },
+      {
+        "book": "dmg",
+        "section": "Hovering on Death’s Door (Optional Rule)"
+      }
+    ],
     "status": "draft",
-    "note": "From knowledge of 2nd Edition; the section title is a guess."
+    "note": "Both sections seen in the rules search's sources (PHB p. 141, DMG p. 103-104)."
   },
   {
     "id": "trap-advantage",
@@ -167,5 +263,157 @@
     "expected": "Not part of 2nd Edition (inspiration is a 5th Edition mechanic): the system should say the books don't cover it.",
     "expectedSections": [],
     "status": "draft"
+  },
+  {
+    "id": "ability-score-methods",
+    "question": "What methods does the Player's Handbook give for generating ability scores?",
+    "kind": "rule",
+    "expected": "Six methods, numbered I to VI: from 3d6 for each ability in order (Method I) to distributing dice among abilities that start at 8 (Method VI); the alternatives are described after Method I.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Rolling Ability Scores"
+      },
+      {
+        "book": "phb",
+        "section": "Alternative Dice-Rolling Methods"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings. Descriptions of methods III, IV and VI still to check on PHB p. 18-19."
+  },
+  {
+    "id": "ability-method-v",
+    "question": "How does Method V for generating ability scores work?",
+    "kind": "rule",
+    "expected": "Roll 4d6 and drop the lowest die, six times, then arrange the six totals among the abilities as desired.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Rolling Ability Scores"
+      },
+      {
+        "book": "dmg",
+        "section": "Method V (4d6, drop lowest, arrange as desired):"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
+  },
+  {
+    "id": "ability-method-i",
+    "question": "How does Method I for generating ability scores work?",
+    "kind": "rule",
+    "expected": "Roll 3d6 for each ability, in order: Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Rolling Ability Scores"
+      },
+      {
+        "book": "dmg",
+        "section": "Method I (3d6, In order):"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
+  },
+  {
+    "id": "ability-method-who-decides",
+    "question": "Who decides which method is used to generate ability scores?",
+    "kind": "rule",
+    "expected": "The Dungeon Master.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Alternative Dice-Rolling Methods"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
+  },
+  {
+    "id": "nonweapon-proficiencies-optional",
+    "question": "Are non-weapon proficiencies an optional rule?",
+    "kind": "rule",
+    "expected": "Yes, completely optional: players who enjoy them can use them and others can ignore them without unfair advantage, if the DM allows it.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Chapter 5: Proficiencies (Optional)"
+      }
+    ],
+    "status": "confirmed",
+    "note": "Confirmed by Roger against PHB p. 70."
+  },
+  {
+    "id": "weapon-proficiencies-optional",
+    "question": "Are weapon proficiencies an optional rule?",
+    "kind": "rule",
+    "expected": "Yes: they are tournament-level rules, optional in regular play; if a game uses them, they apply to all characters, NPCs included.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Chapter 5: Proficiencies (Optional)"
+      }
+    ],
+    "status": "confirmed",
+    "note": "Confirmed by Roger against PHB p. 70."
+  },
+  {
+    "id": "weapon-specialization",
+    "question": "Is weapon specialization an optional rule, and which classes can use it?",
+    "kind": "rule",
+    "expected": "Yes, it is optional, and only single-class fighters can use it.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Weapon Specialization"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
+  },
+  {
+    "id": "hovering-on-deaths-door",
+    "question": "Is there an optional rule that lets characters survive below 0 hit points?",
+    "kind": "rule",
+    "expected": "Yes: Hovering on Death's Door, an optional rule in the Dungeon Master Guide, keeps a character alive until -10 hit points.",
+    "expectedSections": [
+      {
+        "book": "dmg",
+        "section": "Hovering on Death’s Door (Optional Rule)"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
+  },
+  {
+    "id": "multi-class-races",
+    "question": "Which races can be multi-class characters?",
+    "kind": "rule",
+    "expected": "The demihumans (dwarves, elves, gnomes, half-elves and halflings), in the combinations the Player's Handbook lists; humans can be dual-class instead.",
+    "expectedSections": [
+      {
+        "book": "phb",
+        "section": "Multi-Class and Dual-Class Characters"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
+  },
+  {
+    "id": "encounter-too-difficult",
+    "question": "What does the Dungeon Master's Guide advise when an encounter is too difficult?",
+    "kind": "rule",
+    "expected": "The DM can ease it in play, for example by having monsters flee, lowering their hit points, or having them miss or make mistakes; an encounter that was too easy can be followed by a tougher one.",
+    "expectedSections": [
+      {
+        "book": "dmg",
+        "section": "Fixing Things in Play"
+      }
+    ],
+    "status": "draft",
+    "note": "Answered by the rules search with sources, Oct 2026; checked against the cited section headings."
   }
 ]

@@ -7,6 +7,7 @@ Personal project: an agentic system for playing AD&D 2nd Edition with friends, r
 - Node 22.11.0 (see `.node-version`). Do not upgrade Node or npm, and do not suggest it: another project on this machine depends on this version.
 - pnpm through Corepack, version pinned in `package.json`. Run one command per line.
 - Vitest 4 with Vite 6, forced by an override in `pnpm-workspace.yaml`, because newer Vite needs Node 22.12.
+- `better-sqlite3` pinned to version 12 (`^12`), allowed to build in `pnpm-workspace.yaml`: version 13 crashes with a segmentation fault on Node 22.11 (tested), and Node's built-in `node:sqlite` needs the `--experimental-sqlite` flag on 22.11.
 - Local models through Ollama: `qwen2.5:7b` for chat, `bge-m3` for embeddings. The first request after Ollama starts, or after it has been idle, includes loading the model: measure speed on the second request.
 
 ## Structure
@@ -36,6 +37,12 @@ TypeScript monorepo with dependencies in one direction only:
 | `fusion.ts` | Reciprocal rank fusion of ranked lists. |
 | `store.ts` | Builds the LanceDB index (vectors plus a keyword index) and searches it. Builds reuse vectors from an embedding cache keyed by a fingerprint of the model and the embedded text, so only new or changed chunks are embedded; builds report progress and stage timings. Search is hybrid by default, or vector or keyword alone. Results include the converter notes, so agents can warn about unreliable sources. `expand()` turns results into passages: neighbouring pieces of the same section, merged by section, within a size budget (12,000 characters by default; the pieces the search found are always kept). The radius counts text pieces only, so tables in between come along without using it up; a table's title is put in front of its rows; a table that doesn't fit is named in its place ("[Table 8: ..., not included]"). |
 
+### `packages/shared/src`
+
+| Module | Role |
+| --- | --- |
+| `gameSettings.ts` | Game settings chosen by each group at the start of a game: rules options from the books (ability score method I to VI, weapon proficiencies, non-weapon proficiencies, weapon specialization, Hovering on Death's Door) and DM style, our design (encounter difficulty, adjusting encounters in play, explaining rules). The easy, medium and difficult presets; customization, which marks changed settings as custom; plain descriptions with book references. |
+
 ### `packages/server/src`
 
 | Module | Role |
@@ -47,6 +54,8 @@ TypeScript monorepo with dependencies in one direction only:
 | `answering/citations.ts` | Finds the source numbers an answer cites; flags unknown numbers and answers citing nothing. |
 | `answering/answerQuestion.ts` | The answering workflow: source budget from the window, search, expand, numbered sources, prompt check, model, citation and usage checks. Receives its search and model from outside, so tests use fakes. If the search finds nothing, the model is not called. |
 | `llm/contextWindow.ts` | Keeps prompts inside the context window: estimates tokens (3 characters per token, deliberately pessimistic), derives the space left for sources, refuses a prompt that doesn't fit, and checks the token count the model reports. |
+| `state/database.ts` | Opens the game database (`better-sqlite3`) and applies the schema changes it lacks, in order and once, tracked by SQLite's `user_version`. Changes are only ever added at the end, never edited. |
+| `state/games.ts` | `GameStore`: create, get, list and update the settings of games. The only code that knows how games are stored; settings validated on every write and read. |
 | `cli/ask.ts` | The `ask` command: opens the index, creates the model at temperature 0.1, runs the answering workflow with a spinner, prints the answer, the sources (cited ones marked), warnings and measurements. |
 | `cli/evaluate.ts` | The `evaluate` command: checks the expected sections exist, runs every question through the answering workflow, saves the run, compares with the previous run of the same questions, writes a report to review. |
 | `evaluation/questions.ts` | Reads and validates `eval/rules-questions.json`; finds expected sections that don't match any heading in the books. |
@@ -57,6 +66,7 @@ TypeScript monorepo with dependencies in one direction only:
 ## Data
 
 - `data/books/`: the book text in Markdown (`phb.md`, `dmg.md`), from the owner's own copies. Local only, ignored by Git. Files ending in `-condensed.md` are never indexed.
+- `data/games.db`: the game database (SQLite), local only, ignored by Git.
 - `data/index/`: the LanceDB index, and its `embedding_cache` table. Local only, ignored by Git. Rewritten on every `build-index`, reusing cached vectors for unchanged chunks; the cache keeps only the current chunks' vectors, and old table versions are deleted.
 - `eval/rules-questions.json`: the rules evaluation set, committed. Expected answers are written in our own words, never copied from the books; each question is `draft` until checked against the books, then `confirmed`, and its note says where the expected answer came from.
 - `data/eval/runs/`: saved evaluation runs, local only.
@@ -71,7 +81,8 @@ TypeScript monorepo with dependencies in one direction only:
 4. Tool errors are returned to the model as text, never thrown out of the agent loop; the loop has a round limit.
 5. Only `packages/server/src/llm/provider.ts` knows about model providers.
 6. The index records the embedding model that built it and refuses any other: vectors from different models are not comparable.
-7. Verify conversions and chunks on the real books, not only on test samples: after every chunker change, run `compare-chunks` before rebuilding the index.
+7. Game rules are settings, not code: each group chooses them at the start of a game, through a preset or by customizing it. Book options and DM style are kept apart in the settings.
+8. Verify conversions and chunks on the real books, not only on test samples: after every chunker change, run `compare-chunks` before rebuilding the index.
 
 ## Commands
 
@@ -93,6 +104,7 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 
 - Never name a package script after a built-in pnpm command (`search`, `test`, `install`...): the built-in wins and the script never runs. `pnpm run <name>` always runs the script.
 - LanceDB index configurations (`Index.fts()`) can only be used once: create a new one for each index.
+- Never let `better-sqlite3` move to version 13 while Node stays at 22.11: it crashes without an error message. Its type definitions come from `@types/better-sqlite3`.
 - LanceDB prints "No existing dataset ... will be created" warnings straight to the terminal the first time a table is created (they cross the spinner line); `LANCE_LOG` and `RUST_LOG` don't silence them in this version. Harmless.
 - The first LanceDB operation in a process loads its native library and can take seconds: index tests have a 15 s limit and a warm-up.
 - Mixed fractions lost their space in the conversion ("31/2" for "3 1/2"): in VS Code, regex search `\b(\d)([123]/[234])\b` in `data/books` finds them; check each against the page before restoring the space.
@@ -107,6 +119,7 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 - `pnpm test` and `pnpm typecheck` must pass before every commit.
 - Every change to `rules` or `knowledge` gets tests; agent tests use a scripted model, never a real one.
 - Ask before adding a dependency; prefer MIT, Apache 2.0 or BSD licences.
+- When a design depends on what the books say, Claude writes the questions for the rules search (`ask`) and Roger runs them, instead of Claude relying on memory; answers are checked against their sources, and doubtful ones against the PDF pages.
 - Code, comments and identifiers in English. Player-facing input and output are **English-only for now** (decided after the first real answers, see Status): a working system that creates and runs games comes before multilingual support.
 
 ## Status
@@ -120,7 +133,8 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
   - Source fixing: by hand, with the fix lists, as time allows. Proposed priority: the Player's Handbook tables iteration 2 needs (abilities, races, classes, saving throws, THAC0); the PDF converter remains an option for the rest.
   - Done: 1.7 ask the rules: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner; 1.7c0, context window management (window set explicitly, token estimates, source budget derived from the window, prompt check before sending, usage check after); 1.7c, the answering workflow (single pass; the answer's language is left to the instructions, since telling Catalan from Spanish reliably needs a detection library) (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). 1.7d, the `ask` command (verified end to end against a stand-in Ollama: num_ctx 8192, num_predict 1024 and temperature 0.1 reach Ollama). First real answers (qwen2.5:7b, 16 to 21 s each, 4.2 to 4.3 characters per token): "Can a dwarf be a mage?" answered no correctly but claimed no exceptions exist, missing the DM's case-by-case advice in its own source, and ignored the converter note; a Catalan question was misread (see Backlog); the "advantage" trap (a 5th Edition mechanic) was answered with invented content citing real sources, which the citation checks cannot catch (motivates 1.9). Questions and answers are now English-only, with a fixed reply to other languages.
   - Done: 1.8, lean evaluation (tooling): 19 questions (16 rules, 3 traps from 5th Edition), all draft; the `evaluate` command scores retrieval, grounding and traps, and the report collects Roger's verdicts on content. Built and tested end to end; the baseline is deferred until the books are fixed (TODO, groups A and B).
-- Next: Iteration 2, Character Designer.
+- Plan: Iteration 2, game setup (settings and presets, saving games, the setup agent); 3, Character Designer; 4, Campaign Designer; 5, Game Master in play.
+- In progress: Iteration 2. Done: 2.1, settings schema and presets, based on the rules search's answers and Roger's reading of PHB p. 70; the evaluation set grew to 29 questions with ten from that session. 2.2, saving games: SQLite through `better-sqlite3` 12 (chosen over MongoDB: no server to run, transactions built in, the same embedded approach as LanceDB), a versioned schema, and a `GameStore` behind which storage could change. Next: 2.3, the setup agent.
   - After 1.7: 1.8 evaluation (questions with known answers and known source sections); 1.9 evaluator-optimizer where 1.8 shows it helps (claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer), compared against the 1.8 baseline.
 - Next iterations: 2, Character Designer; 3, Campaign Designer.
 
@@ -132,30 +146,31 @@ Work set aside to keep moving towards a playable system. Grouped by what each it
 
 1. Fix the Markdown books with the fix lists (`data/reports/fix-list-<book>.md`), working page by page against the PDFs. **Priority: the Player's Handbook tables Iteration 2 needs** (abilities, races, classes, saving throws, THAC0).
 2. Check every converter warning "header cells that were not detected" against the printed page: Table 1 was a false alarm (its top-left cell is empty in print too, which the converter flagged), but others may hide lost or shifted headings. Delete the comment only when the table matches the page.
-3. Quick fixes: the DMG's name in a decorative font (`D!"#$%" l&'($) fuide`) by search and replace after checking it; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading. Mixed fractions are already done.
-4. After each batch: `check-books`, `compare-chunks`, `build-index` (the embedding cache keeps rebuilds short).
+3. Check the descriptions of ability score methods III, IV and VI in `packages/shared/src/gameSettings.ts` against PHB p. 18-19 (they come from the rules search's answer; I, II and V match the DMG's headings). On PHB p. 70, delete the truncated duplicate of the paragraph that starts "Even newly created, 1st-level characters have proficiencies", before the heading Acquiring Proficiencies.
+4. Quick fixes: the DMG's name in a decorative font (`D!"#$%" l&'($) fuide`) by search and replace after checking it; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading. Mixed fractions are already done.
+5. After each batch: `check-books`, `compare-chunks`, `build-index` (the embedding cache keeps rebuilds short).
 
 ### B. Evaluation baseline (after A)
 
-5. Run `evaluate`, fix the expected section titles it reports as missing, rerun those with `--only`.
-6. Confirm the 19 questions against the books: correct each expected answer in our own words (never copied), write the charging modifiers from the book, set `status` to `confirmed`, commit `eval/rules-questions.json`.
-7. Full run as the baseline; verdicts in the report (correct, partly right, wrong) with a reason (model, retrieval, book); share the summary.
+6. Run `evaluate`, fix the expected section titles it reports as missing, rerun those with `--only`.
+7. Confirm the 29 questions against the books (2 already confirmed): correct each expected answer in our own words (never copied), write the charging modifiers from the book, set `status` to `confirmed`, commit `eval/rules-questions.json`.
+8. Full run as the baseline; verdicts in the report (correct, partly right, wrong) with a reason (model, retrieval, book); share the summary.
 
 ### C. Answer quality (decide with the baseline from B)
 
-8. Step 1.9, evaluator-optimizer: claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer; compared against the baseline. Motivated by the first real answers: a missed exception, an ignored converter note, and a trap answered with invented content citing real sources, which the citation checks can't catch.
-9. Passage budget priority: the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
-10. Reranker, if the evaluation shows the first results are often in the wrong order.
+9. Step 1.9, evaluator-optimizer: claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer; compared against the baseline. Motivated by the first real answers: a missed exception, an ignored converter note, and a trap answered with invented content citing real sources, which the citation checks can't catch.
+10. Passage budget priority: the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
+11. Reranker, if the evaluation shows the first results are often in the wrong order.
 
 ### D. Performance and calibration
 
-11. Calibrate `CHARS_PER_TOKEN` (3, pessimistic): `ask` measured 4.2 to 4.3 characters per token on the first four questions; adjust after more questions.
-12. Confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed (first answers: 16 to 21 s for about 3,000 tokens).
-13. One search took 10.8 s instead of 0.2 to 1.7 s: check with `ollama ps` right after a slow search whether the embedding model was unloaded to make room for the chat model.
-14. One full build took 923 s instead of about 210 s, cause unknown: the progress line ("last batch ... ago") will show whether Ollama pauses, if it happens again.
+12. Calibrate `CHARS_PER_TOKEN` (3, pessimistic): `ask` measured 4.2 to 4.3 characters per token on the first four questions, and 3.9 to 4.8 on the eleven of the game setup session; 3 stays safely pessimistic.
+13. Confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed (first answers: 16 to 21 s for about 3,000 tokens).
+14. One search took 10.8 s instead of 0.2 to 1.7 s: check with `ollama ps` right after a slow search whether the embedding model was unloaded to make room for the chat model.
+15. One full build took 923 s instead of about 210 s, cause unknown: the progress line ("last batch ... ago") will show whether Ollama pauses, if it happens again.
 
 ### E. Larger items
 
-15. Multilingual support (Catalan, Spanish): the 7B model took a Catalan question for French, translated "nan" (dwarf) as "elf" and answered in English, and keyword search finds nothing for non-English words. Options: translate the player's question into English first, naming the language from settings rather than detecting it, with a glossary of game terms provided by Roger (not invented); search and answer in English; translate the answer back. A translation tool the Game Master can call for occasional cases. A larger or more multilingual model, measured against the evaluation.
-16. PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages): table extraction is the weakest part of the current conversions.
-17. MCP server exposing `search_rules` (iteration 1b, undecided).
+16. Multilingual support (Catalan, Spanish): the 7B model took a Catalan question for French, translated "nan" (dwarf) as "elf" and answered in English, and keyword search finds nothing for non-English words. Options: translate the player's question into English first, naming the language from settings rather than detecting it, with a glossary of game terms provided by Roger (not invented); search and answer in English; translate the answer back. A translation tool the Game Master can call for occasional cases. A larger or more multilingual model, measured against the evaluation.
+17. PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages): table extraction is the weakest part of the current conversions.
+18. MCP server exposing `search_rules` (iteration 1b, undecided).
