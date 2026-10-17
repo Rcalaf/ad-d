@@ -5,7 +5,8 @@
   "type": "module",
   "exports": "./src/index.ts",
   "scripts": {
-    "check-model": "tsx --env-file=../../.env src/cli/checkModel.ts"
+    "check-model": "tsx --env-file=../../.env src/cli/checkModel.ts",
+    "ask": "tsx --env-file=../../.env src/cli/ask.ts"
   },
   "dependencies": {
     "@dnd/knowledge": "workspace:*",

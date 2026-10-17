@@ -40,13 +40,14 @@ TypeScript monorepo with dependencies in one direction only:
 
 | Module | Role |
 | --- | --- |
-| `config.ts` | Reads the settings from `.env` (model provider, model, temperature, context window, answer length, embedding model, index folder); errors name the variable to fix. |
+| `config.ts` | Reads the settings from `.env` (model provider, model, temperature, context window, answer length, embedding model, Ollama address for embeddings from `OLLAMA_HOST` as in the knowledge package, index folder); errors name the variable to fix. |
 | `llm/provider.ts` | `getChatModel()`: the only place that knows model providers; optional temperature override per use. Passes the context window and answer length to Ollama (`num_ctx`, `num_predict`). |
 | `answering/prompt.ts` | The instructions for answering rules questions (sources only, cite by number, say when the sources don't answer, mention exceptions and converter notes, answer in the question's language) and the messages sent to the model. |
 | `answering/sources.ts` | Turns passages into numbered sources: book title, location, pages, converter notes, text. |
 | `answering/citations.ts` | Finds the source numbers an answer cites; flags unknown numbers and answers citing nothing. |
 | `answering/answerQuestion.ts` | The answering workflow: source budget from the window, search, expand, numbered sources, prompt check, model, citation and usage checks. Receives its search and model from outside, so tests use fakes. If the search finds nothing, the model is not called. |
 | `llm/contextWindow.ts` | Keeps prompts inside the context window: estimates tokens (3 characters per token, deliberately pessimistic), derives the space left for sources, refuses a prompt that doesn't fit, and checks the token count the model reports. |
+| `cli/ask.ts` | The `ask` command: opens the index, creates the model at temperature 0.1, runs the answering workflow with a spinner, prints the answer, the sources (cited ones marked), warnings and measurements. |
 | `cli/errors.ts` | Turns model errors (Ollama not running, model not downloaded) into what to check. |
 
 ## Data
@@ -75,6 +76,7 @@ TypeScript monorepo with dependencies in one direction only:
 - `pnpm --filter @dnd/knowledge build-index`: rebuilds the index from `data/books` (needs Ollama running); reports progress, how many chunks were reused or embedded, and each stage's duration. In a terminal, a spinner line shows the current stage and its elapsed time, and during embedding the time since the last batch: a growing "last batch ... ago" means the build is waiting for Ollama; a spinner that stops turning means the build itself is blocked
 - `pnpm --filter @dnd/knowledge search-rules "question" [--vector | --keyword] [--full | --context]`: searches the index; `--full` prints whole chunks, `--context` prints the passages exactly as the model will receive them
 - `pnpm --filter @dnd/server check-model`: checks the configured model answers, and how fast
+- `pnpm --filter @dnd/server ask "question"`: answers a rules question from the books, with numbered sources, warnings, and measurements (search and answer time, prompt size, estimated and reported tokens, real characters per token)
 
 Rebuild the index after any change to the books, the chunker or the index format. After a chunker change, run `compare-chunks` first: it needs the old index to compare against.
 
@@ -98,7 +100,7 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 - `pnpm test` and `pnpm typecheck` must pass before every commit.
 - Every change to `rules` or `knowledge` gets tests; agent tests use a scripted model, never a real one.
 - Ask before adding a dependency; prefer MIT, Apache 2.0 or BSD licences.
-- Code, comments and identifiers in English; player-facing output follows the configured language.
+- Code, comments and identifiers in English. Player-facing input and output are **English-only for now** (decided after the first real answers, see Status): a working system that creates and runs games comes before multilingual support.
 
 ## Status
 
@@ -109,14 +111,15 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
   - Settled: mid-sentence chunks in the DMG (about 60) come from the transcription (scrambled sentence openings, blank lines inside paragraphs), not from the chunker.
   - Quick source fixes: the DMG's name printed in a decorative font (`D!"#$%" l&'($) fuide`) can be replaced across the file with search and replace, after checking it against the page; split table titles (`#### Table 57` followed by the title on its own line) merged into one heading.
   - Source fixing: by hand, with the fix lists, as time allows. Proposed priority: the Player's Handbook tables iteration 2 needs (abilities, races, classes, saving throws, THAC0); the PDF converter remains an option for the rest.
-  - In progress: 1.7 ask the rules. Done: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner; 1.7c0, context window management (window set explicitly, token estimates, source budget derived from the window, prompt check before sending, usage check after); 1.7c, the answering workflow (single pass; the answer's language is left to the instructions, since telling Catalan from Spanish reliably needs a detection library) (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). Next: 1.7d, the `ask` command.
+  - Done: 1.7 ask the rules: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner; 1.7c0, context window management (window set explicitly, token estimates, source budget derived from the window, prompt check before sending, usage check after); 1.7c, the answering workflow (single pass; the answer's language is left to the instructions, since telling Catalan from Spanish reliably needs a detection library) (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). 1.7d, the `ask` command (verified end to end against a stand-in Ollama: num_ctx 8192, num_predict 1024 and temperature 0.1 reach Ollama). First real answers (qwen2.5:7b, 16 to 21 s each, 4.2 to 4.3 characters per token): "Can a dwarf be a mage?" answered no correctly but claimed no exceptions exist, missing the DM's case-by-case advice in its own source, and ignored the converter note; a Catalan question was misread (see Backlog); the "advantage" trap (a 5th Edition mechanic) was answered with invented content citing real sources, which the citation checks cannot catch (motivates 1.9). Questions and answers are now English-only, with a fixed reply to other languages. Next: 1.8.
   - After 1.7: 1.8 evaluation (questions with known answers and known source sections); 1.9 evaluator-optimizer where 1.8 shows it helps (claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer), compared against the 1.8 baseline.
 - Next iterations: 2, Character Designer; 3, Campaign Designer.
 
 ## Backlog
 
 - PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages). Higher priority after the diagnostics: table extraction is the weakest part of the current conversions.
+- Multilingual support (Catalan, Spanish), deferred: the 7B model took a Catalan question for French, translated "nan" (dwarf) as "elf" and answered in English, and keyword search finds nothing for non-English words. Options: translate the player's question into English first, naming the language from settings rather than detecting it, with a glossary of game terms provided by Roger (not invented); search and answer in English; translate the answer back. A translation tool the Game Master can call for occasional cases. A larger or more multilingual model, measured against the evaluation.
 - Reranker, if the evaluation shows the first results are often in the wrong order.
-- Context window, remaining work: calibrate `CHARS_PER_TOKEN` (3, pessimistic) against the token counts Ollama reports once real questions run (1.7d); confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed on the Mac.
+- Context window, remaining work: calibrate `CHARS_PER_TOKEN` (3, pessimistic) with the "characters per token" that `ask` prints for real questions; confirm with `ollama ps` that `qwen2.5:7b` runs with the 8,192-token window; measure how prompt length affects answer speed on the Mac.
 - Passage budget priority (decide with the 1.8 evaluation): the found pieces of all results always go in first, so weak results can crowd out the neighbours of strong ones (seen: the start of the Dwarves description dropped for the dwarf mage question). Options: a larger budget, bounded by the context window, or giving the best results their neighbours before weaker results are included.
 - MCP server exposing `search_rules` (iteration 1b, undecided).

@@ -3,6 +3,7 @@ import type { ExpandOptions, Passage, SearchResult } from "@dnd/knowledge";
 import { describe, expect, it } from "vitest";
 import { answerQuestion, type AnswerModel } from "../src/answering/answerQuestion";
 import { findCitations } from "../src/answering/citations";
+import { ENGLISH_ONLY_REPLY, INSTRUCTIONS } from "../src/answering/prompt";
 import { formatSources } from "../src/answering/sources";
 import { PromptTooLongError } from "../src/llm/contextWindow";
 
@@ -60,6 +61,14 @@ class ScriptedModel implements AnswerModel {
 const budget = { contextTokens: 8192, answerTokens: 1024 };
 const textOf = (message: BaseMessage) => String(message.content);
 
+describe("INSTRUCTIONS", () => {
+  it("require answers in English, and a fixed reply to questions in other languages", () => {
+    expect(INSTRUCTIONS).toContain("Answer in English.");
+    expect(INSTRUCTIONS).toContain(`If the question is not written in English, don't answer it: reply only "${ENGLISH_ONLY_REPLY}"`);
+    expect(INSTRUCTIONS).not.toMatch(/same language as the question/);
+  });
+});
+
 describe("formatSources", () => {
   it("numbers each passage, with its book, location, pages and converter notes before its text", () => {
     const text = formatSources([MAGE, TABLE_7]);
@@ -96,6 +105,12 @@ describe("answerQuestion", () => {
     expect(result.checks).toEqual({ unknownCitations: [], uncited: false });
   });
 
+  it("recognizes the English-only reply as a refusal, not as an answer citing nothing", async () => {
+    const result = await answerQuestion("Pot un nan ser mag?", { index: fakeIndex([MAGE]), model: new ScriptedModel(` ${ENGLISH_ONLY_REPLY}\n`), budget });
+    expect(result.notEnglish).toBe(true);
+    expect(result.checks.uncited).toBe(false);
+  });
+
   it("flags citations to sources that don't exist", async () => {
     const result = await answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model: new ScriptedModel("No [1], see also [3]."), budget });
     expect(result.checks.unknownCitations).toEqual([3]);
@@ -129,6 +144,15 @@ describe("answerQuestion", () => {
     const hugeQuestion = "Can a dwarf be a mage? ".repeat(2000);
     await expect(answerQuestion(hugeQuestion, { index: fakeIndex([MAGE]), model, budget })).rejects.toThrow(PromptTooLongError);
     expect(model.received).toEqual([]);
+  });
+
+  it("announces each stage and reports how long each took, and the prompt's length in characters", async () => {
+    const stages: string[] = [];
+    const result = await answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model: new ScriptedModel("No [1]."), budget, onStage: (s) => stages.push(s) });
+    expect(stages).toEqual(["searching", "answering"]);
+    expect(result.timings.retrievalMs).toBeGreaterThanOrEqual(0);
+    expect(result.timings.modelMs).toBeGreaterThanOrEqual(0);
+    expect(result.tokens.promptChars).toBeGreaterThan(MAGE.text.length);
   });
 
   it("reports the estimated and reported token counts, and warns when the model read more than the estimate allowed", async () => {

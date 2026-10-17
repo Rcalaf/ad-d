@@ -26,6 +26,11 @@ describe("loadSettings", () => {
     expect(() => loadSettings({ LLM_MODEL: "x", LLM_CONTEXT_TOKENS: "4096", LLM_MAX_ANSWER_TOKENS: "4000" })).toThrow(/LLM_MAX_ANSWER_TOKENS must be less than half of LLM_CONTEXT_TOKENS/);
   });
 
+  it("reads the Ollama address used for embeddings, the same variable the knowledge package uses", () => {
+    expect(loadSettings({ LLM_MODEL: "x", OLLAMA_HOST: "http://localhost:11434" }).ollamaHost).toBe("http://localhost:11434");
+    expect(loadSettings({ LLM_MODEL: "x" }).ollamaHost).toBeUndefined();
+  });
+
   it("locates the index folder at the repository root", () => {
     expect(loadSettings({ LLM_MODEL: "x" }).indexDir).toMatch(/[/\\]data[/\\]index$/);
   });

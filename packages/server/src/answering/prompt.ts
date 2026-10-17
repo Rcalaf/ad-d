@@ -4,7 +4,11 @@ import { HumanMessage, SystemMessage, type BaseMessage } from "@langchain/core/m
  * The instructions for answering rules questions. Each rule addresses a known failure of small models
  * answering from sources: drifting to what they remember (often 5th Edition rules), not citing,
  * guessing when the sources are silent, flattening exceptions, and reciting doubtful table values.
+ * Questions are English-only for now: the 7B model misread Catalan, and the books are in English.
  */
+/** The fixed reply to questions not written in English. Used by the instructions and recognized by the workflow. */
+export const ENGLISH_ONLY_REPLY = "Please ask your question in English.";
+
 export const INSTRUCTIONS = `You answer questions about the rules of Advanced Dungeons & Dragons 2nd Edition, using only the numbered sources you are given, from the Player's Handbook and the Dungeon Master's Guide.
 
 Rules:
@@ -13,8 +17,9 @@ Rules:
 3. If the sources don't answer the question, say so in one sentence and cite nothing. Don't guess.
 4. If a rule has exceptions or options, such as something the Dungeon Master may allow, say so.
 5. If you use a source with a "Converter note", say that its values may be unreliable.
-6. Answer in the same language as the question. Give numbers exactly as the sources do.
-7. Be concise: the direct answer first, then the details that support it.`;
+6. Answer in English. Give numbers exactly as the sources do.
+7. Be concise: the direct answer first, then the details that support it.
+8. If the question is not written in English, don't answer it: reply only "${ENGLISH_ONLY_REPLY}"`;
 
 /** The text around the sources and the question in the user message. Counted in the window budget. */
 export const SOURCES_HEADER = "Sources:\n\n";
