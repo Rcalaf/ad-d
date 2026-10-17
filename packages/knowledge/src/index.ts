@@ -7,3 +7,4 @@ export * from "./fixList";
 export * from "./embedder";
 export * from "./fusion";
 export * from "./store";
+export * from "./cli/spinner";

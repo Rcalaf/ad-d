@@ -17,6 +17,8 @@ const SettingsSchema = z
     /** Tokens reserved for the answer, inside the context window. */
     answerTokens: z.coerce.number().int().min(128, "LLM_MAX_ANSWER_TOKENS must be at least 128"),
     embeddingModel: z.string().min(1),
+    /** Ollama's address for embeddings; read from OLLAMA_HOST, like the knowledge package, so both reach the same server. */
+    ollamaHost: z.string().url("OLLAMA_HOST must be a full address, for example http://localhost:11434").optional(),
     indexDir: z.string(),
   })
   .refine((s) => s.llmProvider !== "anthropic" || Boolean(s.llmApiKey), {
@@ -49,6 +51,7 @@ export function loadSettings(env: NodeJS.ProcessEnv = process.env): Settings {
     contextTokens: value("LLM_CONTEXT_TOKENS") ?? 8192,
     answerTokens: value("LLM_MAX_ANSWER_TOKENS") ?? 1024,
     embeddingModel: value("EMBEDDING_MODEL") ?? "bge-m3",
+    ollamaHost: value("OLLAMA_HOST"),
     // This file lives in packages/server/src, three levels below the repository root.
     indexDir: path.resolve(import.meta.dirname, "../../../data/index"),
   });
