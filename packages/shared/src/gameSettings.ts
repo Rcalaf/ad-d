@@ -29,7 +29,7 @@ export const ABILITY_SCORE_METHODS = {
 export type AbilityScoreMethod = keyof typeof ABILITY_SCORE_METHODS;
 const METHOD_IDS = Object.keys(ABILITY_SCORE_METHODS) as [AbilityScoreMethod, ...AbilityScoreMethod[]];
 
-const RulesSchema = z.object({
+export const RulesSchema = z.object({
   abilityScoreMethod: z.enum(METHOD_IDS),
   /** Tournament-level rules, optional in regular play; if used, they apply to every character, NPCs included. */
   weaponProficiencies: z.boolean(),
@@ -41,7 +41,7 @@ const RulesSchema = z.object({
   hoveringOnDeathsDoor: z.boolean(),
 });
 
-const DmStyleSchema = z.object({
+export const DmStyleSchema = z.object({
   /** How strong encounters are compared with the party. */
   encounterDifficulty: z.enum(["below", "matched", "above"]),
   /** Whether the DM eases an encounter that turns out too hard, as the Guide's "Fixing Things in Play" describes. */
@@ -113,9 +113,74 @@ export function customizeSettings(settings: GameSettings, changes: SettingsChang
 export interface SettingDescription {
   setting: string;
   value: string;
+  /** What the setting means, in plain words. */
+  explanation: string;
+  /** "book": a rule or guidance from the books; "design": our own choice, with no book reference. */
+  source: "book" | "design";
   /** The book and section the option comes from; absent for settings that are our own design. */
   reference?: string;
 }
+
+export type SettingName =
+  | "Ability score method"
+  | "Weapon proficiencies"
+  | "Non-weapon proficiencies"
+  | "Weapon specialization"
+  | "Hovering on Death's Door"
+  | "Encounter difficulty"
+  | "DM adjusts encounters in play"
+  | "DM explains rules";
+
+/**
+ * What each setting means. Book explanations use only what has been checked against the books: Roger's
+ * reading of PHB p. 70, and rules search answers checked against their sources and the books' headings.
+ * Details not yet checked (such as specialization's bonuses) are left out on purpose. Agents relay these
+ * explanations instead of improvising; deeper questions go to the rules search.
+ */
+export const SETTING_EXPLANATIONS: Record<SettingName, { explanation: string; source: "book" | "design"; reference?: string }> = {
+  "Ability score method": {
+    explanation:
+      "How the six ability scores are generated, from Method I (3d6 for each ability, in order) to Method VI. Classes have ability requirements: with methods that keep the order, the dice decide which classes a character qualifies for; with methods that let players arrange the scores, players choose a class first and place their scores to qualify.",
+    source: "book",
+    reference: PHB_CH1,
+  },
+  "Weapon proficiencies": {
+    explanation:
+      "Rules for which weapons each character is trained in. The Player's Handbook calls them tournament-level rules, optional in regular play; when on, they apply to every character, NPCs included.",
+    source: "book",
+    reference: PHB_CH5,
+  },
+  "Non-weapon proficiencies": {
+    explanation:
+      "Skills not related to weapons, such as building a fire or navigating. Completely optional: when allowed, each player decides whether to use them, without unfair advantage over those who don't.",
+    source: "book",
+    reference: PHB_CH5,
+  },
+  "Weapon specialization": {
+    explanation: "Lets a single-class fighter specialize in a weapon. It is part of the weapon proficiency rules, so it needs weapon proficiencies on.",
+    source: "book",
+    reference: PHB_SPECIALIZATION,
+  },
+  "Hovering on Death's Door": {
+    explanation: "An optional rule from the Dungeon Master Guide: when on, a character stays alive until −10 hit points; when off, a character dies at 0 hit points, the books' default.",
+    source: "book",
+    reference: DMG_HOVERING,
+  },
+  "Encounter difficulty": {
+    explanation: "Our design, not a rule from the books: how strong the encounters prepared for the campaign are, compared with the party.",
+    source: "design",
+  },
+  "DM adjusts encounters in play": {
+    explanation:
+      "The Dungeon Master Guide suggests ways to ease an encounter that turns out too hard during play, such as having monsters flee or make mistakes. This setting says when the DM does so; the setting itself is our design.",
+    source: "book",
+    reference: DMG_FIXING,
+  },
+  "DM explains rules": {
+    explanation: "Our design, not a rule from the books: how much the DM explains rules during play without being asked.",
+    source: "design",
+  },
+};
 
 const STYLE_TEXT = {
   encounterDifficulty: { below: "Below the party's strength", matched: "Matched to the party", above: "Above the party's strength" },
@@ -123,18 +188,19 @@ const STYLE_TEXT = {
   explainsRules: { proactively: "Proactively, suggesting options", "when-asked": "When asked", rarely: "Rarely" },
 } as const;
 
-/** Every setting in plain words, for players and for the setup agent to explain and cite. */
+/** Every setting in plain words, with its explanation and, for book rules, its reference: for players and for agents to relay. */
 export function describeSettings(settings: GameSettings): SettingDescription[] {
   const { rules, dmStyle } = settings;
   const onOff = (on: boolean) => (on ? "On" : "Off");
-  return [
-    { setting: "Ability score method", value: `Method ${rules.abilityScoreMethod}: ${ABILITY_SCORE_METHODS[rules.abilityScoreMethod].description}`, reference: PHB_CH1 },
-    { setting: "Weapon proficiencies", value: onOff(rules.weaponProficiencies), reference: PHB_CH5 },
-    { setting: "Non-weapon proficiencies", value: rules.nonweaponProficiencies === "allowed" ? "Allowed: each player chooses" : "Off", reference: PHB_CH5 },
-    { setting: "Weapon specialization", value: onOff(rules.weaponSpecialization), reference: PHB_SPECIALIZATION },
-    { setting: "Hovering on Death's Door", value: onOff(rules.hoveringOnDeathsDoor), reference: DMG_HOVERING },
-    { setting: "Encounter difficulty", value: STYLE_TEXT.encounterDifficulty[dmStyle.encounterDifficulty] },
-    { setting: "DM adjusts encounters in play", value: STYLE_TEXT.adjustsEncountersInPlay[dmStyle.adjustsEncountersInPlay], reference: DMG_FIXING },
-    { setting: "DM explains rules", value: STYLE_TEXT.explainsRules[dmStyle.explainsRules] },
-  ];
+  const values: Record<SettingName, string> = {
+    "Ability score method": `Method ${rules.abilityScoreMethod}: ${ABILITY_SCORE_METHODS[rules.abilityScoreMethod].description}`,
+    "Weapon proficiencies": onOff(rules.weaponProficiencies),
+    "Non-weapon proficiencies": rules.nonweaponProficiencies === "allowed" ? "Allowed: each player chooses" : "Off",
+    "Weapon specialization": onOff(rules.weaponSpecialization),
+    "Hovering on Death's Door": onOff(rules.hoveringOnDeathsDoor),
+    "Encounter difficulty": STYLE_TEXT.encounterDifficulty[dmStyle.encounterDifficulty],
+    "DM adjusts encounters in play": STYLE_TEXT.adjustsEncountersInPlay[dmStyle.adjustsEncountersInPlay],
+    "DM explains rules": STYLE_TEXT.explainsRules[dmStyle.explainsRules],
+  };
+  return (Object.keys(values) as SettingName[]).map((setting) => ({ setting, value: values[setting], ...SETTING_EXPLANATIONS[setting] }));
 }
