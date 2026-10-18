@@ -67,6 +67,16 @@ export class GameStore {
     if (result.changes === 0) throw new Error(`No game with id ${id}.`);
     return this.get(id)!;
   }
+
+  /** Deletes one game. Returns false when there was no game with that id. */
+  delete(id: string): boolean {
+    return this.db.prepare("DELETE FROM games WHERE id = ?").run(id).changes > 0;
+  }
+
+  /** Deletes every game. Returns how many were deleted. */
+  clear(): number {
+    return this.db.prepare("DELETE FROM games").run().changes;
+  }
 }
 
 function toGame(row: GameRow): Game {

@@ -65,18 +65,19 @@ TypeScript monorepo with dependencies in one direction only:
 
 ## Data
 
-- `data/books/`: the book text in Markdown (`phb.md`, `dmg.md`), from the owner's own copies. Local only, ignored by Git. Files ending in `-condensed.md` are never indexed.
-- `data/games.db`: the game database (SQLite), local only, ignored by Git.
-- `data/index/`: the LanceDB index, and its `embedding_cache` table. Local only, ignored by Git. Rewritten on every `build-index`, reusing cached vectors for unchanged chunks; the cache keeps only the current chunks' vectors, and old table versions are deleted.
+- The whole `data/` folder is local only and ignored by Git (`.gitignore` has `data/`): books, index, reports, evaluation runs and the game database.
+- `data/books/`: the book text in Markdown (`phb.md`, `dmg.md`), from the owner's own copies. Files ending in `-condensed.md` are never indexed.
+- `data/games.db`: the game database (SQLite).
+- `data/index/`: the LanceDB index, and its `embedding_cache` table. Rewritten on every `build-index`, reusing cached vectors for unchanged chunks; the cache keeps only the current chunks' vectors, and old table versions are deleted.
 - `eval/rules-questions.json`: the rules evaluation set, committed. Expected answers are written in our own words, never copied from the books; each question is `draft` until checked against the books, then `confirmed`, and its note says where the expected answer came from.
 - `data/eval/runs/`: saved evaluation runs, local only.
-- `data/reports/`: check reports, fix lists, chunk comparisons and evaluation reports. Local only, ignored by Git, since they quote the books.
+- `data/reports/`: check reports, fix lists, chunk comparisons and evaluation reports. They quote the books, which is why they must never be committed.
 - Never commit, print in full, or reproduce book text in outputs to players. Agents may read and apply it, and cite where a rule comes from.
 
 ## Design principles
 
 1. The model narrates, the code decides: every number on a character sheet or in combat comes from `rules`.
-2. RAG for prose (procedures, rules explained in text, guidance); structured data for numbers and tables.
+2. No agent states a rule from its own memory. Setting up a game, creating characters, designing campaigns and running play all go through the rules search in the knowledge package, and every rule an agent relies on is cited to its source. Exact numbers used in calculations come from data files checked against the books, table by table; anything they don't cover falls back to the rules search. When the books don't cover something, the agent says so and asks the players or the human DM instead of improvising a rule. The model's own creativity is for the story, never for the rules.
 3. Tools are plain functions with Zod schemas; LangChain adapters wrap them for the agents, so an MCP adapter can be added later.
 4. Tool errors are returned to the model as text, never thrown out of the agent loop; the loop has a round limit.
 5. Only `packages/server/src/llm/provider.ts` knows about model providers.
@@ -95,7 +96,7 @@ TypeScript monorepo with dependencies in one direction only:
 - `pnpm --filter @dnd/server check-model`: checks the configured model answers, and how fast
 - `pnpm --filter @dnd/server evaluate [--only id1,id2]`: runs the rules evaluation; report in `data/reports/eval-<date>.md`, runs saved in `data/eval/runs/`
 - `pnpm --filter @dnd/server ask "question"`: answers a rules question from the books, with numbered sources, warnings, and measurements (search and answer time, prompt size, estimated and reported tokens, real characters per token)
-- `pnpm --filter @dnd/server games [create "name" --preset easy | show <id>]`: lists, creates and shows saved games, with each setting described and cited
+- `pnpm --filter @dnd/server games [create "name" --preset easy | show <id> | delete <id> | clear]`: lists, creates, shows and deletes saved games, with each setting described and cited; `delete` and `clear` ask for a typed yes
 
 Rebuild the index after any change to the books, the chunker or the index format. After a chunker change, run `compare-chunks` first: it needs the old index to compare against.
 
@@ -103,7 +104,10 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 
 ## Known pitfalls
 
-- Never name a package script after a built-in pnpm command (`search`, `test`, `install`...): the built-in wins and the script never runs. `pnpm run <name>` always runs the script.
+- Never name a package script after a built-in pnpm command (`search`, `test`, `install`, `setup`...): the built-in wins and the script never runs; `pnpm setup` even starts installing pnpm globally. `pnpm run <name>` always runs the script.
+- `.gitignore` had no final line break: appending with `echo ... >>` would glue the new rule to the last line. Edit it in the editor. Until it ignored the whole `data/` folder, reports quoting the books and the game database were committed; they remain in the public repository's history (see TODO).
+- VS Code's search skips `data/books/` because it's ignored by Git: turn off "Use Exclude Settings and Ignore Files" in the search panel, search inside the open file with Cmd+F, or use `grep` in the terminal (macOS `grep` doesn't support `\b`).
+- Never reuse one Zod schema object in several fields of a tool: the definition sent to the model turns the repeats into references (`$ref`) to the first field, which a small model can't follow. Build each field's schema with a function.
 - LanceDB index configurations (`Index.fts()`) can only be used once: create a new one for each index.
 - Never let `better-sqlite3` move to version 13 while Node stays at 22.11: it crashes without an error message. Its type definitions come from `@types/better-sqlite3`.
 - LanceDB prints "No existing dataset ... will be created" warnings straight to the terminal the first time a table is created (they cross the spinner line); `LANCE_LOG` and `RUST_LOG` don't silence them in this version. Harmless.
@@ -121,6 +125,13 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 - Every change to `rules` or `knowledge` gets tests; agent tests use a scripted model, never a real one.
 - Ask before adding a dependency; prefer MIT, Apache 2.0 or BSD licences.
 - When a design depends on what the books say, Claude writes the questions for the rules search (`ask`) and Roger runs them, instead of Claude relying on memory; answers are checked against their sources, and doubtful ones against the PDF pages.
+- Every agent has the same rules tool (`search_rules`), built on the answering workflow, and its instructions require consulting it before stating, applying or explaining a rule.
+- Agents are judged with repeatable evaluations (fixed scenarios, several runs each, automatic checks), not single conversations: at temperature 0.3, the same conversation can go differently twice.
+- Change one thing at a time in an agent, and measure it, before changing the next.
+- Tests of agent tools also check what the model is shown (the tool definitions as sent), not only what the tools accept.
+- Agent instructions stay short: merge rules rather than adding patches.
+- Commit after every step that passes its tests and checks; never leave work uncommitted across steps.
+- When updating this file, Claude starts from the latest version in the repository and checks that every edit given to apply by hand is still present, and that every package script has its line under Commands.
 - Code, comments and identifiers in English. Player-facing input and output are **English-only for now** (decided after the first real answers, see Status): a working system that creates and runs games comes before multilingual support.
 
 ## Status
@@ -135,9 +146,10 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
   - Done: 1.7 ask the rules: 1.7a, connection to the model (`check-model`: 5.2 s for a one-word answer, first call); 1.7b, neighbouring pieces (`expand`, `--context`; requires an index rebuilt with piece numbers), revised so tables belong to their section and the text before a table is reachable from the text after it; 1.7b3, embedding cache, build progress and a spinner; 1.7c0, context window management (window set explicitly, token estimates, source budget derived from the window, prompt check before sending, usage check after); 1.7c, the answering workflow (single pass; the answer's language is left to the instructions, since telling Catalan from Spanish reliably needs a detection library) (a full build took 923 s once instead of the usual 210 s, cause unknown; progress reporting will show where time goes). 1.7d, the `ask` command (verified end to end against a stand-in Ollama: num_ctx 8192, num_predict 1024 and temperature 0.1 reach Ollama). First real answers (qwen2.5:7b, 16 to 21 s each, 4.2 to 4.3 characters per token): "Can a dwarf be a mage?" answered no correctly but claimed no exceptions exist, missing the DM's case-by-case advice in its own source, and ignored the converter note; a Catalan question was misread (see Backlog); the "advantage" trap (a 5th Edition mechanic) was answered with invented content citing real sources, which the citation checks cannot catch (motivates 1.9). Questions and answers are now English-only, with a fixed reply to other languages.
   - Done: 1.8, lean evaluation (tooling): 19 questions (16 rules, 3 traps from 5th Edition), all draft; the `evaluate` command scores retrieval, grounding and traps, and the report collects Roger's verdicts on content. Built and tested end to end; the baseline is deferred until the books are fixed (TODO, groups A and B).
 - Plan: Iteration 2, game setup (settings and presets, saving games, the setup agent); 3, Character Designer; 4, Campaign Designer; 5, Game Master in play.
-- In progress: Iteration 2. Done: 2.1, settings schema and presets, based on the rules search's answers and Roger's reading of PHB p. 70; the evaluation set grew to 29 questions with ten from that session. 2.2, saving games: SQLite through `better-sqlite3` 12 (chosen over MongoDB: no server to run, transactions built in, the same embedded approach as LanceDB), a versioned schema, and a `GameStore` behind which storage could change. Next: 2.3, the setup agent.
+- In progress: Iteration 2. Done: 2.1, settings schema and presets, based on the rules search's answers and Roger's reading of PHB p. 70; the evaluation set grew to 29 questions with ten from that session. 2.2, saving games: SQLite through `better-sqlite3` 12 (chosen over MongoDB: no server to run, transactions built in, the same embedded approach as LanceDB), a versioned schema, and a `GameStore` behind which storage could change; 2.2b, deleting one game or all of them, from the store and the `games` command, after a typed yes.
+  - 2.3, the setup agent: a first attempt (2.3 to 2.3h, never committed on `main`) is kept on the branch `setup-agent-experiments`. Its lessons are in Working agreements and Known pitfalls: with a 7B model, many small patches made the agent worse; single conversations misled every judgement; a shared schema object reached the model as `$ref` pointers. Being rebuilt from 2.2 in small, measured, committed steps, around four requirements: show the three presets, build a custom combination, explain presets by searching the books (`search_rules`, shared), create the game with the chosen settings.
+- Next: 2.3 rebuild, starting with the generic pieces from the branch (agent loop, `search_rules`) and the evaluation.
   - After 1.7: 1.8 evaluation (questions with known answers and known source sections); 1.9 evaluator-optimizer where 1.8 shows it helps (claim-by-claim support checks, one revision when a check fails, a new search when the sources don't answer), compared against the 1.8 baseline.
-- Next iterations: 2, Character Designer; 3, Campaign Designer.
 
 ## TODO: deferred for better results
 
@@ -175,3 +187,5 @@ Work set aside to keep moving towards a playable system. Grouped by what each it
 16. Multilingual support (Catalan, Spanish): the 7B model took a Catalan question for French, translated "nan" (dwarf) as "elf" and answered in English, and keyword search finds nothing for non-English words. Options: translate the player's question into English first, naming the language from settings rather than detecting it, with a glossary of game terms provided by Roger (not invented); search and answer in English; translate the answer back. A translation tool the Game Master can call for occasional cases. A larger or more multilingual model, measured against the evaluation.
 17. PDF to Markdown converter (Python, Docling, a second reading of every table, OCR for scanned pages): table extraction is the weakest part of the current conversions.
 18. MCP server exposing `search_rules` (iteration 1b, undecided).
+19. Remove the book excerpts from the public repository's history: reports and evaluation runs under `data/` were committed (commits on `main` since hybrid search, and the experiments branch). With `git filter-repo --path data/ --invert-paths`, after a full backup, then a force-push of both branches; GitHub may keep old commits cached until its support purges them.
+20. Try a larger local model for agents (for example a 14B model) on the same evaluation scenarios, to tell the 7B model's limits from the design's.

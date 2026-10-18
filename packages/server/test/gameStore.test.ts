@@ -74,6 +74,26 @@ describe("GameStore", () => {
   });
 });
 
+describe("GameStore, deleting", () => {
+  it("deletes one game, and says whether it existed", () => {
+    const games = store();
+    const a = games.create({ name: "A", settings: presetSettings("easy") });
+    const b = games.create({ name: "B", settings: presetSettings("easy") });
+    expect(games.delete(a.id)).toBe(true);
+    expect(games.list().map((g) => g.id)).toEqual([b.id]);
+    expect(games.delete(a.id)).toBe(false);
+  });
+
+  it("clears every game, returning how many were deleted", () => {
+    const games = store();
+    games.create({ name: "A", settings: presetSettings("easy") });
+    games.create({ name: "B", settings: presetSettings("medium") });
+    expect(games.clear()).toBe(2);
+    expect(games.list()).toEqual([]);
+    expect(games.clear()).toBe(0);
+  });
+});
+
 describe("openDatabase", () => {
   it("creates the tables once, records the schema version, and keeps data across openings", async () => {
     const dir = await mkdtemp(path.join(tmpdir(), "games-"));
