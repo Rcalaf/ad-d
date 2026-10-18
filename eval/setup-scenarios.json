@@ -1,0 +1,36 @@
+[
+  {
+    "id": "beginner-side-change",
+    "turns": [
+      "Our group has some experience.",
+      "We lean towards the beginner side. Could we use the easy preset, but with weapon proficiencies on?",
+      "That looks good. Please call the game Friday group."
+    ],
+    "expect": {
+      "rules": { "abilityScoreMethod": "V", "weaponProficiencies": true },
+      "dmStyle": { "encounterDifficulty": "below" },
+      "gameName": "Friday group"
+    }
+  },
+  {
+    "id": "new-players-question",
+    "turns": [
+      "We are all new players.",
+      "What does Hovering on Death's Door mean?",
+      "Thanks. Keep the easy preset and call the game New heroes."
+    ],
+    "expect": { "preset": "easy", "gameName": "New heroes" }
+  },
+  {
+    "id": "veterans-change",
+    "turns": [
+      "We are veterans.",
+      "Use the difficult preset, but turn on Hovering on Death's Door.",
+      "Call it Iron party."
+    ],
+    "expect": {
+      "rules": { "abilityScoreMethod": "I", "hoveringOnDeathsDoor": true },
+      "gameName": "Iron party"
+    }
+  }
+]

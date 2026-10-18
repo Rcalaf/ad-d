@@ -59,6 +59,11 @@ describe("getChatModel", () => {
     expect(model.numPredict).toBe(1024);
   });
 
+  it("lets a caller override the answer length for one use, like the temperature", () => {
+    const model = getChatModel({ ...base, llmProvider: "ollama" }, { answerTokens: 2048 }) as ChatOllama;
+    expect(model.numPredict).toBe(2048);
+  });
+
   it("lets a caller override the temperature for one use", () => {
     const model = getChatModel({ ...base, llmProvider: "ollama" }, { temperature: 0 }) as ChatOllama;
     expect(model.temperature).toBe(0);

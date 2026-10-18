@@ -6,3 +6,5 @@ export * from "./answering/citations";
 export * from "./answering/sources";
 export * from "./state/database";
 export * from "./state/games";
+export * from "./agents/agentLoop";
+export * from "./agents/rulesTool";

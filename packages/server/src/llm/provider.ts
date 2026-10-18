@@ -7,6 +7,8 @@ import type { Settings } from "../config";
 export interface ModelOptions {
   /** Overrides the configured temperature for this use, for example 0 for factual answers. */
   temperature?: number;
+  /** Overrides the configured answer length, in tokens, for this use: each agent asks for what its task needs. */
+  answerTokens?: number;
 }
 
 /**
@@ -15,6 +17,7 @@ export interface ModelOptions {
  */
 export function getChatModel(settings: Settings, options: ModelOptions = {}): BaseChatModel {
   const temperature = options.temperature ?? settings.temperature;
+  const answerTokens = options.answerTokens ?? settings.answerTokens;
   switch (settings.llmProvider) {
     case "ollama":
       // numCtx and numPredict reach Ollama as num_ctx and num_predict. Without numCtx, Ollama uses its
@@ -24,7 +27,7 @@ export function getChatModel(settings: Settings, options: ModelOptions = {}): Ba
         baseUrl: settings.llmBaseUrl,
         temperature,
         numCtx: settings.contextTokens,
-        numPredict: settings.answerTokens,
+        numPredict: answerTokens,
       });
     case "openai_compatible":
       return new ChatOpenAI({
@@ -33,10 +36,10 @@ export function getChatModel(settings: Settings, options: ModelOptions = {}): Ba
         apiKey: settings.llmApiKey ?? "not-needed",
         temperature,
         // The window is set on the server for these providers; only the answer length is set here.
-        maxTokens: settings.answerTokens,
+        maxTokens: answerTokens,
         configuration: { baseURL: settings.llmBaseUrl },
       });
     case "anthropic":
-      return new ChatAnthropic({ model: settings.llmModel, apiKey: settings.llmApiKey, temperature, maxTokens: settings.answerTokens });
+      return new ChatAnthropic({ model: settings.llmModel, apiKey: settings.llmApiKey, temperature, maxTokens: answerTokens });
   }
 }

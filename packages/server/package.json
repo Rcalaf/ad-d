@@ -8,7 +8,9 @@
     "check-model": "tsx --env-file=../../.env src/cli/checkModel.ts",
     "ask": "tsx --env-file=../../.env src/cli/ask.ts",
     "evaluate": "tsx --env-file=../../.env src/cli/evaluate.ts",
-    "games": "tsx --env-file=../../.env src/cli/games.ts"
+    "games": "tsx --env-file=../../.env src/cli/games.ts",
+    "new-game": "tsx --env-file=../../.env src/cli/newGame.ts",
+    "eval-setup": "tsx --env-file=../../.env src/cli/evalSetup.ts"
   },
   "dependencies": {
     "@dnd/knowledge": "workspace:*",

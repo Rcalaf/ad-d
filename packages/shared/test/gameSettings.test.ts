@@ -6,6 +6,7 @@ import {
   GameSettingsSchema,
   PRESETS,
   presetSettings,
+  SETTING_EXPLANATIONS,
 } from "../src/gameSettings";
 
 describe("PRESETS", () => {
@@ -78,6 +79,34 @@ describe("describeSettings", () => {
     expect(hovering.reference).toMatch(/Dungeon Master Guide, Chapter 9/);
     const style = lines.find((l) => l.setting === "DM explains rules")!;
     expect(style.reference).toBeUndefined();
+  });
+});
+
+describe("setting explanations", () => {
+  it("explain every setting, marking each as a book rule or our design", () => {
+    const lines = describeSettings(presetSettings("medium"));
+    for (const line of lines) {
+      expect(line.explanation.length, line.setting).toBeGreaterThan(40);
+      expect(["book", "design"]).toContain(line.source);
+    }
+    expect(Object.keys(SETTING_EXPLANATIONS)).toHaveLength(8);
+  });
+
+  it("give book references only for book rules, never for our design", () => {
+    for (const line of describeSettings(presetSettings("easy"))) {
+      if (line.source === "design") {
+        expect(line.reference, line.setting).toBeUndefined();
+        expect(line.explanation, line.setting).toMatch(/our design/i);
+      } else {
+        expect(line.reference, line.setting).toBeDefined();
+      }
+    }
+  });
+
+  it("explain Hovering on Death's Door as in the Dungeon Master Guide: alive until -10, otherwise dead at 0", () => {
+    const hovering = SETTING_EXPLANATIONS["Hovering on Death's Door"].explanation;
+    expect(hovering).toMatch(/until −10 hit points/);
+    expect(hovering).toMatch(/dies at 0 hit points/);
   });
 });
 
