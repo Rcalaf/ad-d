@@ -62,6 +62,7 @@ TypeScript monorepo with dependencies in one direction only:
 | `evaluation/runEvaluation.ts` | Scores what code can score reliably: retrieval (expected sections among the sources), grounding (the answer cites an expected section), declined traps; summaries and comparisons between runs of the same questions. |
 | `evaluation/report.ts` | The evaluation report: summary, comparison, and each question with expected answer, answer, sources and an empty verdict. |
 | `cli/errors.ts` | Turns model errors (Ollama not running, model not downloaded) into what to check. |
+| `agents/agentLoop.ts` | The agent loop shared by every agent: the model answers or asks for tools; our code runs them and returns each result with its request's id; unknown tools, invalid arguments and failing tools go back to the model as text; at most 6 rounds; the conversation and tool definitions checked against the context window before each call; every tool use reported. |
 
 ## Data
 
@@ -149,6 +150,7 @@ Working loop for correcting the books by hand: open the PDF and `fix-list-<book>
 - In progress: Iteration 2. Done: 2.1, settings schema and presets, based on the rules search's answers and Roger's reading of PHB p. 70; the evaluation set grew to 29 questions with ten from that session. 2.2, saving games: SQLite through `better-sqlite3` 12 (chosen over MongoDB: no server to run, transactions built in, the same embedded approach as LanceDB), a versioned schema, and a `GameStore` behind which storage could change; 2.2b, deleting one game or all of them, from the store and the `games` command, after a typed yes.
   - 2.3, the setup agent: a first attempt (2.3 to 2.3h, never committed on `main`) is kept on the branch `setup-agent-experiments`. Its lessons are in Working agreements and Known pitfalls: with a 7B model, many small patches made the agent worse; single conversations misled every judgement; a shared schema object reached the model as `$ref` pointers. Being rebuilt from 2.2 in small, measured, committed steps, around four requirements: show the three presets, build a custom combination, explain presets by searching the books (`search_rules`, shared), create the game with the chosen settings.
 - Next: 2.3 rebuilt from scratch on `main`, nothing taken from the branch: a basic, informative game creation agent (show the presets, build the chosen settings, explain them by searching the books, create the game after a typed yes). It doesn't design characters or campaigns, nor act as Game Master. Steps: 2.3.1 agent loop, 2.3.2 shared `search_rules`, 2.3.3 the setup tools, 2.3.4 instructions and `new-game` with a manual test, 2.3.5 adjustments only if needed.
+- Done: 2.3.1, the agent loop.
 
 ## TODO: deferred for better results
 
