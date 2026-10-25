@@ -86,7 +86,7 @@ const SetSettingsSchema = z.object({
 export function setupTools(session: SetupSession): AgentTool[] {
   const showPresets: AgentTool = {
     name: "show_presets",
-    description: "Show the three presets (easy, medium, difficult) with the value of every setting, and what each setting is.",
+    description: "Show the three presets (easy, medium, difficult) with the value of every setting, and where each setting comes from.",
     schema: z.object({}),
     run: () => {
       const references = new Map(describeSettings(PRESETS.medium).map((l) => [l.setting, l.reference]));
@@ -98,8 +98,8 @@ export function setupTools(session: SetupSession): AgentTool[] {
         const reference = references.get(label);
         return `- ${field}: ${label} (${reference ?? "our design, not from the books"})`;
       });
-      const methods = Object.entries(ABILITY_SCORE_METHODS).map(([id, m]) => `${id}: ${m.description}`).join("; ");
-      return ["The three presets:", ...presets, "", "The settings:", ...settings, `Ability score methods: ${methods}.`].join("\n");
+      // The methods' identifiers only (I to VI): what each one means is for search_books to explain, from the books.
+      return ["The three presets:", ...presets, "", "The settings:", ...settings].join("\n");
     },
   };
 
@@ -155,7 +155,7 @@ export function setupTools(session: SetupSession): AgentTool[] {
     run: ({ name }) => {
       if (!session.settings) throw new Error("There are no settings yet: set them with set_settings first.");
       session.requestedName = name;
-      return `Creation of "${name}" requested. The program now asks the person at the keyboard to confirm.`;
+      return `Creation of "${name}" requested. The game is not created yet: the program now asks the person at the keyboard to confirm.`;
     },
   };
 

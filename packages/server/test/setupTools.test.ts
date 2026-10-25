@@ -30,6 +30,12 @@ describe("show_presets", () => {
     expect(text).toMatch(/hoveringOnDeathsDoor: Hovering on Death's Door \(Dungeon Master Guide, Chapter 9/);
     expect(text).toMatch(/encounterDifficulty: Encounter difficulty \(our design, not from the books\)/);
   });
+
+  it("gives the methods' identifiers only, without descriptions, so explanations come from search_books", async () => {
+    const text = await make().run("show_presets", {});
+    expect(text).toContain("abilityScoreMethod V");
+    expect(text).not.toMatch(/4d6|3d6/);
+  });
 });
 
 describe("set_settings", () => {
@@ -90,6 +96,7 @@ describe("create_game", () => {
     const text = await run("create_game", { name: "  Friday group " });
     expect(session.requestedName).toBe("Friday group");
     expect(text).toMatch(/requested/i);
+    expect(text).toMatch(/is not created yet/i);
   });
 });
 

@@ -81,6 +81,7 @@ export async function runAgentTurn(options: {
       messages.push(new ToolMessage({ content: use.result, tool_call_id: request.id ?? request.name }));
     }
   }
+  console.log(messages)
 
   return {
     reply: `(The agent stopped after ${maxRounds} rounds of tool use without answering. Please rephrase or ask again.)`,
