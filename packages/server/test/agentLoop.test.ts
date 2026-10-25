@@ -93,6 +93,20 @@ describe("runAgentTurn", () => {
     ]);
   });
 
+  it("attaches the turn reminder to the player's latest message, in every model call of the turn", async () => {
+    const model = new ScriptedModel([toolRequest("1", "double", { n: 21 }), answer("42.")]);
+    await runAgentTurn({ model, tools: [double], messages: conversation(), turnReminder: "Use double for doubling." });
+    for (const sent of model.sent) {
+      const latest = sent.filter((m) => m._getType() === "human").at(-1)!;
+      expect(String(latest.content)).toBe("What is 21 doubled?\n\n[Note from the program, not from the player: Use double for doubling.]");
+    }
+  });
+
+  it("keeps the player's message as typed in the returned conversation, so reminders never pile up", async () => {
+    const turn = await runAgentTurn({ model: new ScriptedModel([answer("42.")]), tools: [double], messages: conversation(), turnReminder: "Use double." });
+    expect(turn.messages.filter((m) => m._getType() === "human").map((m) => m.content)).toEqual(["What is 21 doubled?"]);
+  });
+
   it("refuses to send a conversation that doesn't fit the context window, before calling the model", async () => {
     const model = new ScriptedModel([answer("never sent")]);
     const tooLong = [new SystemMessage("x".repeat(30_000)), new HumanMessage("hi")];

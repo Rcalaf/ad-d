@@ -10,4 +10,11 @@ Your tools:
 - search_books: what the books say. Use it whenever you explain a rule or a setting, and mention the book and page it gives. Never explain rules from your own memory.
 - create_game: when the players are happy and have chosen a name. The program then asks them to confirm and creates the game: never say yourself that it is created.
 
-Start by showing the presets and asking how experienced the group is, and suggest a preset: easy for new players, medium for some experience, difficult for veterans. Keep your replies short. Never write tool arguments or JSON in your replies. The players write in English.`;
+Start by asking how experienced the group is, and suggest a preset: easy for new players, medium for some experience, difficult for veterans. Keep your replies short. Never write tool arguments or JSON in your replies. The players write in English.`;
+
+/**
+ * Attached by the loop to the player's latest message, every turn: the two decisions the agent got wrong when
+ * the cue was only in the instructions (explaining without searching; describing settings without setting them).
+ */
+export const SETUP_TURN_REMINDER =
+  "If the player asks what a rule or setting means, call search_books before answering, and name the book and page. To suggest or change settings, call set_settings.";

@@ -3,7 +3,7 @@ import { AIMessage, HumanMessage, SystemMessage, type BaseMessage } from "@langc
 import { OllamaEmbedder, RulesIndex, Spinner } from "@dnd/knowledge";
 import { describeSettings } from "@dnd/shared";
 import { runAgentTurn, toLangChainTools, type ToolCallingModel, type ToolUse } from "../agents/agentLoop";
-import { SETUP_INSTRUCTIONS } from "../agents/setup/prompt";
+import { SETUP_INSTRUCTIONS, SETUP_TURN_REMINDER } from "../agents/setup/prompt";
 import { SetupSession, setupTools } from "../agents/setup/tools";
 import { searchBooksTool } from "../agents/tools/searchBooks";
 import { answerQuestion } from "../answering/answerQuestion";
@@ -62,20 +62,9 @@ async function main() {
   const spinner = new Spinner();
   let messages: BaseMessage[] = [new SystemMessage(SETUP_INSTRUCTIONS), new AIMessage(OPENING)];
   console.log(`\n${OPENING}\n(Type "quit" to leave without creating a game.)`);
-  const turn = await runAgentTurn({
-          model,
-          tools,
-          messages: [...messages, new HumanMessage(String('show setting options').trim())],
-          budget,
-          onToolUse: (use) => spinner.log(describeToolUse(use)),
-        });
-    messages = turn.messages;
-    spinner.stop();
-    console.log(`\n${turn.reply}`);
 
   try {
     while (true) {
-
       const line = await ask("\n> ");
       if (line === undefined || ["quit", "exit"].includes(line.toLowerCase())) break;
       if (!line) continue;
@@ -88,6 +77,7 @@ async function main() {
           tools,
           messages: [...messages, new HumanMessage(line)],
           budget,
+          turnReminder: SETUP_TURN_REMINDER,
           onToolUse: (use) => spinner.log(describeToolUse(use)),
         });
         messages = turn.messages;

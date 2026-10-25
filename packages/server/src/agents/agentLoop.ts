@@ -1,4 +1,4 @@
-import { ToolMessage, type AIMessage, type BaseMessage } from "@langchain/core/messages";
+import { HumanMessage, ToolMessage, type AIMessage, type BaseMessage } from "@langchain/core/messages";
 import { tool as langChainTool, type StructuredToolInterface } from "@langchain/core/tools";
 import { toJsonSchema } from "@langchain/core/utils/json_schema";
 import type { z } from "zod";
@@ -57,17 +57,33 @@ export async function runAgentTurn(options: {
   budget?: WindowBudget;
   /** Called after each tool use, to show what the agent is doing. */
   onToolUse?: (use: ToolUse) => void;
+  /**
+   * A short note attached to the player's latest message, seen by the model in every call of this turn only.
+   * Small models attend most to the latest message, where the instructions, sent first, are farthest away;
+   * the note puts the key cue where the model is looking. The returned conversation keeps the message as typed.
+   */
+  turnReminder?: string;
 }): Promise<AgentTurn> {
-  const { model, tools, maxRounds = 6, budget, onToolUse } = options;
+  const { model, tools, maxRounds = 6, budget, onToolUse, turnReminder } = options;
   const messages = [...options.messages];
   const toolUses: ToolUse[] = [];
   const toolsByName = new Map(tools.map((t) => [t.name, t]));
   // The tool definitions are sent with every call, so they take room in the context window too.
   const definitions = tools.map((t) => `${t.name} ${t.description} ${JSON.stringify(toJsonSchema(t.schema))}`);
 
+  // The player's latest message, to which the reminder is attached when sending (never in the returned conversation).
+  const latestHuman = messages.map((m) => m._getType()).lastIndexOf("human");
+  const toSend = (): BaseMessage[] => {
+    if (!turnReminder || latestHuman < 0) return messages;
+    const withNote = [...messages];
+    withNote[latestHuman] = new HumanMessage(`${String(messages[latestHuman].content)}\n\n[Note from the program, not from the player: ${turnReminder}]`);
+    return withNote;
+  };
+
   for (let round = 1; round <= maxRounds; round++) {
-    if (budget) assertPromptFits([...definitions, ...messages.map((m) => String(m.content))], budget);
-    const response = await model.invoke(messages);
+    const sending = toSend();
+    if (budget) assertPromptFits([...definitions, ...sending.map((m) => String(m.content))], budget);
+    const response = await model.invoke(sending);
     messages.push(response);
 
     const requests = response.tool_calls ?? [];
@@ -81,7 +97,6 @@ export async function runAgentTurn(options: {
       messages.push(new ToolMessage({ content: use.result, tool_call_id: request.id ?? request.name }));
     }
   }
-  console.log(messages)
 
   return {
     reply: `(The agent stopped after ${maxRounds} rounds of tool use without answering. Please rephrase or ask again.)`,
