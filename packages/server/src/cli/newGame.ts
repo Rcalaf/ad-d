@@ -4,7 +4,7 @@ import { OllamaEmbedder, RulesIndex, Spinner } from "@dnd/knowledge";
 import { describeSettings } from "@dnd/shared";
 import { runAgentTurn, toLangChainTools, type ToolCallingModel, type ToolUse } from "../agents/agentLoop";
 import { SETUP_INSTRUCTIONS, SETUP_TURN_REMINDER } from "../agents/setup/prompt";
-import { SetupSession, setupTools } from "../agents/setup/tools";
+import { presetsTable, SetupSession, setupTools } from "../agents/setup/tools";
 import { searchBooksTool } from "../agents/tools/searchBooks";
 import { answerQuestion } from "../answering/answerQuestion";
 import { loadSettings } from "../config";
@@ -16,7 +16,13 @@ import { explainModelError } from "./errors";
 /** Answers from the books stick to the sources; the conversation itself can be a little freer. */
 const BOOKS_TEMPERATURE = 0.1;
 const AGENT_TEMPERATURE = 0.3;
-const OPENING = "Let's set up your game. How experienced is your group with AD&D 2nd Edition: new players, some experience, or veterans?";
+const OPENING = [
+  "Let's set up your game. There are three presets to start from:",
+  "",
+  presetsTable(),
+  "",
+  "How experienced is your group with AD&D 2nd Edition: new players, some experience, or veterans?",
+].join("\n");
 
 /** A tool use in words, for the line shown while the agent works. */
 function describeToolUse(use: ToolUse): string {

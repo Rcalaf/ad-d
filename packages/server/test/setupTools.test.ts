@@ -1,7 +1,7 @@
 import { toJsonSchema } from "@langchain/core/utils/json_schema";
 import { presetSettings } from "@dnd/shared";
 import { describe, expect, it } from "vitest";
-import { SetupSession, setupTools } from "../src/agents/setup/tools";
+import { presetsTable, SetupSession, setupTools } from "../src/agents/setup/tools";
 
 function make() {
   const session = new SetupSession();
@@ -121,5 +121,29 @@ describe("what the model is shown", () => {
         expect(offered[field]?.enum, `${field} ${value}`).toContain(value);
       }
     }
+  });
+});
+
+describe("presetsTable", () => {
+  const rows = presetsTable().split("\n");
+  const cells = (row: string) => row.trim().split(/\s{2,}/);
+
+  it("has a column per preset and a row per setting, labelled in plain words", () => {
+    expect(cells(rows[0])).toEqual(["Setting", "easy", "medium", "difficult"]);
+    expect(rows).toHaveLength(1 + 8);
+    expect(cells(rows.find((r) => r.startsWith("Ability score method"))!)).toEqual(["Ability score method", "V", "V", "I"]);
+    expect(cells(rows.find((r) => r.startsWith("Hovering on Death's Door"))!)).toEqual(["Hovering on Death's Door", "on", "on", "off"]);
+  });
+
+  it("aligns its columns, so it reads as a table in a terminal", () => {
+    const starts = (column: number) => new Set(rows.map((r) => [...r.matchAll(/\S+(?: \S+)*/g)][column].index));
+    for (const column of [1, 2, 3]) expect(starts(column).size, `column ${column}`).toBe(1);
+  });
+
+  it("writes every value as set_settings accepts it", () => {
+    const tool = make().tool("set_settings");
+    const offered = (toJsonSchema(tool.schema) as { properties: Record<string, { enum?: string[] }> }).properties;
+    const allowed = new Set(Object.values(offered).flatMap((p) => p.enum ?? []));
+    for (const row of rows.slice(1)) for (const value of cells(row).slice(1)) expect(allowed, `${row.slice(0, 30)} ${value}`).toContain(value);
   });
 });

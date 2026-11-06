@@ -63,6 +63,24 @@ const settingsText = (s: GameSettings) => {
 };
 
 /**
+ * The three presets side by side, for the players: rows labelled in plain words, values written exactly as
+ * set_settings accepts them, columns aligned for a terminal. Built from the same fields as the tools' results.
+ */
+export function presetsTable(): string {
+  const columns = [
+    ["Setting", ...FIELDS.map(([, label]) => label)],
+    ...PRESET_NAMES.map((name) => {
+      const values = toVocabulary(PRESETS[name]);
+      return [name, ...FIELDS.map(([field]) => values[field])];
+    }),
+  ];
+  const widths = columns.map((column) => Math.max(...column.map((cell) => cell.length)) + 2);
+  return columns[0]
+    .map((_, row) => columns.map((column, c) => (c < columns.length - 1 ? column[row].padEnd(widths[c]) : column[row])).join(""))
+    .join("\n");
+}
+
+/**
  * One allowed value out of a fixed list, letter case ignored. Built by a function for each field: one schema
  * object shared by several fields would reach the model as a reference ($ref) to the first, which it can't follow.
  */
