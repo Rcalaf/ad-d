@@ -7,7 +7,8 @@ async function main() {
   const settings = loadSettings();
   console.log(`Provider: ${settings.llmProvider} · Model: ${settings.llmModel}${settings.llmBaseUrl ? ` · ${settings.llmBaseUrl}` : ""}`);
 
-  const model = getChatModel(settings, { temperature: 0 });
+  // A connection check: thinking would only make it slower.
+  const model = getChatModel(settings, { temperature: 0, thinking: false });
   const start = performance.now();
   try {
     const response = await model.invoke("Reply with one word: OK");

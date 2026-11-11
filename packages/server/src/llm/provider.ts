@@ -7,6 +7,11 @@ import type { Settings } from "../config";
 export interface ModelOptions {
   /** Overrides the configured temperature for this use, for example 0 for factual answers. */
   temperature?: number;
+  /**
+   * For models that think before answering (Qwen3): false switches thinking off for this use, for work that
+   * gains nothing from it, such as summarizing given passages. Not set: the model's own default. Ollama only.
+   */
+  thinking?: boolean;
 }
 
 /**
@@ -25,6 +30,8 @@ export function getChatModel(settings: Settings, options: ModelOptions = {}): Ba
         temperature,
         numCtx: settings.contextTokens,
         numPredict: settings.answerTokens,
+        // Sent only when a caller sets it, so every other use stays as before.
+        ...(options.thinking !== undefined && { think: options.thinking }),
       });
     case "openai_compatible":
       return new ChatOpenAI({

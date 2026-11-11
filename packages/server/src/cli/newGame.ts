@@ -49,7 +49,8 @@ async function main() {
   const index = await RulesIndex.open(settings.indexDir, new OllamaEmbedder({ model: settings.embeddingModel, host: settings.ollamaHost }));
 
   const session = new SetupSession();
-  const booksModel = getChatModel(settings, { temperature: BOOKS_TEMPERATURE });
+  // The books' answers summarize given passages: thinking adds time without helping. The agent keeps its default.
+  const booksModel = getChatModel(settings, { temperature: BOOKS_TEMPERATURE, thinking: false });
   const tools = [...setupTools(session), searchBooksTool((question) => answerQuestion(question, { index, model: booksModel, budget }))];
   const chat = getChatModel(settings, { temperature: AGENT_TEMPERATURE });
   if (!chat.bindTools) throw new Error(`The model provider for ${settings.llmModel} doesn't support tools.`);

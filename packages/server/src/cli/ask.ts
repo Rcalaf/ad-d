@@ -23,7 +23,8 @@ async function main() {
 
   const settings = loadSettings();
   const index = await RulesIndex.open(settings.indexDir, new OllamaEmbedder({ model: settings.embeddingModel, host: settings.ollamaHost }));
-  const model = getChatModel(settings, { temperature: ANSWER_TEMPERATURE });
+  // Answers summarize given passages: thinking adds time without helping.
+  const model = getChatModel(settings, { temperature: ANSWER_TEMPERATURE, thinking: false });
 
   let stage = "Searching the books";
   let stageStart = performance.now();

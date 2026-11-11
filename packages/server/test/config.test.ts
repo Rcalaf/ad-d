@@ -63,4 +63,9 @@ describe("getChatModel", () => {
     const model = getChatModel({ ...base, llmProvider: "ollama" }, { temperature: 0 }) as ChatOllama;
     expect(model.temperature).toBe(0);
   });
+
+  it("lets a caller switch thinking off for one use, and leaves it to the model when not asked", () => {
+    expect((getChatModel({ ...base, llmProvider: "ollama" }, { thinking: false }) as ChatOllama).think).toBe(false);
+    expect((getChatModel({ ...base, llmProvider: "ollama" }) as ChatOllama).think).toBeUndefined();
+  });
 });

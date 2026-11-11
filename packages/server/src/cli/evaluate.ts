@@ -47,7 +47,8 @@ async function main() {
   }
 
   const index = await RulesIndex.open(settings.indexDir, new OllamaEmbedder({ model: settings.embeddingModel, host: settings.ollamaHost }));
-  const model = getChatModel(settings, { temperature: ANSWER_TEMPERATURE });
+  // The same answering as search_books uses, so the evaluation measures what the agents get.
+  const model = getChatModel(settings, { temperature: ANSWER_TEMPERATURE, thinking: false });
   const budget = { contextTokens: settings.contextTokens, answerTokens: settings.answerTokens };
 
   let current = "";
