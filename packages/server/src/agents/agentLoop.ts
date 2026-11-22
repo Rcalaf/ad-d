@@ -1,4 +1,4 @@
-import { HumanMessage, ToolMessage, type AIMessage, type BaseMessage } from "@langchain/core/messages";
+import { AIMessage, HumanMessage, ToolMessage, type BaseMessage } from "@langchain/core/messages";
 import { tool as langChainTool, type StructuredToolInterface } from "@langchain/core/tools";
 import { toJsonSchema } from "@langchain/core/utils/json_schema";
 import type { z } from "zod";
@@ -40,6 +40,11 @@ export interface AgentTurn {
   toolUses: ToolUse[];
   /** True when the turn ended because of the round limit, not with an answer. */
   stoppedAtRoundLimit: boolean;
+  /**
+   * Set when the final reply was not a complete answer: "cut-off" when it stopped at the answer limit with some
+   * text, "empty" when it had no text at all. The reply then carries a note saying so.
+   */
+  problem?: "empty" | "cut-off";
 }
 
 /** The tools in LangChain's format, to describe them to the model. Running them is the loop's job, not LangChain's. */
@@ -87,7 +92,13 @@ export async function runAgentTurn(options: {
     messages.push(response);
 
     const requests = response.tool_calls ?? [];
-    if (requests.length === 0) return { reply: textOf(response.content), messages, toolUses, stoppedAtRoundLimit: false };
+    if (requests.length === 0) {
+      const { reply, problem } = checkReply(response);
+      // An empty reply is replaced by its note in the conversation too: the agent then sees that its turn produced
+      // nothing, instead of a question left unanswered, which made it answer one turn late.
+      if (problem === "empty") messages[messages.length - 1] = new AIMessage(reply);
+      return { reply, messages, toolUses, stoppedAtRoundLimit: false, problem };
+    }
 
     // Every request gets exactly one result, with the request's id: the model needs both to continue.
     for (const request of requests) {
@@ -103,6 +114,7 @@ export async function runAgentTurn(options: {
     messages,
     toolUses,
     stoppedAtRoundLimit: true,
+    problem: undefined,
   };
 }
 
@@ -122,6 +134,27 @@ async function runTool(tool: AgentTool | undefined, name: string, args: unknown)
 }
 
 /** A reply's text: either a string, or a list of parts of which the text parts count. */
+/** Whether a reply stopped at the answer limit, in the words of each provider. */
+function stoppedAtLimit(metadata: Record<string, unknown> | undefined): boolean {
+  return metadata?.done_reason === "length" || metadata?.finish_reason === "length" || metadata?.stop_reason === "max_tokens";
+}
+
+/**
+ * The final reply's text, with a note when it isn't a complete answer. With a thinking model, the thinking counts
+ * against the answer limit, so a long reasoning can leave no room for the answer: the note says how much it used.
+ */
+function checkReply(response: AIMessage): { reply: string; problem?: "empty" | "cut-off" } {
+  const text = textOf(response.content);
+  const atLimit = stoppedAtLimit(response.response_metadata);
+  if (!text) {
+    const thinking = String(response.additional_kwargs?.reasoning_content ?? "").length;
+    const reason = atLimit ? `the model reached its answer limit${thinking ? `, after ${thinking} characters of thinking` : ""}` : "";
+    return { reply: reason ? `(No answer: ${reason}. Please ask again.)` : "(No answer from the model. Please ask again.)", problem: "empty" };
+  }
+  if (atLimit) return { reply: `${text}\n\n(The answer was cut off at the length limit.)`, problem: "cut-off" };
+  return { reply: text, problem: undefined };
+}
+
 function textOf(content: unknown): string {
   if (typeof content === "string") return content.trim();
   if (Array.isArray(content)) return content.map((p) => (typeof p === "string" ? p : p?.type === "text" ? p.text : "")).join("").trim();

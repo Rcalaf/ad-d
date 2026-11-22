@@ -113,4 +113,41 @@ describe("runAgentTurn", () => {
     await expect(runAgentTurn({ model, tools: [double], messages: tooLong, budget: { contextTokens: 8192, answerTokens: 1024 } })).rejects.toThrow(PromptTooLongError);
     expect(model.sent).toEqual([]);
   });
+
+  describe("empty and cut-off replies", () => {
+    const reply = (content: string, metadata: Record<string, unknown>, thinking?: string) =>
+      new AIMessage({ content, response_metadata: metadata, additional_kwargs: thinking ? { reasoning_content: thinking } : {} });
+    const run = (message: AIMessage) => runAgentTurn({ model: new ScriptedModel([message]), tools: [double], messages: conversation() });
+
+    it("leaves a normal reply unchanged", async () => {
+      const turn = await run(reply("42.", { done_reason: "stop" }));
+      expect(turn).toMatchObject({ reply: "42.", problem: undefined });
+    });
+
+    it("adds a note to a reply cut off at the length limit, whichever provider reports it", async () => {
+      for (const metadata of [{ done_reason: "length" }, { finish_reason: "length" }, { stop_reason: "max_tokens" }]) {
+        const turn = await run(reply("The answer is", metadata));
+        expect(turn.problem, JSON.stringify(metadata)).toBe("cut-off");
+        expect(turn.reply).toBe("The answer is\n\n(The answer was cut off at the length limit.)");
+      }
+    });
+
+    it("explains an empty reply at the limit, with how much thinking used it up", async () => {
+      const turn = await run(reply("", { done_reason: "length" }, "x".repeat(3200)));
+      expect(turn.problem).toBe("empty");
+      expect(turn.reply).toBe("(No answer: the model reached its answer limit, after 3200 characters of thinking. Please ask again.)");
+    });
+
+    it("explains an empty reply that didn't reach the limit", async () => {
+      const turn = await run(reply("  ", { done_reason: "stop" }));
+      expect(turn).toMatchObject({ problem: "empty", reply: "(No answer from the model. Please ask again.)" });
+    });
+
+    it("records the note in the conversation in place of the empty reply, so the agent sees its turn produced nothing", async () => {
+      const turn = await run(reply("", { done_reason: "length" }));
+      const last = turn.messages.at(-1)!;
+      expect(last._getType()).toBe("ai");
+      expect(String(last.content)).toMatch(/^\(No answer: the model reached its answer limit/);
+    });
+  });
 });
