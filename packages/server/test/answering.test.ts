@@ -68,10 +68,10 @@ describe("INSTRUCTIONS", () => {
     expect(INSTRUCTIONS).not.toMatch(/same language as the question/);
   });
 
-  it("forbid conclusions the sources don't state, answering that they don't decide and describing each option instead", () => {
+  it("forbid conclusions the sources don't state, including rankings and orderings, describing each option in the sources' order instead", () => {
     expect(INSTRUCTIONS).toContain("4. Don't draw conclusions the sources don't state.");
-    expect(INSTRUCTIONS).toMatch(/which option is best, easiest or most suitable and the sources don't say, answer that they don't decide it/);
-    expect(INSTRUCTIONS).toMatch(/then describe what they say about each option, with its citations/);
+    expect(INSTRUCTIONS).toMatch(/which option is best, easiest or most suitable, or asks to rank or order options that way, and the sources don't, answer that they don't decide it/);
+    expect(INSTRUCTIONS).toMatch(/then describe what they say about each option in the order the sources give, with its citations/);
     expect(INSTRUCTIONS).toContain("9. If the question is not written in English");
   });
 });
