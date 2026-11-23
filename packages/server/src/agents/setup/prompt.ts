@@ -15,6 +15,8 @@ Start by asking how experienced the group is, and suggest a preset: easy for new
 /**
  * Attached by the loop to the player's latest message, every turn: the two decisions the agent got wrong when
  * the cue was only in the instructions (explaining without searching; describing settings without setting them).
+ * The second sentence once said "to suggest or change settings, call set_settings": on terse messages such as
+ * "Easier to harder", the agent then changed settings nobody had asked to change. It now says when, and to ask.
  */
 export const SETUP_TURN_REMINDER =
-  "If the player asks what a rule or setting means, call search_books before answering, and name the book and page. To suggest or change settings, call set_settings.";
+  "If the player asks what a rule or setting means, call search_books before answering, and name the book and page. Call set_settings only when players ask for a change or say what they want; if unclear, ask what they mean.";

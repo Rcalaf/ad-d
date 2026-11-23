@@ -97,11 +97,13 @@ async function main() {
           messages: [...messages, new HumanMessage(line)],
           budget,
           turnReminder: SETUP_TURN_REMINDER,
+          // After a creation request, the program takes over with the typed confirmation: no reply from the agent.
+          endTurnAfter: ["create_game"],
           onToolUse: (use) => spinner.log(describeToolUse(use)),
         });
         messages = turn.messages;
         spinner.stop();
-        console.log(`\n${turn.reply}`);
+        if (turn.reply) console.log(`\n${turn.reply}`);
         // Time and tokens of this turn, left on screen to compare changes.
         console.log(formatTurnStats({ ms: performance.now() - start, agent: turn.usage, books: booksThisTurn }));
       } catch (error) {

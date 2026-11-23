@@ -47,6 +47,8 @@ export interface AgentTurn {
   problem?: "empty" | "cut-off";
   /** The model calls of this turn, and the tokens they read and wrote, as the model reports them. */
   usage: { calls: number; inputTokens: number; outputTokens: number };
+  /** Set when the turn ended right after this tool succeeded (see endTurnAfter): there is then no reply. */
+  endedBy?: string;
 }
 
 /** The tools in LangChain's format, to describe them to the model. Running them is the loop's job, not LangChain's. */
@@ -70,8 +72,14 @@ export async function runAgentTurn(options: {
    * the note puts the key cue where the model is looking. The returned conversation keeps the message as typed.
    */
   turnReminder?: string;
+  /**
+   * Tools after which the turn ends as soon as they succeed, without another model call: whatever comes next is the
+   * program's job, and a reply could only get in the way (the setup agent announced "the game has been created"
+   * before the person at the keyboard had confirmed). All tool calls of the same response still run first.
+   */
+  endTurnAfter?: string[];
 }): Promise<AgentTurn> {
-  const { model, tools, maxRounds = 6, budget, onToolUse, turnReminder } = options;
+  const { model, tools, maxRounds = 6, budget, onToolUse, turnReminder, endTurnAfter = [] } = options;
   const messages = [...options.messages];
   const toolUses: ToolUse[] = [];
   // Each call re-reads the whole conversation, so "read" grows turn after turn, while "written" stays small.
@@ -104,7 +112,7 @@ export async function runAgentTurn(options: {
       // An empty reply is replaced by its note in the conversation too: the agent then sees that its turn produced
       // nothing, instead of a question left unanswered, which made it answer one turn late.
       if (problem === "empty") messages[messages.length - 1] = new AIMessage(reply);
-      return { reply, messages, toolUses, stoppedAtRoundLimit: false, problem, usage };
+      return { reply, messages, toolUses, stoppedAtRoundLimit: false, problem, usage, endedBy: undefined };
     }
 
     // Every request gets exactly one result, with the request's id: the model needs both to continue.
@@ -114,6 +122,10 @@ export async function runAgentTurn(options: {
       onToolUse?.(use);
       messages.push(new ToolMessage({ content: use.result, tool_call_id: request.id ?? request.name }));
     }
+
+    // A listed tool that succeeded ends the turn here, after every call of this response has run.
+    const ending = toolUses.slice(-requests.length).find((use) => use.ok && endTurnAfter.includes(use.name));
+    if (ending) return { reply: "", messages, toolUses, stoppedAtRoundLimit: false, problem: undefined, usage, endedBy: ending.name };
   }
 
   return {
@@ -123,6 +135,7 @@ export async function runAgentTurn(options: {
     stoppedAtRoundLimit: true,
     problem: undefined,
     usage,
+    endedBy: undefined,
   };
 }
 

@@ -22,4 +22,9 @@ describe("SETUP_INSTRUCTIONS", () => {
     expect(SETUP_INSTRUCTIONS).toMatch(/no numbers, rankings or advice that aren't in it/i);
     expect(SETUP_INSTRUCTIONS).toMatch(/if it says the books don't decide something, say so/i);
   });
+
+  it("let the reminder change settings only when the players ask or say what they want, and ask when a message is unclear", () => {
+    expect(SETUP_TURN_REMINDER).toContain("Call set_settings only when players ask for a change or say what they want; if unclear, ask what they mean.");
+    expect(SETUP_TURN_REMINDER).not.toMatch(/to suggest or change settings, call set_settings/i);
+  });
 });

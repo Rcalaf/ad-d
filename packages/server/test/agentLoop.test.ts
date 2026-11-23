@@ -163,4 +163,43 @@ describe("runAgentTurn", () => {
     const turn = await runAgentTurn({ model: new ScriptedModel([answer("42.")]), tools: [double], messages: conversation() });
     expect(turn.usage).toEqual({ calls: 1, inputTokens: 0, outputTokens: 0 });
   });
+
+  describe("tools that end the turn", () => {
+    const create: AgentTool = { name: "create", description: "Requests creation.", schema: z.object({ name: z.string() }), run: ({ name }) => `Requested "${name}".` };
+    const failingCreate: AgentTool = { ...create, run: () => { throw new Error("no settings yet"); } };
+
+    it("ends the turn right after a listed tool succeeds, without another model call or a reply", async () => {
+      const model = new ScriptedModel([toolRequest("1", "create", { name: "Friday group" }), answer("never asked for")]);
+      const turn = await runAgentTurn({ model, tools: [create], messages: conversation(), endTurnAfter: ["create"] });
+      expect(model.sent).toHaveLength(1);
+      expect(turn).toMatchObject({ reply: "", endedBy: "create", stoppedAtRoundLimit: false });
+      expect(turn.messages.map((m) => m._getType()).slice(-2)).toEqual(["ai", "tool"]);
+    });
+
+    it("lets the model answer when the listed tool fails, so it can explain the problem", async () => {
+      const model = new ScriptedModel([toolRequest("1", "create", { name: "Friday group" }), answer("Choose settings first.")]);
+      const turn = await runAgentTurn({ model, tools: [failingCreate], messages: conversation(), endTurnAfter: ["create"] });
+      expect(model.sent).toHaveLength(2);
+      expect(turn).toMatchObject({ reply: "Choose settings first.", endedBy: undefined });
+    });
+
+    it("runs every tool call of the same response before ending", async () => {
+      const both = new AIMessage({
+        content: "",
+        tool_calls: [
+          { id: "a", name: "double", args: { n: 2 }, type: "tool_call" },
+          { id: "b", name: "create", args: { name: "Friday group" }, type: "tool_call" },
+        ],
+      });
+      const turn = await runAgentTurn({ model: new ScriptedModel([both]), tools: [double, create], messages: conversation(), endTurnAfter: ["create"] });
+      expect(turn.toolUses.map((u) => [u.name, u.ok])).toEqual([["double", true], ["create", true]]);
+      expect(turn.endedBy).toBe("create");
+    });
+
+    it("doesn't end the turn for tools that aren't listed", async () => {
+      const model = new ScriptedModel([toolRequest("1", "double", { n: 2 }), answer("4.")]);
+      const turn = await runAgentTurn({ model, tools: [double, create], messages: conversation(), endTurnAfter: ["create"] });
+      expect(turn).toMatchObject({ reply: "4.", endedBy: undefined });
+    });
+  });
 });
