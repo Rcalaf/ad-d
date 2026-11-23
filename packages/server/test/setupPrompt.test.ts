@@ -17,11 +17,12 @@ describe("SETUP_INSTRUCTIONS", () => {
     expect(SETUP_TURN_REMINDER).toContain("set_settings");
   });
 
-  it("ask the agent to relay the books' answer, adding no numbers, rankings or advice of its own", () => {
-    expect(SETUP_INSTRUCTIONS).toMatch(/relay its answer with its book and page, adding nothing of your own/i);
-    expect(SETUP_INSTRUCTIONS).toMatch(/no numbers, rankings or advice that aren't in it/i);
-    expect(SETUP_INSTRUCTIONS).toMatch(/if it says the books don't decide something, say so/i);
+  it("tell the agent the players see the books' answer directly, so it neither repeats nor rewords it", () => {
+    expect(SETUP_INSTRUCTIONS).toContain("The players see its answer and sources directly: don't repeat or reword them; add at most one sentence relating it to their settings.");
+    expect(SETUP_INSTRUCTIONS).not.toMatch(/relay its answer/i);
+    expect(SETUP_TURN_REMINDER).not.toMatch(/name the book and page/);
   });
+
 
   it("let the reminder change settings only when the players ask or say what they want, and ask when a message is unclear", () => {
     expect(SETUP_TURN_REMINDER).toContain("Call set_settings only when players ask for a change or say what they want; if unclear, ask what they mean.");

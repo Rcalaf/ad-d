@@ -13,6 +13,7 @@ import { getChatModel } from "../llm/provider";
 import { openDatabase } from "../state/database";
 import { GameStore } from "../state/games";
 import { explainModelError } from "./errors";
+import { booksForPlayer } from "./booksForPlayer";
 import { formatTurnStats, type BooksAnswerStats } from "./turnStats";
 
 /** Answers from the books stick to the sources; the conversation itself can be a little freer. */
@@ -90,6 +91,8 @@ async function main() {
 
       const start = performance.now();
       booksThisTurn = [];
+      // The books' answers of this turn, shown to the player as they are, before the agent's reply.
+      const booksShown: string[] = [];
       spinner.start(() => `Thinking · ${((performance.now() - start) / 1000).toFixed(1)} s`);
       try {
         const turn = await runAgentTurn({
@@ -100,10 +103,14 @@ async function main() {
           turnReminder: SETUP_TURN_REMINDER,
           // After a creation request, the program takes over with the typed confirmation: no reply from the agent.
           endTurnAfter: ["create_game"],
-          onToolUse: (use) => spinner.log(describeToolUse(use)),
+          onToolUse: (use) => {
+            spinner.log(describeToolUse(use));
+            if (use.name === "search_books" && use.ok) booksShown.push(use.result);
+          },
         });
         messages = turn.messages;
         spinner.stop();
+        for (const books of booksShown) console.log(`\n${booksForPlayer(books)}`);
         if (turn.reply) console.log(`\n${turn.reply}`);
         // Time and tokens of this turn, left on screen to compare changes.
         console.log(formatTurnStats({ ms: performance.now() - start, agent: turn.usage, books: booksThisTurn }));
