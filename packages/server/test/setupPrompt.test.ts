@@ -27,4 +27,9 @@ describe("SETUP_INSTRUCTIONS", () => {
     expect(SETUP_TURN_REMINDER).toContain("Call set_settings only when players ask for a change or say what they want; if unclear, ask what they mean.");
     expect(SETUP_TURN_REMINDER).not.toMatch(/to suggest or change settings, call set_settings/i);
   });
+
+  it("say that other parts of the program create characters, design adventures and run the game, without offering them", () => {
+    expect(SETUP_INSTRUCTIONS).toContain("You don't create characters, design adventures or run the game: other parts of the program do that later; never offer them.");
+    expect(SETUP_INSTRUCTIONS).not.toContain("say that comes later");
+  });
 });
