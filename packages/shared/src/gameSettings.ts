@@ -118,22 +118,53 @@ export interface SettingDescription {
   reference?: string;
 }
 
+/**
+ * What each value means, so no value is left bare: an agent given a bare "On" or "Rarely" invents a meaning, and
+ * did, wrongly. Book rules say what the books say: weapon proficiencies (PHB pp. 71-72), specialization (PHB p. 73,
+ * single-class fighters only, checked by Roger), Hovering on Death's Door (DMG p. 104). For "off", only that the
+ * optional rule isn't used: what applies instead hasn't been checked against the books.
+ */
+const RULE_TEXT = {
+  weaponProficiencies: {
+    on: "On: characters train with specific weapons; using a weapon without proficiency gives a penalty to hit, which depends on the class",
+    off: "Off: the optional weapon proficiency rules aren't used",
+  },
+  nonweaponProficiencies: { allowed: "Allowed: each player chooses whether to use them", off: "Off: non-weapon proficiencies aren't used" },
+  weaponSpecialization: {
+    on: "On: a single-class fighter can specialize in one weapon, using extra weapon proficiency slots: +1 to attack and +2 to damage with a melee weapon",
+    off: "Off: weapon specialization isn't used",
+  },
+  hoveringOnDeathsDoor: { on: "On: a character falls unconscious at 0 hit points and dies at –10", off: "Off: this optional rule isn't used" },
+} as const;
+
+/**
+ * Our own design: how our Game Master behaves. Each value worded to differ from its neighbours. The meanings of
+ * "never" and "rarely" were confirmed by Roger; "when asked" is Claude's suggestion, still to be confirmed.
+ */
 const STYLE_TEXT = {
   encounterDifficulty: { below: "Below the party's strength", matched: "Matched to the party", above: "Above the party's strength" },
-  adjustsEncountersInPlay: { always: "Always, when the party is in trouble", "avoid-total-wipe": "Only to avoid a total party wipe", never: "Never" },
-  explainsRules: { proactively: "Proactively, suggesting options", "when-asked": "When asked", rarely: "Rarely" },
+  adjustsEncountersInPlay: {
+    always: "Always, when the party is in trouble",
+    "avoid-total-wipe": "Only to avoid a total party wipe",
+    never: "Never: encounters are played as prepared, whatever happens to the party",
+  },
+  explainsRules: {
+    proactively: "Proactively, suggesting options",
+    "when-asked": "When asked: the DM explains a rule whenever a player asks",
+    rarely: "Rarely: players are expected to know the rules; the DM explains only when a ruling needs it",
+  },
 } as const;
 
 /** Every setting in plain words, for players and for the setup agent to explain and cite. */
 export function describeSettings(settings: GameSettings): SettingDescription[] {
   const { rules, dmStyle } = settings;
-  const onOff = (on: boolean) => (on ? "On" : "Off");
+  const onOff = (on: boolean) => (on ? "on" : "off");
   return [
     { setting: "Ability score method", value: `Method ${rules.abilityScoreMethod}: ${ABILITY_SCORE_METHODS[rules.abilityScoreMethod].description}`, reference: PHB_CH1 },
-    { setting: "Weapon proficiencies", value: onOff(rules.weaponProficiencies), reference: PHB_CH5 },
-    { setting: "Non-weapon proficiencies", value: rules.nonweaponProficiencies === "allowed" ? "Allowed: each player chooses" : "Off", reference: PHB_CH5 },
-    { setting: "Weapon specialization", value: onOff(rules.weaponSpecialization), reference: PHB_SPECIALIZATION },
-    { setting: "Hovering on Death's Door", value: onOff(rules.hoveringOnDeathsDoor), reference: DMG_HOVERING },
+    { setting: "Weapon proficiencies", value: RULE_TEXT.weaponProficiencies[onOff(rules.weaponProficiencies)], reference: PHB_CH5 },
+    { setting: "Non-weapon proficiencies", value: RULE_TEXT.nonweaponProficiencies[rules.nonweaponProficiencies], reference: PHB_CH5 },
+    { setting: "Weapon specialization", value: RULE_TEXT.weaponSpecialization[onOff(rules.weaponSpecialization)], reference: PHB_SPECIALIZATION },
+    { setting: "Hovering on Death's Door", value: RULE_TEXT.hoveringOnDeathsDoor[onOff(rules.hoveringOnDeathsDoor)], reference: DMG_HOVERING },
     { setting: "Encounter difficulty", value: STYLE_TEXT.encounterDifficulty[dmStyle.encounterDifficulty] },
     { setting: "DM adjusts encounters in play", value: STYLE_TEXT.adjustsEncountersInPlay[dmStyle.adjustsEncountersInPlay], reference: DMG_FIXING },
     { setting: "DM explains rules", value: STYLE_TEXT.explainsRules[dmStyle.explainsRules] },

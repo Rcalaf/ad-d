@@ -47,14 +47,14 @@ describe("set_settings", () => {
     expect(text).toContain("weaponProficiencies: off");
   });
 
-  it("gives each value its plain-words meaning, as the confirmation shows it, when the meaning says more than the value", async () => {
+  it("gives each value its plain-words meaning, as the confirmation shows it", async () => {
     const text = await make().run("set_settings", { preset: "easy" });
     expect(text).toContain("- adjustsEncountersInPlay: always (Always, when the party is in trouble)");
     expect(text).toContain("- encounterDifficulty: below (Below the party's strength)");
-    expect(text).toContain("- nonweaponProficiencies: on (Allowed: each player chooses)");
+    expect(text).toContain("- nonweaponProficiencies: on (Allowed: each player chooses whether to use them)");
     expect(text).toContain("- explainsRules: proactively (Proactively, suggesting options)");
-    expect(text).toMatch(/^- weaponProficiencies: off$/m);
-    expect(text).toMatch(/^- hoveringOnDeathsDoor: on$/m);
+    expect(text).toContain("- weaponProficiencies: off (Off: the optional weapon proficiency rules aren't used)");
+    expect(text).toContain("- hoveringOnDeathsDoor: on (On: a character falls unconscious at 0 hit points and dies at –10)");
   });
 
   it("changes the current settings, which then become custom", async () => {

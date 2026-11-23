@@ -95,3 +95,22 @@ describe("ABILITY_SCORE_METHODS", () => {
     expect(Object.keys(ABILITY_SCORE_METHODS)).toEqual(["I", "II", "III", "IV", "V", "VI"]);
   });
 });
+
+describe("describeSettings, the meaning of every value", () => {
+  const all = (["easy", "medium", "difficult"] as const).flatMap((name) => describeSettings(presetSettings(name)));
+  const off = describeSettings(customizeSettings(presetSettings("medium"), { rules: { weaponProficiencies: false, weaponSpecialization: false, nonweaponProficiencies: "off", hoveringOnDeathsDoor: false } }));
+  const value = (lines: { setting: string; value: string }[], setting: string) => lines.find((l) => l.setting === setting)!.value;
+
+  it("leaves no value bare: each one says what it means, so an agent has nothing to fill in", () => {
+    for (const line of [...all, ...off]) expect(["On", "Off", "Never", "Rarely", "When asked"], `${line.setting}: ${line.value}`).not.toContain(line.value);
+  });
+
+  it("gives the book rules' meanings as the books state them", () => {
+    const medium = describeSettings(presetSettings("medium"));
+    expect(value(medium, "Hovering on Death's Door")).toBe("On: a character falls unconscious at 0 hit points and dies at –10");
+    expect(value(medium, "Weapon specialization")).toMatch(/^On: a single-class fighter can specialize in one weapon, using extra weapon proficiency slots: \+1 to attack and \+2 to damage with a melee weapon$/);
+    expect(value(medium, "Weapon proficiencies")).toMatch(/^On: characters train with specific weapons; using a weapon without proficiency gives a penalty to hit, which depends on the class$/);
+    expect(value(off, "Hovering on Death's Door")).toBe("Off: this optional rule isn't used");
+    expect(value(off, "Weapon proficiencies")).toBe("Off: the optional weapon proficiency rules aren't used");
+  });
+});
