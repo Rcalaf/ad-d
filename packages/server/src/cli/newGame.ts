@@ -52,7 +52,9 @@ async function main() {
   // The books' answers summarize given passages: thinking adds time without helping. The agent keeps its default.
   const booksModel = getChatModel(settings, { temperature: BOOKS_TEMPERATURE, thinking: false });
   const tools = [...setupTools(session), searchBooksTool((question) => answerQuestion(question, { index, model: booksModel, budget }))];
-  const chat = getChatModel(settings, { temperature: AGENT_TEMPERATURE });
+  // Thinking off for the agent too: choosing settings and tools gains little from it, and it costs time on every
+  // turn and can use up the answer limit (empty replies). Measured against thinking on: see CLAUDE.md, 2.3.10.
+  const chat = getChatModel(settings, { temperature: AGENT_TEMPERATURE, thinking: false });
   if (!chat.bindTools) throw new Error(`The model provider for ${settings.llmModel} doesn't support tools.`);
   const model = chat.bindTools(toLangChainTools(tools)) as unknown as ToolCallingModel;
 
