@@ -7,7 +7,7 @@ import { formatSources, toSources, type Source } from "./sources";
 
 /** What the workflow needs from a model: the chat models from getChatModel() fit, and tests pass a scripted one. */
 export interface AnswerModel {
-  invoke(messages: BaseMessage[]): Promise<{ content: unknown; usage_metadata?: { input_tokens?: number } }>;
+  invoke(messages: BaseMessage[]): Promise<{ content: unknown; usage_metadata?: { input_tokens?: number; output_tokens?: number } }>;
 }
 
 /** What the workflow needs from the rules index: RulesIndex fits, and tests pass a fake. */
@@ -41,8 +41,8 @@ export interface AnswerResult {
   checks: CitationChecks;
   /** True when the model declined because the question isn't in English: not an answer, so nothing to check. */
   notEnglish: boolean;
-  /** The prompt's length in characters, its estimated tokens, and the tokens the model reports reading. */
-  tokens: { promptChars: number; estimated: number; reported?: number };
+  /** The prompt's length in characters, its estimated tokens, and the tokens the model reports reading and writing. */
+  tokens: { promptChars: number; estimated: number; reported?: number; generated?: number };
   /** Time spent searching and expanding, and waiting for the model, in milliseconds. */
   timings: { retrievalMs: number; modelMs: number };
   /** Set when the model reports reading more tokens than the estimate allowed: the prompt may have been cut. */
@@ -102,7 +102,12 @@ export async function answerQuestion(question: string, options: AnswerOptions): 
     // A refusal cites nothing by design: only real answers are checked.
     checks: notEnglish ? { unknownCitations: [], uncited: false } : checkCitations(cited, passages.length),
     notEnglish,
-    tokens: { promptChars: promptParts.reduce((sum, part) => sum + part.length, 0), estimated: estimatedTokens, reported },
+    tokens: {
+      promptChars: promptParts.reduce((sum, part) => sum + part.length, 0),
+      estimated: estimatedTokens,
+      reported,
+      generated: response.usage_metadata?.output_tokens,
+    },
     timings: { retrievalMs, modelMs },
     usageWarning: checkReportedUsage(reported, budget),
   };

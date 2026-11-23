@@ -67,6 +67,13 @@ describe("INSTRUCTIONS", () => {
     expect(INSTRUCTIONS).toContain(`If the question is not written in English, don't answer it: reply only "${ENGLISH_ONLY_REPLY}"`);
     expect(INSTRUCTIONS).not.toMatch(/same language as the question/);
   });
+
+  it("forbid conclusions the sources don't state, answering that they don't decide and describing each option instead", () => {
+    expect(INSTRUCTIONS).toContain("4. Don't draw conclusions the sources don't state.");
+    expect(INSTRUCTIONS).toMatch(/which option is best, easiest or most suitable and the sources don't say, answer that they don't decide it/);
+    expect(INSTRUCTIONS).toMatch(/then describe what they say about each option, with its citations/);
+    expect(INSTRUCTIONS).toContain("9. If the question is not written in English");
+  });
 });
 
 describe("formatSources", () => {
@@ -162,5 +169,10 @@ describe("answerQuestion", () => {
     expect(ok.usageWarning).toBeUndefined();
     const cut = await answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model: new ScriptedModel("No [1].", 7000), budget });
     expect(cut.usageWarning).toMatch(/may have been cut/);
+  });
+
+  it("reports the tokens the model wrote, when it reports them", async () => {
+    const result = await answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model: new ScriptedModel("No [1].", 900), budget });
+    expect(result.tokens.generated).toBe(50);
   });
 });

@@ -150,4 +150,17 @@ describe("runAgentTurn", () => {
       expect(String(last.content)).toMatch(/^\(No answer: the model reached its answer limit/);
     });
   });
+
+  it("sums the agent's model calls and tokens over the turn, as the model reports them", async () => {
+    const used = (message: AIMessage, input: number, output: number) =>
+      Object.assign(message, { usage_metadata: { input_tokens: input, output_tokens: output, total_tokens: input + output } });
+    const model = new ScriptedModel([used(toolRequest("1", "double", { n: 21 }), 1000, 20), used(answer("42."), 1100, 5)]);
+    const turn = await runAgentTurn({ model, tools: [double], messages: conversation() });
+    expect(turn.usage).toEqual({ calls: 2, inputTokens: 2100, outputTokens: 25 });
+  });
+
+  it("counts calls even when the model reports no tokens", async () => {
+    const turn = await runAgentTurn({ model: new ScriptedModel([answer("42.")]), tools: [double], messages: conversation() });
+    expect(turn.usage).toEqual({ calls: 1, inputTokens: 0, outputTokens: 0 });
+  });
 });

@@ -12,6 +12,7 @@ import { getChatModel } from "../llm/provider";
 import { openDatabase } from "../state/database";
 import { GameStore } from "../state/games";
 import { explainModelError } from "./errors";
+import { formatTurnStats, type BooksAnswerStats } from "./turnStats";
 
 /** Answers from the books stick to the sources; the conversation itself can be a little freer. */
 const BOOKS_TEMPERATURE = 0.1;
@@ -51,7 +52,15 @@ async function main() {
   const session = new SetupSession();
   // The books' answers summarize given passages: thinking adds time without helping. The agent keeps its default.
   const booksModel = getChatModel(settings, { temperature: BOOKS_TEMPERATURE, thinking: false });
-  const tools = [...setupTools(session), searchBooksTool((question) => answerQuestion(question, { index, model: booksModel, budget }))];
+  // Each books' answer of the current turn, for the line shown under the reply.
+  let booksThisTurn: BooksAnswerStats[] = [];
+  const askBooks = async (question: string) => {
+    const result = await answerQuestion(question, { index, model: booksModel, budget });
+    const { retrievalMs, modelMs } = result.timings;
+    booksThisTurn.push({ ms: retrievalMs + modelMs, inputTokens: result.tokens.reported ?? 0, outputTokens: result.tokens.generated ?? 0 });
+    return result;
+  };
+  const tools = [...setupTools(session), searchBooksTool(askBooks)];
   // Thinking off for the agent too: choosing settings and tools gains little from it, and it costs time on every
   // turn and can use up the answer limit (empty replies). Measured against thinking on: see CLAUDE.md, 2.3.10.
   const chat = getChatModel(settings, { temperature: AGENT_TEMPERATURE, thinking: false });
@@ -79,6 +88,7 @@ async function main() {
       if (!line) continue;
 
       const start = performance.now();
+      booksThisTurn = [];
       spinner.start(() => `Thinking · ${((performance.now() - start) / 1000).toFixed(1)} s`);
       try {
         const turn = await runAgentTurn({
@@ -92,6 +102,8 @@ async function main() {
         messages = turn.messages;
         spinner.stop();
         console.log(`\n${turn.reply}`);
+        // Time and tokens of this turn, left on screen to compare changes.
+        console.log(formatTurnStats({ ms: performance.now() - start, agent: turn.usage, books: booksThisTurn }));
       } catch (error) {
         // The conversation stays as it was before this message, so the next one starts from a valid state.
         spinner.stop();
