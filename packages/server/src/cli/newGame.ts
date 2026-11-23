@@ -3,6 +3,7 @@ import { AIMessage, HumanMessage, SystemMessage, type BaseMessage } from "@langc
 import { OllamaEmbedder, RulesIndex, Spinner } from "@dnd/knowledge";
 import { describeSettings } from "@dnd/shared";
 import { runAgentTurn, toLangChainTools, type ToolCallingModel, type ToolUse } from "../agents/agentLoop";
+import { claimsCreation } from "../agents/setup/creationClaim";
 import { SETUP_INSTRUCTIONS, SETUP_TURN_REMINDER } from "../agents/setup/prompt";
 import { presetsTable, SetupSession, setupTools } from "../agents/setup/tools";
 import { searchBooksTool } from "../agents/tools/searchBooks";
@@ -106,6 +107,12 @@ async function main() {
         if (turn.reply) console.log(`\n${turn.reply}`);
         // Time and tokens of this turn, left on screen to compare changes.
         console.log(formatTurnStats({ ms: performance.now() - start, agent: turn.usage, books: booksThisTurn }));
+        // A reply saying the game is created, when no creation was even requested, is false: the player is told so,
+        // and so is the agent, so it doesn't carry on as if the game existed.
+        if (!session.requestedName && claimsCreation(turn.reply)) {
+          console.log("\n(Note from the program: the game has not been created. Give it a name to request creation; it is saved only after you confirm.)");
+          messages.push(new HumanMessage("(Note from the program: the game has not been created; nothing was saved. Only create_game, followed by the typed yes of the person at the keyboard, creates it.)"));
+        }
       } catch (error) {
         // The conversation stays as it was before this message, so the next one starts from a valid state.
         spinner.stop();
