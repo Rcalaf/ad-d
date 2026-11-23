@@ -21,7 +21,8 @@ export const ABILITY_SCORE_METHODS = {
   I: { description: "3d6 for each ability, in order" },
   II: { description: "3d6 twice for each ability, keep the score you want, in order" },
   III: { description: "3d6 six times, assign the scores as desired" },
-  IV: { description: "3d6 twelve times, keep the six best, assign as desired" },
+  // The book: "Choose six of these rolls (generally the six best rolls)": the choice is the player's.
+  IV: { description: "3d6 twelve times, choose six (usually the best), assign as desired" },
   V: { description: "4d6, drop the lowest die, six times, arrange as desired" },
   VI: { description: "each ability starts at 8; roll seven dice and add each die's points to one ability; no ability above 18" },
 } as const;

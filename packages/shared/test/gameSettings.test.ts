@@ -87,3 +87,11 @@ describe("ABILITY_SCORE_METHODS", () => {
     for (const method of Object.values(ABILITY_SCORE_METHODS)) expect(method.description.length).toBeGreaterThan(10);
   });
 });
+
+describe("ABILITY_SCORE_METHODS", () => {
+  it("describe the six methods as the Player's Handbook does (pp. 18-19), Method IV choosing six rolls, usually the best", () => {
+    expect(ABILITY_SCORE_METHODS.IV.description).toBe("3d6 twelve times, choose six (usually the best), assign as desired");
+    expect(ABILITY_SCORE_METHODS.V.description).toBe("4d6, drop the lowest die, six times, arrange as desired");
+    expect(Object.keys(ABILITY_SCORE_METHODS)).toEqual(["I", "II", "III", "IV", "V", "VI"]);
+  });
+});

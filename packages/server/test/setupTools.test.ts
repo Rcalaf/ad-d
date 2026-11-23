@@ -1,5 +1,5 @@
 import { toJsonSchema } from "@langchain/core/utils/json_schema";
-import { presetSettings } from "@dnd/shared";
+import { ABILITY_SCORE_METHODS, presetSettings } from "@dnd/shared";
 import { describe, expect, it } from "vitest";
 import { presetsTable, SetupSession, setupTools } from "../src/agents/setup/tools";
 
@@ -31,10 +31,9 @@ describe("show_presets", () => {
     expect(text).toMatch(/encounterDifficulty: Encounter difficulty \(our design, not from the books\)/);
   });
 
-  it("gives the methods' identifiers only, without descriptions, so explanations come from search_books", async () => {
+  it("describes each ability score method, from the shared settings, so the agent has nothing to fill in", async () => {
     const text = await make().run("show_presets", {});
-    expect(text).toContain("abilityScoreMethod V");
-    expect(text).not.toMatch(/4d6|3d6/);
+    for (const [id, method] of Object.entries(ABILITY_SCORE_METHODS)) expect(text).toContain(`${id}: ${method.description}`);
   });
 });
 
@@ -44,7 +43,7 @@ describe("set_settings", () => {
     const text = await run("set_settings", { preset: "easy" });
     expect(session.settings).toEqual(presetSettings("easy"));
     expect(text).toMatch(/^Settings \(preset: easy\):/);
-    expect(text).toContain("abilityScoreMethod: V");
+    expect(text).toContain("abilityScoreMethod: V (4d6, drop the lowest die, six times, arrange as desired)");
     expect(text).toContain("weaponProficiencies: off");
   });
 

@@ -57,9 +57,13 @@ function toVocabulary(s: GameSettings): Record<Field, string> {
   };
 }
 
+/** The method's description after its identifier, so an agent listing the settings has nothing to fill in. */
+const withDescription = (field: Field, value: string) =>
+  field === "abilityScoreMethod" ? `${value} (${ABILITY_SCORE_METHODS[value as keyof typeof ABILITY_SCORE_METHODS].description})` : value;
+
 const settingsText = (s: GameSettings) => {
   const values = toVocabulary(s);
-  return [`Settings (preset: ${s.preset}):`, ...FIELDS.map(([field]) => `- ${field}: ${values[field]}`)].join("\n");
+  return [`Settings (preset: ${s.preset}):`, ...FIELDS.map(([field]) => `- ${field}: ${withDescription(field, values[field])}`)].join("\n");
 };
 
 /**
@@ -116,8 +120,10 @@ export function setupTools(session: SetupSession): AgentTool[] {
         const reference = references.get(label);
         return `- ${field}: ${label} (${reference ?? "our design, not from the books"})`;
       });
-      // The methods' identifiers only (I to VI): what each one means is for search_books to explain, from the books.
-      return ["The three presets:", ...presets, "", "The settings:", ...settings].join("\n");
+      // The methods with their descriptions, checked against the Player's Handbook (pp. 18-19). Removed once, to push
+      // qwen2.5:7b to search; with qwen3:8b, which searches when asked, the gap only made it invent descriptions.
+      const methods = Object.entries(ABILITY_SCORE_METHODS).map(([id, m]) => `${id}: ${m.description}`).join("; ");
+      return ["The three presets:", ...presets, "", "The settings:", ...settings, `Ability score methods: ${methods}.`].join("\n");
     },
   };
 
