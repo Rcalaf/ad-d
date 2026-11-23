@@ -47,6 +47,16 @@ describe("set_settings", () => {
     expect(text).toContain("weaponProficiencies: off");
   });
 
+  it("gives each value its plain-words meaning, as the confirmation shows it, when the meaning says more than the value", async () => {
+    const text = await make().run("set_settings", { preset: "easy" });
+    expect(text).toContain("- adjustsEncountersInPlay: always (Always, when the party is in trouble)");
+    expect(text).toContain("- encounterDifficulty: below (Below the party's strength)");
+    expect(text).toContain("- nonweaponProficiencies: on (Allowed: each player chooses)");
+    expect(text).toContain("- explainsRules: proactively (Proactively, suggesting options)");
+    expect(text).toMatch(/^- weaponProficiencies: off$/m);
+    expect(text).toMatch(/^- hoveringOnDeathsDoor: on$/m);
+  });
+
   it("changes the current settings, which then become custom", async () => {
     const { run, session } = make();
     await run("set_settings", { preset: "easy" });

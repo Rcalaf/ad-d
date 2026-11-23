@@ -57,13 +57,21 @@ function toVocabulary(s: GameSettings): Record<Field, string> {
   };
 }
 
-/** The method's description after its identifier, so an agent listing the settings has nothing to fill in. */
-const withDescription = (field: Field, value: string) =>
-  field === "abilityScoreMethod" ? `${value} (${ABILITY_SCORE_METHODS[value as keyof typeof ABILITY_SCORE_METHODS].description})` : value;
-
+/**
+ * Each value with its meaning in plain words, so an agent listing the settings has nothing to fill in: for the
+ * method, its description; for the others, the meaning the confirmation shows (describeSettings), when it says more
+ * than the value itself ("Always, when the party is in trouble", but not a plain "On" after "on").
+ */
 const settingsText = (s: GameSettings) => {
   const values = toVocabulary(s);
-  return [`Settings (preset: ${s.preset}):`, ...FIELDS.map(([field]) => `- ${field}: ${withDescription(field, values[field])}`)].join("\n");
+  const meanings = new Map(describeSettings(s).map((line) => [line.setting, line.value]));
+  const line = ([field, label]: (typeof FIELDS)[number]) => {
+    const value = values[field];
+    if (field === "abilityScoreMethod") return `- ${field}: ${value} (${ABILITY_SCORE_METHODS[value as keyof typeof ABILITY_SCORE_METHODS].description})`;
+    const meaning = meanings.get(label);
+    return meaning && meaning.toLowerCase() !== value ? `- ${field}: ${value} (${meaning})` : `- ${field}: ${value}`;
+  };
+  return [`Settings (preset: ${s.preset}):`, ...FIELDS.map(line)].join("\n");
 };
 
 /**
