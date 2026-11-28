@@ -68,4 +68,12 @@ describe("search_books", () => {
     expect(shown.properties.question.description).toMatch(/english/i);
     expect(JSON.stringify(shown)).not.toContain("$ref");
   });
+
+  it("adds a short note when the check removed statements the sources don't support", async () => {
+    const verification = { answer: "", flagged: [], removed: [{ sentence: "Dwarves are the best fighters [2].", reason: "not in the sources" }], revised: true, checkFailed: false, calls: 3, inputTokens: 0, outputTokens: 0, ms: 0 };
+    const text = await toolAnswering({ verification }).run("Can dwarves be mages?");
+    expect(text).toMatch(/^Answer: .*\(1 statement was removed: the books' sources don't support it\.\)\nSources:/s);
+    const two = await toolAnswering({ verification: { ...verification, removed: [...verification.removed, ...verification.removed] } }).run("Can dwarves be mages?");
+    expect(two).toContain("(2 statements were removed: the books' sources don't support them.)");
+  });
 });

@@ -33,7 +33,10 @@ export function searchBooksTool(answer: (question: string) => Promise<AnswerResu
       const cited = result.sources
         .filter((s) => result.cited.includes(s.number))
         .map((s) => `${sourceHeading(s)}${s.notes.length ? " (converter note: its values may be unreliable)" : ""}`);
-      return `Answer: ${result.answer}\nSources:\n${cited.join("\n")}`;
+      // Statements the check removed (step 1.9) are announced, so the answer isn't read as complete.
+      const removed = result.verification?.removed.length ?? 0;
+      const note = removed === 0 ? "" : removed === 1 ? " (1 statement was removed: the books' sources don't support it.)" : ` (${removed} statements were removed: the books' sources don't support them.)`;
+      return `Answer: ${result.answer}${note}\nSources:\n${cited.join("\n")}`;
     },
   };
 }

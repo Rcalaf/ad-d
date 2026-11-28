@@ -34,7 +34,7 @@ async function main() {
     model,
     budget: { contextTokens: settings.contextTokens, answerTokens: settings.answerTokens },
     onStage: (s) => {
-      stage = s === "searching" ? "Searching the books" : `Waiting for ${settings.llmModel}`;
+      stage = s === "searching" ? "Searching the books" : s === "checking" ? "Checking the answer against the sources" : `Waiting for ${settings.llmModel}`;
       stageStart = performance.now();
     },
   });
@@ -62,11 +62,22 @@ function print(result: AnswerResult) {
     for (const warning of warnings) console.log(`  ⚠ ${warning}`);
   }
 
+  // The check of the answer (step 1.9), in detail: what it removed and why, so a wrong removal can be spotted.
+  const v = result.verification;
+  if (v) {
+    const outcome = v.checkFailed ? "its reply couldn't be read, so the answer was kept as it was" : v.removed.length ? `${v.removed.length} removed` : v.revised ? "revised, then supported" : "every sentence supported";
+    console.log(`\nCheck against the sources: ${outcome}${v.revised ? " (after one revision)" : ""}.`);
+    // What the first check flagged, even when the revision fixed it, so a catch (or a false alarm) can be seen.
+    for (const f of v.flagged) console.log(`  ! Flagged by the first check: ${f.sentence}\n      Reason: ${f.reason}`);
+    for (const r of v.removed) console.log(`  ✗ Removed: ${r.sentence}\n      Reason: ${r.reason}`);
+  }
+
   // Measurements: the real characters per token calibrates the pessimistic estimate in contextWindow.ts.
   const { promptChars, estimated, reported } = result.tokens;
   const perToken = reported ? `, ${reported} read by the model (${(promptChars / reported).toFixed(1)} characters per token)` : "";
   console.log(
     `\nSearch ${seconds(result.timings.retrievalMs)} · answer ${seconds(result.timings.modelMs)} · ` +
+      (v ? `check ${seconds(v.ms)}, ${v.calls} call${v.calls === 1 ? "" : "s"}, ${v.inputTokens} read, ${v.outputTokens} written · ` : "") +
       `prompt ${promptChars} characters, about ${estimated} tokens estimated${perToken}`,
   );
 }

@@ -4,6 +4,7 @@ import { assertPromptFits, checkReportedUsage, sourceBudgetChars, type WindowBud
 import { checkCitations, findCitations, type CitationChecks } from "./citations";
 import { buildMessages, ENGLISH_ONLY_REPLY, INSTRUCTIONS, QUESTION_HEADER, SOURCES_HEADER } from "./prompt";
 import { formatSources, toSources, type Source } from "./sources";
+import { verifyAnswer, type Verification } from "./verify";
 
 /** What the workflow needs from a model: the chat models from getChatModel() fit, and tests pass a scripted one. */
 export interface AnswerModel {
@@ -29,7 +30,9 @@ export interface AnswerOptions {
   /** Search results to start from. Default 5. */
   limit?: number;
   /** Called as each stage starts, for progress displays. */
-  onStage?: (stage: "searching" | "answering") => void;
+  onStage?: (stage: "searching" | "answering" | "checking") => void;
+  /** Check the answer sentence by sentence against its sources (step 1.9). Default true. */
+  verify?: boolean;
 }
 
 export interface AnswerResult {
@@ -43,8 +46,10 @@ export interface AnswerResult {
   notEnglish: boolean;
   /** The prompt's length in characters, its estimated tokens, and the tokens the model reports reading and writing. */
   tokens: { promptChars: number; estimated: number; reported?: number; generated?: number };
-  /** Time spent searching and expanding, and waiting for the model, in milliseconds. */
-  timings: { retrievalMs: number; modelMs: number };
+  /** Time spent searching and expanding, waiting for the model, and checking the answer, in milliseconds. */
+  timings: { retrievalMs: number; modelMs: number; verifyMs?: number };
+  /** The check of the answer against its sources: what was revised or removed, and its own calls and tokens. */
+  verification?: Verification;
   /** Set when the model reports reading more tokens than the estimate allowed: the prompt may have been cut. */
   usageWarning?: string;
 }
@@ -56,7 +61,7 @@ const NOTHING_FOUND = "I found no passages in the books about this question.";
  * passages as sources, ask the model to answer only from them with citations, then check the citations.
  */
 export async function answerQuestion(question: string, options: AnswerOptions): Promise<AnswerResult> {
-  const { index, model, budget, maxSourceChars = 12_000, limit = 5, onStage = () => {} } = options;
+  const { index, model, budget, maxSourceChars = 12_000, limit = 5, onStage = () => {}, verify = true } = options;
 
   onStage("searching");
   const retrievalStart = performance.now();
@@ -87,11 +92,20 @@ export async function answerQuestion(question: string, options: AnswerOptions): 
 
   onStage("answering");
   const modelStart = performance.now();
-  const response = await model.invoke(buildMessages(sourcesText, question));
+  const messages = buildMessages(sourcesText, question);
+  const response = await model.invoke(messages);
   const modelMs = performance.now() - modelStart;
 
-  const answer = contentText(response.content).trim();
-  const notEnglish = answer === ENGLISH_ONLY_REPLY;
+  const firstAnswer = contentText(response.content).trim();
+  const notEnglish = firstAnswer === ENGLISH_ONLY_REPLY;
+  // Only a real, cited answer is checked: a refusal or an answer citing nothing is already handled downstream.
+  let verification: Verification | undefined;
+  if (verify && !notEnglish && findCitations(firstAnswer).length > 0) {
+    onStage("checking");
+    verification = await verifyAnswer(firstAnswer, messages, model);
+  }
+  const answer = verification?.answer ?? firstAnswer;
+  // Recomputed from the final answer: a removed sentence's citations no longer count.
   const cited = findCitations(answer);
   const reported = response.usage_metadata?.input_tokens;
   return {
@@ -108,7 +122,8 @@ export async function answerQuestion(question: string, options: AnswerOptions): 
       reported,
       generated: response.usage_metadata?.output_tokens,
     },
-    timings: { retrievalMs, modelMs },
+    timings: { retrievalMs, modelMs, verifyMs: verification?.ms },
+    verification,
     usageWarning: checkReportedUsage(reported, budget),
   };
 }

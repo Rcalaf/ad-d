@@ -59,7 +59,13 @@ async function main() {
   const askBooks = async (question: string) => {
     const result = await answerQuestion(question, { index, model: booksModel, budget });
     const { retrievalMs, modelMs } = result.timings;
-    booksThisTurn.push({ ms: retrievalMs + modelMs, inputTokens: result.tokens.reported ?? 0, outputTokens: result.tokens.generated ?? 0 });
+    // The check of the answer (step 1.9) is part of the books' answer: its time and tokens count too.
+    const v = result.verification;
+    booksThisTurn.push({
+      ms: retrievalMs + modelMs + (v?.ms ?? 0),
+      inputTokens: (result.tokens.reported ?? 0) + (v?.inputTokens ?? 0),
+      outputTokens: (result.tokens.generated ?? 0) + (v?.outputTokens ?? 0),
+    });
     return result;
   };
   const tools = [...setupTools(session), searchBooksTool(askBooks)];

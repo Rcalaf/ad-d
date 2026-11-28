@@ -153,10 +153,10 @@ describe("answerQuestion", () => {
     expect(model.received).toEqual([]);
   });
 
-  it("announces each stage and reports how long each took, and the prompt's length in characters", async () => {
+  it("announces each stage, the check of a cited answer included, and reports how long each took, and the prompt's length", async () => {
     const stages: string[] = [];
     const result = await answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model: new ScriptedModel("No [1]."), budget, onStage: (s) => stages.push(s) });
-    expect(stages).toEqual(["searching", "answering"]);
+    expect(stages).toEqual(["searching", "answering", "checking"]);
     expect(result.timings.retrievalMs).toBeGreaterThanOrEqual(0);
     expect(result.timings.modelMs).toBeGreaterThanOrEqual(0);
     expect(result.tokens.promptChars).toBeGreaterThan(MAGE.text.length);
@@ -174,5 +174,45 @@ describe("answerQuestion", () => {
   it("reports the tokens the model wrote, when it reports them", async () => {
     const result = await answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model: new ScriptedModel("No [1].", 900), budget });
     expect(result.tokens.generated).toBe(50);
+  });
+
+  describe("the check of the answer (step 1.9)", () => {
+    /** A model giving its replies in order: the answer first, then the check's verdicts, a revision, and so on. */
+    class SequenceModel implements AnswerModel {
+      received: BaseMessage[][] = [];
+      constructor(private readonly replies: string[]) {}
+      async invoke(messages: BaseMessage[]) {
+        this.received.push(messages);
+        return { content: this.replies.shift() ?? "", usage_metadata: { input_tokens: 100, output_tokens: 10, total_tokens: 110 } };
+      }
+    }
+    const ask = (model: AnswerModel, extra = {}) => answerQuestion("Can a dwarf be a mage?", { index: fakeIndex([MAGE]), model, budget, ...extra });
+
+    it("checks a cited answer and keeps it when every sentence is supported", async () => {
+      const model = new SequenceModel(["No, dwarves cannot be mages [1].", "1: supported"]);
+      const result = await ask(model);
+      expect(model.received).toHaveLength(2);
+      expect(result.answer).toBe("No, dwarves cannot be mages [1].");
+      expect(result.verification).toMatchObject({ removed: [], revised: false, checkFailed: false, calls: 1 });
+      expect(result.timings.verifyMs).toBeGreaterThanOrEqual(0);
+    });
+
+    it("removes what is still unsupported after the revision, and recomputes the citations from the final answer", async () => {
+      const answer = "No, dwarves cannot be mages [1]. Dwarves are the best fighters [2].";
+      const model = new SequenceModel([answer, "1: supported\n2: not supported: not in the sources", answer, "1: supported\n2: not supported: still not in the sources"]);
+      const result = await ask(model);
+      expect(result.answer).toBe("No, dwarves cannot be mages [1].");
+      expect(result.cited).toEqual([1]);
+      expect(result.verification?.removed).toEqual([{ sentence: "Dwarves are the best fighters [2].", reason: "still not in the sources" }]);
+    });
+
+    it("doesn't check an answer that cites nothing, or a refusal, and can be switched off", async () => {
+      const uncited = new SequenceModel(["The sources don't say."]);
+      expect((await ask(uncited)).verification).toBeUndefined();
+      expect(uncited.received).toHaveLength(1);
+      const off = new SequenceModel(["No [1]."]);
+      expect((await ask(off, { verify: false })).verification).toBeUndefined();
+      expect(off.received).toHaveLength(1);
+    });
   });
 });
